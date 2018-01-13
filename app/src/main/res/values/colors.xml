@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="black">#000000</color>
+    <color name="settings_category_gray">#777777</color>
+    <color name="white">#FFFFFF</color>
+    <color name = "background">#3b589c</color>
+    <color name="main_nav_gray">#3f4751</color>
+    <color name="main_nav_btn_pressed_gray">#1e2227</color>
+    <color name="main_dlg_btn_gray">#888888</color>
+    <color name="details_item_bg">#BBBBBB</color>
+    <color name="line_color">#267c64</color>
+    <color name="point_color">#267c64</color>
+    <color name = "target_weight">#e97533</color>
+</resources>

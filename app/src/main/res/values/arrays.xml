@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="weight_unit">
+        <item>公斤</item>
+        <item>斤</item>
+    </array>
+    <array name="weight_unit_value">
+        <item>"1"</item>
+        <item>"2"</item>
+    </array>
+</resources>

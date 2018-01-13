@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.plbear.iweight.model.main.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="600"
+        android:background="@color/background">
+
+        <include layout="@layout/title" />
+
+        <Button
+            android:id="@+id/btn_record"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/btn_input_weight"
+            android:textColor="@color/background"
+            android:textSize="50sp"
+            android:typeface="serif" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/lab_switch_data"
+            android:id="@+id/lab_week"
+            android:text="@string/week_data"
+            android:drawableBottom="@drawable/labselect"
+            />
+        <TextView
+            style="@style/lab_switch_data"
+            android:id="@+id/lab_month"
+            android:text="@string/month_data"
+           />
+        <TextView
+            android:id="@+id/lab_all_data"
+            android:text="@string/all_data"
+            style="@style/lab_switch_data"/>
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="360"
+        android:id="@+id/main_view_pager"></android.support.v4.view.ViewPager>
+
+</LinearLayout>

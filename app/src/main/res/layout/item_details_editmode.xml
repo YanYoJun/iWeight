@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativelayout_item"
+    android:background="@drawable/details_item_bg"
+    >
+
+    <TextView
+        android:id="@+id/lab_details_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:text="@string/details_item_time"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:textColor= "@color/black"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:layout_marginTop="9dp"
+        android:id="@+id/checkbox_details_item_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:id="@+id/lab_details_item_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details_item_weight"
+        android:layout_marginRight="30dp"
+        android:layout_toLeftOf="@id/checkbox_details_item_select"
+        android:textColor="@color/black"
+        android:layout_marginBottom="12dp"
+        android:textSize="20sp" />
+</RelativeLayout>

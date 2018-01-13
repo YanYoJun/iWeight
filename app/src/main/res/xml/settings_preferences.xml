@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="@string/base_settings">
+        <Preference
+            android:defaultValue="23"
+            android:key="set_target_weight"
+            android:persistent="true"
+            android:summary="@string/set_target_weight_summary"
+            android:title="@string/set_target_weight_title"></Preference>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="only_once_everyday"
+            android:title="@string/only_once_everyday"></SwitchPreference>
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="请选择单位"
+            android:entries="@array/weight_unit"
+            android:entryValues="@array/weight_unit_value"
+            android:key="value_unit"
+            android:summary="当前单位为："
+            android:title="体重单位" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="@string/adv_settings">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="export_import_switch"
+            android:summary="@string/export_import_switch_summery"
+            android:title="@string/export_import_switch"></SwitchPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
