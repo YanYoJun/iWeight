@@ -12,10 +12,6 @@ class Data {
         init(id, time, weight)
     }
 
-    constructor() {
-
-    }
-
     private fun init(id: Int, time: Long, weight: Float) {
         this.time = time
         this.id = id

@@ -57,7 +57,6 @@ class MainActivity : FragmentActivity() {
     private var mDrawerLayout: DrawerLayout? = null
     private var mXmlListener: XMLHelper.OnXMLListener? = null
     private var mSP: SharedPreferences? = null
-    private val mHandler = Handler()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

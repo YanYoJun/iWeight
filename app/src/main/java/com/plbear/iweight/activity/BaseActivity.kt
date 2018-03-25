@@ -16,7 +16,7 @@ abstract class BaseActivity : Activity() {
     abstract fun afterLayout()
 
     companion object {
-        public val TAG = this.javaClass.simpleName
+        protected val TAG = this.javaClass.simpleName
         val ACTION_EXIT = "com.plbear.iweight.ACTION_EXIT"
     }
 
