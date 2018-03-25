@@ -36,6 +36,9 @@ import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.utils.Utils
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.storage.XMLHelper
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.include_main.*
+import kotlinx.android.synthetic.main.title.*
 
 import java.util.Timer
 import java.util.TimerTask
@@ -45,30 +48,19 @@ import java.util.TimerTask
  */
 
 class MainActivity : FragmentActivity() {
-    private var mDB: DataManager? = null
-    //private LineChartView mShowView = null;
-    private var mViewPager: ViewPager? = null
-    private var mWeek: TextView? = null
-    private var mMonth: TextView? = null
-    private var mAll: TextView? = null
     private val mSwitchLab = SparseArray<TextView>()
-
-    private var mNavView: NavigationView? = null
-    private var mDrawerLayout: DrawerLayout? = null
     private var mXmlListener: XMLHelper.OnXMLListener? = null
-    private var mSP: SharedPreferences? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
-        val btn = findViewById<View>(R.id.btn_record) as Button
-        btn.setOnClickListener(View.OnClickListener {
+        btn_record.setOnClickListener(View.OnClickListener {
             MyLog.d(TAG, "input weight")
-            val onceEveryDay = mSP!!.getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
+            val onceEveryDay = SPUtils.getSp().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
             if (onceEveryDay) {
-                val lastTime = Utils.formatTime(mDB!!.queryLastDataTime())
+                val lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime())
                 MyLog.d(TAG, "lastTime:" + lastTime)
                 if (lastTime == Utils.formatTime(System.currentTimeMillis())) {
                     Toast.makeText(this@MainActivity, R.string.toast_notify_only_once_everyday, Toast.LENGTH_SHORT).show()
@@ -77,28 +69,16 @@ class MainActivity : FragmentActivity() {
             }
             showRecordDialog()
         })
-        //mShowView = (LineChartView) findViewById(R.id.show_weight);
 
-        val btnMore = findViewById<View>(R.id.btn_title_more) as ImageButton
-        btnMore.setOnClickListener { mDrawerLayout!!.openDrawer(mNavView) }
+        btn_title_more.setOnClickListener { drawer_layout_main.openDrawer(nav_main_view) }
     }
 
+    /**
+     * init all the view
+     */
     private fun init() {
         MyLog.i(TAG,"init enter")
-        mDB = DataManager.getInstance(this)
-        mNavView = findViewById<NavigationView>(R.id.nav_main_view)
-        mDrawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout_main)
-        mSP = SPUtils.getSp()
-
-
-        val btnAbout = mNavView!!.getHeaderView(0).findViewById<View>(R.id.btn_main_nav_about) as Button
-        btnAbout.setOnClickListener {
-            val intent = Intent(this@MainActivity, AboutActivity::class.java)
-            startActivity(intent)
-        }
-
-        val exitButton = mNavView!!.getHeaderView(0).findViewById<View>(R.id.btn_main_nav_exit) as Button
-        exitButton.setOnClickListener { System.exit(0) }
+        initNav()
 
         mXmlListener = object:XMLHelper.OnXMLListener{
             override fun onReadSuccess() {
@@ -118,46 +98,68 @@ class MainActivity : FragmentActivity() {
             }
         }
 
+        //init week\month\year\all TextView
+        initCharView()
 
-        val detailsButton = mNavView!!.getHeaderView(0).findViewById<View>(R.id.btn_main_nav_detail) as Button
+
+
+
+    }
+
+    /**
+     * 初始化侧边栏
+     */
+    private fun initNav(){
+        val btnAbout = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_about)
+        btnAbout.setOnClickListener {
+            val intent = Intent(this@MainActivity, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
+        val exitButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_exit)
+        exitButton.setOnClickListener { System.exit(0) }
+
+
+        val detailsButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_detail)
         detailsButton.setOnClickListener {
             MyLog.d(TAG, "detailsButton click")
             val intent = Intent(this@MainActivity, DetailsActivity::class.java)
             startActivity(intent)
         }
 
-        val settingsButton = mNavView!!.getHeaderView(0).findViewById<View>(R.id.btn_main_nav_settings) as Button
+        val settingsButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_settings)
         settingsButton.setOnClickListener {
             MyLog.d(TAG, "settingsButton click")
             val intent = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(intent)
         }
-        //init week\month\year\all TextView
-        mWeek = findViewById<View>(R.id.lab_week) as TextView
-        mMonth = findViewById<View>(R.id.lab_month) as TextView
-        mAll = findViewById<View>(R.id.lab_all_data) as TextView
-        mSwitchLab.put(0, mWeek)
-        mSwitchLab.put(1, mMonth)
-        mSwitchLab.put(2, mAll)
+    }
 
-        mWeek!!.setOnClickListener {
+    /**
+     * 初始化折线图
+     */
+    private fun initCharView(){
+        mSwitchLab.put(0, lab_week)
+        mSwitchLab.put(1, lab_month)
+        mSwitchLab.put(2, lab_all_data)
+
+        lab_week.setOnClickListener {
             chooseFrag(0)
-            mViewPager!!.currentItem = 0
+            view_pager_main.currentItem = 0
         }
 
-        mMonth!!.setOnClickListener {
+        lab_month.setOnClickListener {
             chooseFrag(1)
-            mViewPager!!.currentItem = 1
+            view_pager_main.currentItem = 1
         }
 
 
-        mAll!!.setOnClickListener {
+        lab_all_data.setOnClickListener {
             chooseFrag(3)
-            mViewPager!!.currentItem = 3
+            view_pager_main.currentItem = 3
         }
 
         //init fragment
-        mViewPager = findViewById<View>(R.id.main_view_pager) as ViewPager
         val weekFrag = MainDataFragment()
         weekFrag.tag = "weekFrag"
         weekFrag.setShowDateNums(7)
@@ -172,9 +174,9 @@ class MainActivity : FragmentActivity() {
         fragList.add(monthFrag)
         fragList.add(allFrag)
         val fragmentAdapter = MainDataFragmentAdapter(this@MainActivity.supportFragmentManager, fragList)
-        mViewPager!!.adapter = fragmentAdapter
-        mWeek!!.setTextColor(resources.getColor(R.color.background))
-        mViewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        view_pager_main.adapter = fragmentAdapter
+        lab_week.setTextColor(resources.getColor(R.color.background))
+        view_pager_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
@@ -206,12 +208,11 @@ class MainActivity : FragmentActivity() {
 
     override fun onResume() {
         super.onResume()
-        val db = DataManager.getInstance(this)
-        mViewPager!!.currentItem = 0
+        view_pager_main.currentItem = 0
         chooseFrag(0)
 
-        val isExOn = mSP!!.getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
-        val importButton = mNavView!!.getHeaderView(0).findViewById<View>(R.id.btn_main_nav_import) as Button
+        val isExOn = SPUtils.getSp().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
+        val importButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_import)
         if (isExOn) {
             importButton.visibility = View.VISIBLE
             importButton.setOnClickListener(View.OnClickListener {
@@ -234,7 +235,7 @@ class MainActivity : FragmentActivity() {
         /**
          * 导出
          */
-        val exportButton = mNavView!!.getHeaderView(0).findViewById<View>(R.id.btn_main_nav_export) as Button
+        val exportButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_export)
         if (isExOn) {
             exportButton.visibility = View.VISIBLE
             exportButton.setOnClickListener(View.OnClickListener {
@@ -252,16 +253,6 @@ class MainActivity : FragmentActivity() {
         } else {
             exportButton.visibility = View.GONE
         }
-    }
-
-    override fun onStop() {
-        /*this.getContentResolver().unregisterContentObserver(mObserver);*/
-        super.onStop()
-    }
-
-    override fun onStart() {
-        /*this.getContentResolver().registerContentObserver(Constant.CONTENT_URI, true, mObserver);*/
-        super.onStart()
     }
 
     /**
@@ -284,7 +275,7 @@ class MainActivity : FragmentActivity() {
                     return@OnClickListener
                 }
                 val data = Data(-1, time, weight)
-                val isOnlyOneTime = mSP!!.getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
+                val isOnlyOneTime = SPUtils.getSp().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
                 MyLog.d(TAG, "isOnlyOnceEveryday" + isOnlyOneTime)
                 DataManager.getInstance(this@MainActivity)!!.add(data)
 

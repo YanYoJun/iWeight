@@ -11,6 +11,7 @@ import com.plbear.iweight.utils.Utils
 import java.util.ArrayList
 
 import android.R.attr.value
+import com.plbear.iweight.utils.App
 
 /**
  * Created by yanyongjun on 16/11/5.
@@ -134,6 +135,14 @@ class DataManager private constructor(context: Context) {
             }
             sInstance = DataManager(context)
             return sInstance
+        }
+
+        fun getInstance(): DataManager {
+            if (sInstance != null) {
+                return sInstance!!
+            }
+            sInstance = DataManager(App.getAppContext())
+            return sInstance!!
         }
     }
 }

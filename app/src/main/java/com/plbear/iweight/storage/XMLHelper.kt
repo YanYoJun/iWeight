@@ -201,7 +201,7 @@ class XMLHelper(context: Context) {
                         MyLog.d(TAG, "xmlname:" + name)
                         if (TAG_ITEM == name) {
                             val count = pullParser.attributeCount
-                            val data = Data()
+                            val data = Data(0,0,0.0f)
                             for (i in 0 until count) {
                                 val attName = pullParser.getAttributeName(i)
                                 if (ATT_DATA == attName) {
