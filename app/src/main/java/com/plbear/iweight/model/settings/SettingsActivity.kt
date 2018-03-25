@@ -11,6 +11,7 @@ import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.MyLog.Companion
 import com.plbear.iweight.activity.BaseActivity
 import com.plbear.iweight.model.main.MainActivity
+import kotlinx.android.synthetic.main.include_title.*
 
 /**
  * Created by HuHu on 2017/3/13.
@@ -25,25 +26,14 @@ class SettingsActivity : BaseActivity() {
     override fun afterLayout() {
         MyLog.d(TAG, "onCreate")
         init()
-        val btnBack = findViewById<View>(R.id.btn_back) as ImageButton
-        btnBack.setOnClickListener {
-            val intent = Intent(this@SettingsActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
+    fun onClick_back(v:View){
+        finish()
     }
 
     private fun init() {
-
-        val title = findViewById<View>(R.id.lab_title) as TextView
-        title.setText(R.string.settings)
+        lab_title.setText(R.string.settings)
     }
 
     companion object {

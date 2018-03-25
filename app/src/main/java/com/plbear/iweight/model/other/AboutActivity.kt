@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import com.plbear.iweight.R
 import com.plbear.iweight.activity.BaseActivity
 import com.plbear.iweight.model.main.MainActivity
+import kotlinx.android.synthetic.main.include_title.*
 
 /**
  * Created by yanyongjun on 16/11/11.
@@ -18,8 +19,11 @@ class AboutActivity : BaseActivity() {
     }
 
     override fun afterLayout() {
-        val btnBack = findViewById<View>(R.id.btn_back) as ImageButton
-        btnBack.setOnClickListener {
+
+    }
+
+    fun onClick_back(v: View) {
+        btn_back.setOnClickListener {
             val intent = Intent(this@AboutActivity, MainActivity::class.java)
             startActivity(intent)
         }

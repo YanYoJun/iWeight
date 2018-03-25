@@ -16,6 +16,7 @@
         android:paddingLeft = "10dp"
         android:background="@null"
         android:scaleType="fitCenter"
+        android:onClick="onClick_back"
         android:src="@drawable/back"/>
 
     <TextView

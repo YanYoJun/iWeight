@@ -25,6 +25,9 @@ import com.plbear.iweight.activity.BaseActivity
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.main.MainActivity
 import com.plbear.iweight.utils.Utils
+import kotlinx.android.synthetic.main.activity_details.*
+import kotlinx.android.synthetic.main.include_title.*
+import java.nio.file.Files.delete
 
 import java.util.ArrayList
 import java.util.HashMap
@@ -36,52 +39,47 @@ import java.util.TimerTask
  */
 
 class DetailsActivity : BaseActivity() {
-    private var mListView: ListView? = null
+
     private var mAdapter: DetailsAdapter? = null
     private var mDataList: ArrayList<Data>? = null
-    private var mDB: DataManager? = null
-    private var mBtnBack: ImageButton? = null
-    private var mBtnSelectAll: Button? = null
-    private var mBtnChange: Button? = null
-    private var mBtnDelete: Button? = null
     private val mCallback = object : DetailsAdapter.OnItemClick {
         override fun itemClick(mSelectMap: HashMap<Int, Boolean>, selectCount: Int) {
             val size = mDataList!!.size
             if (size != selectCount) {
-                mBtnSelectAll!!.setText(R.string.select_all)
+                btn_details_select_all.setText(R.string.select_all)
             } else {
-                mBtnSelectAll!!.setText(R.string.disselect_all)
+                btn_details_select_all.setText(R.string.disselect_all)
             }
             if (selectCount == 1) {
-                mBtnChange!!.isClickable = true
-                mBtnChange!!.setTextColor(Color.BLACK)
+                btn_details_change.isClickable = true
+                btn_details_change.setTextColor(Color.BLACK)
             } else {
-                mBtnChange!!.isClickable = false
-                mBtnChange!!.setTextColor(resources.getColor(R.color.details_item_bg))
+                btn_details_change.isClickable = false
+                btn_details_change.setTextColor(resources.getColor(R.color.details_item_bg))
             }
             if (selectCount > 0) {
-                mBtnDelete!!.isClickable = true
-                mBtnDelete!!.setTextColor(Color.BLACK)
+                btn_details_delete.isClickable = true
+                btn_details_delete.setTextColor(Color.BLACK)
             } else {
-                mBtnDelete!!.isClickable = false
-                mBtnDelete!!.setTextColor(resources.getColor(R.color.details_item_bg))
+                btn_details_delete.isClickable = false
+                btn_details_delete.setTextColor(resources.getColor(R.color.details_item_bg))
             }
         }
 
         override fun longItemClick(editMode: Boolean) {
             if (editMode) {
-                mBtnSelectAll!!.visibility = View.VISIBLE
-                mBtnChange!!.visibility = View.VISIBLE
-                mBtnDelete!!.visibility = View.VISIBLE
-                mBtnSelectAll!!.setText(R.string.select_all)
-                mBtnChange!!.isClickable = false
-                mBtnChange!!.setTextColor(resources.getColor(R.color.details_item_bg))
-                mBtnDelete!!.isClickable = false
-                mBtnDelete!!.setTextColor(resources.getColor(R.color.details_item_bg))
+                btn_details_select_all.visibility = View.VISIBLE
+                btn_details_change.visibility = View.VISIBLE
+                btn_details_delete.visibility = View.VISIBLE
+                btn_details_select_all.setText(R.string.select_all)
+                btn_details_change.isClickable = false
+                btn_details_change.setTextColor(resources.getColor(R.color.details_item_bg))
+                btn_details_delete.isClickable = false
+                btn_details_delete.setTextColor(resources.getColor(R.color.details_item_bg))
             } else {
-                mBtnSelectAll!!.visibility = View.GONE
-                mBtnChange!!.visibility = View.GONE
-                mBtnDelete!!.visibility = View.GONE
+                btn_details_select_all.visibility = View.GONE
+                btn_details_change.visibility = View.GONE
+                btn_details_delete.visibility = View.GONE
             }
         }
     }
@@ -112,25 +110,19 @@ class DetailsActivity : BaseActivity() {
     }
 
     private fun init() {
-        mBtnSelectAll = findViewById<View>(R.id.btn_details_select_all) as Button
-        mListView = findViewById<View>(R.id.listview_details) as ListView
-        mBtnChange = findViewById<View>(R.id.btn_details_change) as Button
-        mBtnDelete = findViewById<View>(R.id.btn_details_delete) as Button
-        mDB = DataManager.getInstance(this)
-        mDataList = mDB!!.queryAll()
+        mDataList = DataManager.getInstance().queryAll()
         Utils.sortDataBigToSmall(mDataList!!)
         mAdapter = DetailsAdapter(this, mDataList!!, mCallback)
-        mListView!!.adapter = mAdapter
-        mBtnBack = findViewById<View>(R.id.btn_back) as ImageButton
-        mBtnBack!!.setOnClickListener {
-            val intent = Intent(this@DetailsActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
+        listview_details.adapter = mAdapter
 
-        mListView!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> }
-        mBtnSelectAll!!.setOnClickListener { mAdapter!!.onSelectAllClick() }
-        mBtnChange!!.setOnClickListener { showChangeDialog() }
-        mBtnDelete!!.setOnClickListener { showDeleteDialog() }
+        listview_details.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> }
+        btn_details_select_all.setOnClickListener { mAdapter!!.onSelectAllClick() }
+        btn_details_change.setOnClickListener { showChangeDialog() }
+        btn_details_delete.setOnClickListener { showDeleteDialog() }
+    }
+
+    fun onClick_back(v:View){
+        finish()
     }
 
     private fun showDeleteDialog() {
@@ -142,7 +134,7 @@ class DetailsActivity : BaseActivity() {
         val btnSubmit = layout.findViewById<View>(R.id.dialog_submit) as Button
         btnSubmit.setOnClickListener {
             val list = mAdapter!!.selectData
-            mDB!!.delete(list)
+            DataManager.getInstance().delete(list)
             dialog.dismiss()
             mAdapter!!.exitEditMode()
         }
@@ -172,7 +164,7 @@ class DetailsActivity : BaseActivity() {
                     return@OnClickListener
                 }
                 data.weight = weight
-                mDB!!.update(data)
+                DataManager.getInstance().update(data)
                 dialog.dismiss()
                 mAdapter!!.exitEditMode()
             } catch (e: Exception) {
@@ -181,7 +173,7 @@ class DetailsActivity : BaseActivity() {
             }
         })
 
-        val btnCancel = layout.findViewById<View>(R.id.dialog_cacnel) as Button
+        val btnCancel = layout.findViewById<Button>(R.id.dialog_cacnel)
         btnCancel.setOnClickListener { dialog.dismiss() }
         dialog.show()
 
@@ -200,7 +192,7 @@ class DetailsActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        val adapter = mListView!!.adapter as DetailsAdapter
+        val adapter = listview_details.adapter as DetailsAdapter
         if (adapter.isEditMode) {
             adapter.exitEditMode()
             return

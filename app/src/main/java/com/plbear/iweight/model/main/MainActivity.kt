@@ -100,10 +100,6 @@ class MainActivity : FragmentActivity() {
 
         //init week\month\year\all TextView
         initCharView()
-
-
-
-
     }
 
     /**
