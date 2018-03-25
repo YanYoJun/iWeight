@@ -1,4 +1,4 @@
-package com.plbear.iweight.Utils
+package com.plbear.iweight.utils
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,12 +10,13 @@ import android.preference.PreferenceManager
 open class SPUtils {
     companion object {
         private var SP: SharedPreferences? = null
-        fun getSP(context: Context): SharedPreferences? {
+        private val TAG = "SPUtils"
+        fun getSp(): SharedPreferences {
             if (SP != null) {
-                return SP
+                return SP!!
             }
-            SP = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
-            return SP
+            SP = PreferenceManager.getDefaultSharedPreferences(App.getAppContext())
+            return SP!!
         }
     }
 }

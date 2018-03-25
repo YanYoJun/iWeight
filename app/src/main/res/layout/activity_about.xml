@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    tools:context="com.plbear.iweight.activity.AboutActivity">
+    tools:context="com.plbear.iweight.model.other.AboutActivity">
     <include layout="@layout/include_title"></include>
     <TextView
         android:layout_width="wrap_content"
