@@ -1,13 +1,7 @@
-package com.plbear.iweight.activity
+package com.plbear.iweight.base
 
-import android.app.Activity
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.plbear.iweight.utils.AppManager
 import com.plbear.iweight.utils.MyLog
 
 /**

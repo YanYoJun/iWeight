@@ -1,4 +1,4 @@
-package com.plbear.iweight.utils
+package com.plbear.iweight.base
 
 import android.app.Activity
 import java.util.*

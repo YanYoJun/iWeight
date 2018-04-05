@@ -1,8 +1,8 @@
 package com.plbear.iweight.utils
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.plbear.iweight.base.App
 
 /**
  * Created by yanyongjun on 2018/1/13.

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.plbear.iweight.model.main.MainActivity">
+    tools:context="com.plbear.iweight.model.main.activity.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -4,14 +4,14 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 
-import com.plbear.iweight.utils.Constant
+import com.plbear.iweight.base.Constant
 import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
 
 import android.R.attr.value
-import com.plbear.iweight.utils.App
+import com.plbear.iweight.base.App
 
 /**
  * Created by yanyongjun on 16/11/5.

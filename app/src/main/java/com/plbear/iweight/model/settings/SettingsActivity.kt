@@ -1,16 +1,10 @@
 package com.plbear.iweight.model.settings
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
 
 import com.plbear.iweight.R
 import com.plbear.iweight.utils.MyLog
-import com.plbear.iweight.utils.MyLog.Companion
-import com.plbear.iweight.activity.BaseActivity
-import com.plbear.iweight.model.main.MainActivity
+import com.plbear.iweight.base.BaseActivity
 import kotlinx.android.synthetic.main.include_title.*
 
 /**

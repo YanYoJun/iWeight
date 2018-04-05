@@ -1,7 +1,5 @@
-package com.plbear.iweight.view
+package com.plbear.iweight.model.main.adapter
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.SparseArray
 import com.plbear.iweight.data.Data
 
@@ -9,19 +7,18 @@ import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.model.settings.SettingsActivity
-import com.plbear.iweight.utils.App
+import com.plbear.iweight.base.App
 import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
 import java.util.Collections
-import java.util.Comparator
 
 /**
  * Created by yanyongjun on 16/11/5.
  */
 
-class DataAdapter() {
-    private var TAG = "DataAdapter:"
+class LineChartAdapter() {
+    private var TAG = "LineChartAdapter:"
     private val mDataList = ArrayList<Data>()
     var showDataList = ArrayList<Data>()
         private set

@@ -2,33 +2,27 @@ package com.plbear.iweight.model.details
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.database.ContentObserver
 import android.graphics.Color
 import android.net.Uri
 import android.os.Handler
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ListView
 import android.widget.Toast
 
 import com.plbear.iweight.R
-import com.plbear.iweight.utils.Constant
+import com.plbear.iweight.base.Constant
 import com.plbear.iweight.data.DataManager
-import com.plbear.iweight.activity.BaseActivity
+import com.plbear.iweight.base.BaseActivity
 import com.plbear.iweight.data.Data
-import com.plbear.iweight.model.main.MainActivity
 import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.include_title.*
-import java.nio.file.Files.delete
 
 import java.util.ArrayList
 import java.util.HashMap

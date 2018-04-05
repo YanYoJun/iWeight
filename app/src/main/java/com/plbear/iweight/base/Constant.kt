@@ -1,4 +1,4 @@
-package com.plbear.iweight.utils
+package com.plbear.iweight.base
 
 import android.net.Uri
 
@@ -14,7 +14,7 @@ class Constant {
         var PROVIDER_ITEMS_WITHOUT_NOTIFY = 2
         var PROVIDER_POS = 3
 
-        var CONTENT_URI = Uri.parse("content://$PROVIDER_AUTHORITY/items")
-        var CONTENT_URI_WITHOUT_NOTIRY = Uri.parse("content://$PROVIDER_AUTHORITY/items_without_notify")
+        var CONTENT_URI = Uri.parse("content://${PROVIDER_AUTHORITY}/items")
+        var CONTENT_URI_WITHOUT_NOTIRY = Uri.parse("content://${PROVIDER_AUTHORITY}/items_without_notify")
     }
 }

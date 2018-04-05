@@ -67,7 +67,7 @@
             android:text="@string/unit" />
     </RelativeLayout>
 
-    <com.plbear.iweight.view.LineChartView
+    <com.plbear.iweight.model.main.view.LineChartView
         android:id="@+id/show_weight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

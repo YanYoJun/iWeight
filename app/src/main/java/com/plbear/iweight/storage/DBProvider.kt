@@ -9,7 +9,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 
-import com.plbear.iweight.utils.Constant
+import com.plbear.iweight.base.Constant
 import com.plbear.iweight.utils.MyLog
 
 import java.util.HashMap

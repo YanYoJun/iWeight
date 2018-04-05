@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.main
+package com.plbear.iweight.model.main.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

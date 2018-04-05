@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.main
+package com.plbear.iweight.model.main.fragment
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -14,10 +14,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.plbear.iweight.R
-import com.plbear.iweight.utils.Constant
+import com.plbear.iweight.base.Constant
 import com.plbear.iweight.utils.MyLog
-import com.plbear.iweight.view.DataAdapter
-import com.plbear.iweight.view.LineChartView
+import com.plbear.iweight.model.main.adapter.LineChartAdapter
+import com.plbear.iweight.model.main.view.LineChartView
 
 /**
  * Created by yanyongjun on 2017/7/22.
@@ -27,7 +27,7 @@ class MainDataFragment : Fragment() {
 
     private var TAG = "MainDataFragment-" + this + "--"
     private var mView: LineChartView? = null
-    private var mAdapter: DataAdapter? = null
+    private var mAdapter: LineChartAdapter? = null
     private var mShowNum = 7
     private var mShowAllData = false
     private val mHandler = Handler()

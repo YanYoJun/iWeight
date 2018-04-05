@@ -1,4 +1,4 @@
-package com.plbear.iweight.view
+package com.plbear.iweight.model.main.view
 
 import android.content.Context
 import android.graphics.Canvas
@@ -16,11 +16,9 @@ import android.view.View
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.R
 import com.plbear.iweight.data.Data
-import com.plbear.iweight.utils.App
+import com.plbear.iweight.model.main.adapter.LineChartAdapter
 import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
-
-import java.util.ArrayList
 
 /**
  * Created by koakira on 16/11/5.
@@ -55,12 +53,12 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
     private var mCurMoveLength = 0
 
 
-    /*public void setDataAdapter(DataAdapter adapter) {
+    /*public void setDataAdapter(LineChartAdapter adapter) {
         mDataAdapter = adapter;
         Message msg = mHandler.obtainMessage(MSG_DATA_CHANGE);
         mHandler.sendMessage(msg);
     }*/
-    var dataAdpater = DataAdapter()
+    var dataAdpater = LineChartAdapter()
         private set
     private var mContext: Context? = null
     private val mHandler = object : Handler() {
@@ -143,7 +141,7 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
     private fun init() {
         MyLog.e(TAG, "init")
         dataAdpater!!.setTag(TAG)
-        dataAdpater!!.registerDataListener(object : DataAdapter.DataChangeListener {
+        dataAdpater!!.registerDataListener(object : LineChartAdapter.DataChangeListener {
             override fun onChange() {
                 MyLog.d(TAG, "LineChartView data changed")
                 val msg = mHandler.obtainMessage(MSG_DATA_CHANGE)

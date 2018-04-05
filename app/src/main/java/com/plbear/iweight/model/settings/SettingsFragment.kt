@@ -11,7 +11,6 @@ import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.preference.PreferenceScreen
 import android.preference.SwitchPreference
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -22,10 +21,9 @@ import android.widget.Toast
 
 import com.plbear.iweight.R
 import com.plbear.iweight.utils.MyLog
-import com.plbear.iweight.utils.MyLog.Companion
 import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.utils.Utils
-import com.plbear.iweight.model.main.MainDataFragment
+import com.plbear.iweight.model.main.fragment.MainDataFragment
 
 import java.util.Timer
 import java.util.TimerTask
