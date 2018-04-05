@@ -2,6 +2,8 @@ package com.plbear.iweight.utils
 
 import android.content.Context
 import android.graphics.Point
+import android.widget.Toast
+import com.plbear.iweight.base.App
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.settings.SettingsActivity
 import java.text.SimpleDateFormat
@@ -99,6 +101,14 @@ open class Utils {
             result.y = (((a * a - b * b) * param.y - 2.0 * a * b * param.x.toDouble() - 2.0 * b * c) / (a * a + b * b)).toInt()
             MyLog.Companion.d(TAG, "getOppPoint result:" + result)
             return result
+        }
+
+        fun showToast(str: String) {
+            Toast.makeText(App.getAppContext(), str, Toast.LENGTH_SHORT).show()
+        }
+
+        fun showToast(str:Int){
+            Toast.makeText(App.getAppContext(),str,Toast.LENGTH_SHORT).show()
         }
     }
 }

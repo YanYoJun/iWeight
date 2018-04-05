@@ -113,7 +113,7 @@ class SettingsFragment : PreferenceFragment() {
     private fun showSetTargetDialog() {
         val builder = AlertDialog.Builder(mContext)
         val inflater = mContext!!.layoutInflater
-        val layout = inflater.inflate(R.layout.dialog_main_input_weight, mContext!!.findViewById<View>(R.id.dialog_layout) as ViewGroup)
+        val layout = inflater.inflate(R.layout.dialog_main_input_weight, null)
         val labTitle = layout.findViewById<View>(R.id.dialog_lab_title) as TextView
         labTitle.setText(R.string.dialog_target_widget_title)
         builder.setView(layout)
@@ -132,14 +132,14 @@ class SettingsFragment : PreferenceFragment() {
             try {
                 val weight = java.lang.Float.parseFloat(editText.text.toString())
                 if (!Utils.checkWeightValue(weight)) {
-                    Toast.makeText(mContext, "您输入的值太不合理了，在逗我玩吧~", Toast.LENGTH_SHORT).show()
+                    Utils.showToast("您输入的值太不合理了，在逗我玩吧~")
                     return@OnClickListener
                 }
                 savePreferences(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, weight)
-                Toast.makeText(mContext, R.string.save_target_weight_success, Toast.LENGTH_SHORT).show()
+                Utils.showToast(R.string.save_target_weight_success)
                 dialog.dismiss()
             } catch (e: Exception) {
-                Toast.makeText(mContext, "输入值不合法，请重新输入~", Toast.LENGTH_SHORT).show()
+                Utils.showToast("输入值不合法，请重新输入~")
             }
         })
 
