@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.details
+package com.plbear.iweight.utils.details
 
 import android.content.Context
 import android.view.LayoutInflater

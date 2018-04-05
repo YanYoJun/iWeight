@@ -6,8 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.support.design.widget.TabLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.util.SparseArray
@@ -20,10 +22,11 @@ import android.widget.Toast
 
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.R
+import com.plbear.iweight.R.id.*
 import com.plbear.iweight.base.BaseActivity
 import com.plbear.iweight.model.other.AboutActivity
 import com.plbear.iweight.data.Data
-import com.plbear.iweight.model.details.DetailsActivity
+import com.plbear.iweight.utils.details.DetailsActivity
 import com.plbear.iweight.model.main.fragment.MainDataFragment
 import com.plbear.iweight.model.main.adapter.MainDataFragmentAdapter
 import com.plbear.iweight.utils.MyLog
@@ -43,8 +46,17 @@ import java.util.TimerTask
  */
 
 class MainActivity : BaseActivity() {
-    private val mSwitchLab = SparseArray<TextView>()
     private var mXmlListener: XMLHelper.OnXMLListener? = null
+    var mFragList = ArrayList<Fragment>()
+    var mPagerAdapter = object: FragmentPagerAdapter(supportFragmentManager){
+        override fun getItem(position: Int): Fragment {
+            return mFragList[position]
+        }
+
+        override fun getCount(): Int {
+            return mFragList.size
+        }
+    }
 
     override fun getLayout(): Int {
         return R.layout.activity_main
@@ -126,82 +138,47 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    private fun initTabLayout(){
+        try {
+            tab_main.setupWithViewPager(view_pager_main)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        tab_main.tabMode = TabLayout.MODE_FIXED
+        tab_main.getTabAt(0)?.setText("本周")
+        tab_main.getTabAt(1)?.setText("当月")
+        tab_main.getTabAt(2)?.setText("全部")
+    }
+
     /**
      * 初始化折线图
      */
     private fun initCharView(){
-        mSwitchLab.put(0, lab_week)
-        mSwitchLab.put(1, lab_month)
-        mSwitchLab.put(2, lab_all_data)
-
-        lab_week.setOnClickListener {
-            chooseFrag(0)
-            view_pager_main.currentItem = 0
-        }
-
-        lab_month.setOnClickListener {
-            chooseFrag(1)
-            view_pager_main.currentItem = 1
-        }
-
-
-        lab_all_data.setOnClickListener {
-            chooseFrag(3)
-            view_pager_main.currentItem = 3
-        }
-
         //init fragment
         val weekFrag = MainDataFragment()
         weekFrag.tag = "weekFrag"
         weekFrag.setShowDateNums(7)
+        mFragList.add(weekFrag)
+
         val monthFrag = MainDataFragment()
         monthFrag.tag = "monthFrag"
         monthFrag.setShowDateNums(30)
+        mFragList.add(monthFrag)
+
         val allFrag = MainDataFragment()
         allFrag.tag = "allFrag"
         allFrag.setShowAllData(true)
-        val fragList = ArrayList<Fragment>()
-        fragList.add(weekFrag)
-        fragList.add(monthFrag)
-        fragList.add(allFrag)
-        val fragmentAdapter = MainDataFragmentAdapter(this@MainActivity.supportFragmentManager, fragList)
-        view_pager_main.adapter = fragmentAdapter
-        lab_week.setTextColor(resources.getColor(R.color.background))
-        view_pager_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        mFragList.add(allFrag)
 
-            }
-
-            override fun onPageSelected(position: Int) {
-                chooseFrag(position)
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-        })
-    }
-
-    private fun chooseFrag(item: Int) {
-        val drawable = resources.getDrawable(R.drawable.labselect)
-        drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
-        for (i in 0 until mSwitchLab.size()) {
-            if (i == item) {
-                mSwitchLab.get(i).setTextColor(resources.getColor(R.color.background))
-                mSwitchLab.get(i).setCompoundDrawables(null, null, null, drawable)
-            } else {
-                mSwitchLab.get(i).setTextColor(resources.getColor(R.color.main_dlg_btn_gray))
-                mSwitchLab.get(i).setCompoundDrawables(null, null, null, null)
-            }
-        }
+        view_pager_main.adapter = mPagerAdapter
+        MyLog.e(TAG,"initCharView")
+        initTabLayout()
     }
 
 
     override fun onResume() {
         MyLog.e(TAG,"onResume")
         super.onResume()
-        view_pager_main.currentItem = 0
-        chooseFrag(0)
 
         val isExOn = SPUtils.getSp().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
         val importButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_import)

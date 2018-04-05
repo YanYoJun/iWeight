@@ -29,7 +29,7 @@
             android:name="com.plbear.iweight.model.settings.SettingsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".model.details.DetailsActivity"></activity>
+        <activity android:name=".utils.details.DetailsActivity"></activity>
         <activity android:name=".model.other.AboutActivity">
 
         </activity>
