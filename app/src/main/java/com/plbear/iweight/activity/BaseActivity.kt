@@ -6,34 +6,30 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.plbear.iweight.utils.AppManager
 import com.plbear.iweight.utils.MyLog
 
 /**
  * Created by yanyongjun on 2018/1/28.
  */
-abstract class BaseActivity : Activity() {
+abstract class BaseActivity : AppCompatActivity() {
     abstract fun getLayout(): Int
     abstract fun afterLayout()
-
-    companion object {
-        protected val TAG = this.javaClass.simpleName
-        val ACTION_EXIT = "com.plbear.iweight.ACTION_EXIT"
-    }
+    protected val TAG = this.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayout())
-        val filter = IntentFilter()
-        filter.addAction(ACTION_EXIT)
-        registerReceiver(mReceiver, filter)
         MyLog.d(TAG, "onCreate")
+        AppManager.getAppManager().addToStack(this)
         afterLayout()
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(mReceiver)
+        AppManager.getAppManager().removeFromStack(this)
         MyLog.d(TAG, "onDestroy")
     }
 
@@ -48,21 +44,11 @@ abstract class BaseActivity : Activity() {
     }
 
     protected fun exitAll() {
-        val intent = Intent(ACTION_EXIT)
-        intent.`package` = packageName
-        sendBroadcast(intent)
+        AppManager.getAppManager().finshAllActivity()
     }
 
-    internal var mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent == null || context == null) {
-                MyLog.e(TAG, "onReceive context == null or intent == null")
-            }
-            val action = intent!!.action
-            MyLog.d(TAG, "onReceive action:" + action!!)
-            if (ACTION_EXIT == action) {
-                finish()
-            }
-        }
+    override fun finish() {
+        AppManager.getAppManager().removeFromStack(this)
+        super.finish()
     }
 }

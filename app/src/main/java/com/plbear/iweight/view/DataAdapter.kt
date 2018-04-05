@@ -9,6 +9,7 @@ import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.model.settings.SettingsActivity
+import com.plbear.iweight.utils.App
 import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
@@ -19,7 +20,7 @@ import java.util.Comparator
  * Created by yanyongjun on 16/11/5.
  */
 
-class DataAdapter(context: Context) {
+class DataAdapter() {
     private var TAG = "DataAdapter:"
     private val mDataList = ArrayList<Data>()
     var showDataList = ArrayList<Data>()
@@ -32,7 +33,6 @@ class DataAdapter(context: Context) {
         private set
 
     private val mListener = ArrayList<DataChangeListener>()
-    private var mContext: Context? = null
     //目标体重值
     /**
      * 得到目标体重，这个体重刷新后的数据来源应用该是唯一的，就是这里
@@ -83,7 +83,7 @@ class DataAdapter(context: Context) {
         get() = weightBiggest - weightSmallest
 
     init {
-        init(context)
+        init()
     }
 
     fun setShowAllData(flag: Boolean) {
@@ -101,19 +101,18 @@ class DataAdapter(context: Context) {
      *
      * @returnd
      */
-    private fun init(context: Context) {
-        mContext = context
+    private fun init() {
         val sp = SPUtils.getSp()
         targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * Utils.getValueUnit()
 
-        val db = DataManager.getInstance(context)
+        val db = DataManager.getInstance(App.getAppContext())
         val list = db!!.queryAll()
         mDataList.clear()
         mDataList.addAll(list)
 
         setShowList(mDataList)
 
-        mDataManager = DataManager.getInstance(mContext)
+        mDataManager = DataManager.getInstance(App.getAppContext())
     }
 
     fun setShowNum(num: Int) {
@@ -144,7 +143,7 @@ class DataAdapter(context: Context) {
 
     fun notifyDataSetChange() {
         MyLog.e(TAG, "notifyDataSetChange")
-        val db = DataManager.getInstance(mContext)
+        val db = DataManager.getInstance(App.getAppContext())
         val list = db!!.queryAll()
         mDataList.clear()
         mDataList.addAll(list)

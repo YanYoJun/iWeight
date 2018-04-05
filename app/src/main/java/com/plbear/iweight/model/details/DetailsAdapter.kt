@@ -11,24 +11,24 @@ import android.widget.TextView
 import com.plbear.iweight.R
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.data.DataManager
+import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
 import java.util.HashMap
 
 /**
- * Created by yanyongjun on 2016/11/23.
- */
+* Created by yanyongjun on 2016/11/23.
+*/
 
 class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemClick) : BaseAdapter() {
-    private var mContext: Context? = null
-    private var mListData: ArrayList<Data>? = null
-    private var mInflater: LayoutInflater? = null
+    private var mContext = context
+    private var mListData = list
+    private var mInflater: LayoutInflater = LayoutInflater.from(context)
     var isEditMode = false
-        private set
     private val mSelectMap = HashMap<Int, Boolean>()
     private var mSelectCount = 0
-    private var mCallback: OnItemClick? = null
+    private var mCallback: OnItemClick = callback
 
     val selectData: ArrayList<Data>
         get() {
@@ -37,7 +37,7 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
             while (it.hasNext()) {
                 val key = it.next()
                 if (mSelectMap[key] == true) {
-                    list.add(mListData!![key])
+                    list.add(mListData[key])
                 }
             }
             return list
@@ -49,30 +49,24 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
         fun longItemClick(editMode: Boolean)
     }
 
-    init {
-        mContext = context
-        mListData = list
-        mInflater = LayoutInflater.from(context)
-        mCallback = callback
-    }
-
     override fun notifyDataSetChanged() {
         val db = DataManager.getInstance(mContext)
         mListData = db!!.queryAll()
-        Utils.sortDataBigToSmall(mListData!!)
+        Utils.sortDataBigToSmall(mListData)
         super.notifyDataSetChanged()
     }
 
-    override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
-        var view: View? = null
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        var view: View
         if (isEditMode) {
-            view = mInflater!!.inflate(R.layout.item_details_editmode, null)
+            view = mInflater.inflate(R.layout.item_details_editmode, null)
         } else {
-            view = mInflater!!.inflate(R.layout.item_details, null)
+            view = mInflater.inflate(R.layout.item_details, null)
         }
-        val labDate = view!!.findViewById<View>(R.id.lab_details_item_date) as TextView
-        val labWeight = view.findViewById<View>(R.id.lab_details_item_weight) as TextView
-        val data = mListData!![position]
+        val labDate = view.findViewById<TextView>(R.id.lab_details_item_date)
+        val labWeight = view.findViewById<TextView>(R.id.lab_details_item_weight)
+        val data = mListData[position]
         labDate.text = Utils.formatTimeFull(data.time)
         labWeight.setText(""+data.weight)
         if (isEditMode) {
@@ -92,7 +86,7 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
                     mSelectCount++
                 }
                 selectBox.isChecked = !click
-                mCallback!!.itemClick(mSelectMap, mSelectCount)
+                mCallback.itemClick(mSelectMap, mSelectCount)
             }
         } else {
             view.isClickable = false
@@ -109,12 +103,13 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
         return position.toLong()
     }
 
-    override fun getItem(position: Int): Any {
-        return position
+    override fun getItem(position: Int): Any? {
+        return mListData[position]
     }
 
     override fun getCount(): Int {
-        return mListData!!.size
+        MyLog.e(TAG,"yanlog getcount:"+mListData.size)
+        return mListData.size
     }
 
     fun enterEditMode() {
@@ -123,7 +118,7 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
             mSelectMap.clear()
             notifyDataSetChanged()
         }
-        mCallback!!.longItemClick(isEditMode)
+        mCallback.longItemClick(isEditMode)
     }
 
     fun exitEditMode() {
@@ -133,7 +128,7 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
             mSelectCount = 0
             notifyDataSetChanged()
         }
-        mCallback!!.longItemClick(isEditMode)
+        mCallback.longItemClick(isEditMode)
 
     }
 
@@ -152,7 +147,7 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
             mSelectCount = mListData!!.size
         }
         notifyDataSetChanged()
-        mCallback!!.itemClick(mSelectMap, mSelectCount)
+        mCallback.itemClick(mSelectMap, mSelectCount)
     }
 
     companion object {

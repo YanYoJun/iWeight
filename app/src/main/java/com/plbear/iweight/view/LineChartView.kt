@@ -16,6 +16,7 @@ import android.view.View
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.R
 import com.plbear.iweight.data.Data
+import com.plbear.iweight.utils.App
 import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
@@ -34,15 +35,15 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
     private val ALIGN_PADDING_TOP = 10
     private val ALIGN_PADDING_BOTTOM = 40
 
-    private var mBondLinePaint: Paint? = null
-    private var mLinePaint: Paint? = null
-    private var mDottedLinePaint: Paint? = null
-    private var mPolyLinePaint: Paint? = null
-    private var mTextPaint: Paint? = null
-    private var mPointPaint: Paint? = null
-    private var mTargetPaint: Paint? = null
-    private var mTargetTextPaint: Paint? = null
-    private var mDataManager: DataManager? = null
+    private  var mBondLinePaint: Paint = Paint()
+    private  var mLinePaint: Paint = Paint()
+    private  var mDottedLinePaint: Paint = Paint()
+    private  var mPolyLinePaint: Paint = Paint()
+    private  var mTextPaint: Paint = Paint()
+    private  var mPointPaint: Paint = Paint()
+    private  var mTargetPaint: Paint = Paint()
+    private  var mTargetTextPaint: Paint = Paint()
+    private  var mDataManager: DataManager = DataManager.getInstance()
 
     private var mTop = 0
     private var mLeft = 0
@@ -59,7 +60,7 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         Message msg = mHandler.obtainMessage(MSG_DATA_CHANGE);
         mHandler.sendMessage(msg);
     }*/
-    var dataAdpater: DataAdapter? = null
+    var dataAdpater = DataAdapter()
         private set
     private var mContext: Context? = null
     private val mHandler = object : Handler() {
@@ -91,64 +92,55 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
      * 初始化画笔工具
      */
     private fun initPaints() {
-        mBondLinePaint = Paint()
-        mBondLinePaint!!.color = Color.BLACK
-        mBondLinePaint!!.typeface = Typeface.DEFAULT_BOLD
-        mBondLinePaint!!.style = Paint.Style.STROKE
-        mBondLinePaint!!.strokeWidth = 3f
-        mBondLinePaint!!.isAntiAlias = true
-        mBondLinePaint!!.alpha = 130
+        mBondLinePaint.color = Color.BLACK
+        mBondLinePaint.typeface = Typeface.DEFAULT_BOLD
+        mBondLinePaint.style = Paint.Style.STROKE
+        mBondLinePaint.strokeWidth = 3f
+        mBondLinePaint.isAntiAlias = true
+        mBondLinePaint.alpha = 130
 
-        mLinePaint = Paint()
-        mLinePaint!!.color = Color.BLACK
-        mLinePaint!!.style = Paint.Style.STROKE
-        mLinePaint!!.strokeWidth = 3f
-        mLinePaint!!.alpha = 90
-        mLinePaint!!.isAntiAlias = true
+        mLinePaint.color = Color.BLACK
+        mLinePaint.style = Paint.Style.STROKE
+        mLinePaint.strokeWidth = 3f
+        mLinePaint.alpha = 90
+        mLinePaint.isAntiAlias = true
 
-        mDottedLinePaint = Paint()
-        mDottedLinePaint!!.color = Color.BLACK
-        mDottedLinePaint!!.style = Paint.Style.STROKE
-        mDottedLinePaint!!.strokeWidth = 3f
-        mDottedLinePaint!!.isAntiAlias = true
-        mDottedLinePaint!!.alpha = 150
+        mDottedLinePaint.color = Color.BLACK
+        mDottedLinePaint.style = Paint.Style.STROKE
+        mDottedLinePaint.strokeWidth = 3f
+        mDottedLinePaint.isAntiAlias = true
+        mDottedLinePaint.alpha = 150
 
-        mPolyLinePaint = Paint()
-        mPolyLinePaint!!.color = resources.getColor(R.color.line_color)
-        mPolyLinePaint!!.style = Paint.Style.STROKE
-        mPolyLinePaint!!.strokeWidth = 5f
-        mPolyLinePaint!!.isAntiAlias = true
+        mPolyLinePaint.color = resources.getColor(R.color.line_color)
+        mPolyLinePaint.style = Paint.Style.STROKE
+        mPolyLinePaint.strokeWidth = 5f
+        mPolyLinePaint.isAntiAlias = true
 
-        mTextPaint = Paint()
-        mTextPaint!!.color = Color.BLACK
-        mTextPaint!!.textSize = 38f
-        mTextPaint!!.isAntiAlias = true
-        mTextPaint!!.style = Paint.Style.FILL
-        mTextPaint!!.alpha = 150
-        mTextPaint!!.strokeWidth = 1f
+        mTextPaint.color = Color.BLACK
+        mTextPaint.textSize = 38f
+        mTextPaint.isAntiAlias = true
+        mTextPaint.style = Paint.Style.FILL
+        mTextPaint.alpha = 150
+        mTextPaint.strokeWidth = 1f
 
-        mPointPaint = Paint()
-        mPointPaint!!.color = resources.getColor(R.color.point_color)
-        mPointPaint!!.strokeWidth = 20f
+        mPointPaint.color = resources.getColor(R.color.point_color)
+        mPointPaint.strokeWidth = 20f
 
-        mTargetPaint = Paint()
-        mTargetPaint!!.color = resources.getColor(R.color.target_weight)
-        mTargetPaint!!.style = Paint.Style.STROKE
-        mTargetPaint!!.strokeWidth = 4f
-        mTargetPaint!!.isAntiAlias = true
+        mTargetPaint.color = resources.getColor(R.color.target_weight)
+        mTargetPaint.style = Paint.Style.STROKE
+        mTargetPaint.strokeWidth = 4f
+        mTargetPaint.isAntiAlias = true
 
-        mTargetTextPaint = Paint()
-        mTargetTextPaint!!.color = resources.getColor(R.color.target_weight)
-        mTargetTextPaint!!.textSize = 38f
-        mTargetTextPaint!!.isAntiAlias = true
-        mTargetTextPaint!!.style = Paint.Style.FILL
-        mTargetTextPaint!!.alpha = 150
-        mTargetTextPaint!!.strokeWidth = 1f
+        mTargetTextPaint.color = resources.getColor(R.color.target_weight)
+        mTargetTextPaint.textSize = 38f
+        mTargetTextPaint.isAntiAlias = true
+        mTargetTextPaint.style = Paint.Style.FILL
+        mTargetTextPaint.alpha = 150
+        mTargetTextPaint.strokeWidth = 1f
 
     }
 
     private fun init() {
-        dataAdpater = DataAdapter(mContext!!)
         MyLog.e(TAG, "init")
         dataAdpater!!.setTag(TAG)
         dataAdpater!!.registerDataListener(object : DataAdapter.DataChangeListener {
@@ -159,7 +151,6 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
             }
         })
         initPaints()
-        mDataManager = DataManager.getInstance(mContext)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -177,20 +168,17 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
     }
 
     override fun onDraw(canvas: Canvas) {
-        MyLog.d(TAG, "onDraw")
         canvas.drawLine(ALIGN_PADDING_LEFT.toFloat(), ALIGN_PADDING_TOP.toFloat(), (mRight - ALIGN_PADDING_RIGHT).toFloat(),
-                ALIGN_PADDING_TOP.toFloat(), mBondLinePaint!!)
+                ALIGN_PADDING_TOP.toFloat(), mBondLinePaint)
         for (i in 1 until SPACES_COUNT) {
             canvas.drawLine(ALIGN_PADDING_LEFT.toFloat(), (ALIGN_PADDING_TOP + i * mLineSpacing).toFloat(), (mRight - ALIGN_PADDING_RIGHT).toFloat(), (ALIGN_PADDING_TOP + i * mLineSpacing).toFloat(), mLinePaint!!)
         }
         canvas.drawLine(ALIGN_PADDING_LEFT.toFloat(), (ALIGN_PADDING_TOP + SPACES_COUNT * mLineSpacing).toFloat(), (mRight - ALIGN_PADDING_RIGHT).toFloat(), (ALIGN_PADDING_TOP + SPACES_COUNT * mLineSpacing).toFloat(), mBondLinePaint!!)
-
         drawDottedLine(canvas)
         drawPolyLine(canvas)
         drawWeightText(canvas)
         drawTimeText(canvas)
         val temp = dataAdpater!!.showPointCount
-        MyLog.e(TAG, "onDraw:" + temp)
         if (dataAdpater!!.showPointCount < 50) {
             drawPoint(canvas)
         }
@@ -219,25 +207,6 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         MyLog.e(TAG, "begin:$begin end:$end")
         drawDottedLine(canvas, begin, end, mTargetPaint)
         canvas.drawText(mContext!!.resources.getString(R.string.target_weight), (end.x - 120).toFloat(), (end.y + 40).toFloat(), mTargetTextPaint!!)
-        /*        MyLog.Companion.e(TAG, "drawTargetLine");
-        Data begin = new Data();
-        begin.setWeight(mDataAdapter.getTargetWeight());
-        begin.setTime(mDataAdapter.getTimeSmallest());
-
-        Data end = new Data();
-        end.setWeight(mDataAdapter.getTargetWeight());
-        end.setTime(mDataAdapter.getTimeBiggest());
-
-        int beginId = mDataAdapter.getShowDataStartId();
-        float steps = mWidth / (mDataAdapter.getShowPointCount()-1);
-        Point beginPoint = toViewPoint(begin, 0, steps);
-        Point endPoint = toViewPoint(end,mDataAdapter.getShowPointCount()-1 , steps);
-        drawDottedLine(canvas, beginPoint, endPoint, mTargetPaint);
-        MyLog.Companion.d(TAG, "yanlog drawTargetLine beginPoint:" + beginPoint + " endPoint:" + endPoint);
-        MyLog.Companion.d(TAG, "yanlog targetLine begin:" + begin + " :end:" + end);
-
-        canvas.drawText(mContext.getResources().getString(R.string.target_weight), endPoint.x - 120, endPoint.y + 40, mTargetTextPaint);*/
-        /*canvas.drawLine(beginPoint.x, beginPoint.y, endPoint.x, endPoint.y, mTargetPaint);*/
     }
 
     /**
@@ -290,17 +259,14 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
      * @param canvas
      */
     private fun drawTimeText(canvas: Canvas) {
-        if (dataAdpater == null) {
-            return
-        }
-        val minTime = dataAdpater!!.timeSmallest
-        val maxTime = dataAdpater!!.timeBiggest
+        val minTime = dataAdpater.timeSmallest
+        val maxTime = dataAdpater.timeBiggest
         canvas.drawText(Utils.formatTime(minTime), ALIGN_PADDING_LEFT.toFloat(), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT).toFloat(),
-                mTextPaint!!)
+                mTextPaint)
         canvas.drawText(Utils.formatTime((minTime + maxTime) / 2), (ALIGN_PADDING_LEFT + mWidth / 2 - 60).toFloat(), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT).toFloat(),
-                mTextPaint!!)
+                mTextPaint)
         canvas.drawText(Utils.formatTime(maxTime), (ALIGN_PADDING_LEFT + mWidth - 110).toFloat(), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT).toFloat(),
-                mTextPaint!!)
+                mTextPaint)
 
     }
 
@@ -315,10 +281,10 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         }
         val maxvalue = dataAdpater!!.weightBiggest
         val space = dataAdpater!!.height / SPACES_COUNT
-        canvas.drawText(String.format("%.1f", maxvalue), ALIGN_PADDING_LEFT.toFloat(), (ALIGN_PADDING_TOP + 40).toFloat(), mTextPaint!!)
+        canvas.drawText(String.format("%.1f", maxvalue), ALIGN_PADDING_LEFT.toFloat(), (ALIGN_PADDING_TOP + 40).toFloat(), mTextPaint)
         for (i in 1 until SPACES_COUNT) {
             canvas.drawText(String.format("%.1f", maxvalue - i * space),
-                    ALIGN_PADDING_LEFT.toFloat(), (ALIGN_PADDING_TOP + 40 + i * mLineSpacing).toFloat(), mTextPaint!!)
+                    ALIGN_PADDING_LEFT.toFloat(), (ALIGN_PADDING_TOP + 40 + i * mLineSpacing).toFloat(), mTextPaint)
         }
     }
 
@@ -368,7 +334,7 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
                 path.moveTo(begin.x + (i + 1) * spaceX, begin.y + (i + 1) * spaceY)
                 i += 2
             }
-            canvas.drawPath(path, paint!!)
+            canvas.drawPath(path, paint)
         } else {
             val path = Path()
             val space = 10
@@ -396,23 +362,21 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
      * @param canvas
      */
     private fun drawPolyLine(canvas: Canvas) {
-        val list = dataAdpater!!.showDataList
-        if (list == null || list.size == 0 || list.size == 1) {
+        val list = dataAdpater.showDataList
+        if (list.size == 0 || list.size == 1) {
             return
         }
         val path = Path()
-        val beginsId = dataAdpater!!.showDataStartId
-        val steps = (mWidth / (dataAdpater!!.showPointCount - 1)).toFloat()
+        val beginsId = dataAdpater.showDataStartId
+        val steps = (mWidth / (dataAdpater.showPointCount - 1)).toFloat()
         var begin = toViewPoint(list[0], 0, steps)
-        MyLog.e(TAG, "drawPolyLine:" + begin!!.toString() + ":" + list[0].toString())
         var end: Point? = null
         path.moveTo(begin.x.toFloat(), begin.y.toFloat())
         val fixPoint_1 = Point()
         val fixPoint_2 = Point()
         for (i in 1 until list.size) {
             end = toViewPoint(list[i], i, steps)
-            MyLog.e(TAG, "drawPolyLine:" + end!!.toString() + ":" + list[i].toString())
-            fixPoint_1.set((begin!!.x + end.x) / 2, begin.y)
+            fixPoint_1.set((begin.x + end.x) / 2, begin.y)
             fixPoint_2.set((begin.x + end.x) / 2, end.y)
             path.cubicTo(fixPoint_1.x.toFloat(), fixPoint_1.y.toFloat(), fixPoint_2.x.toFloat(), fixPoint_2.y.toFloat(), end.x.toFloat(), end.y.toFloat())
             begin = end
@@ -426,17 +390,14 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
      * @param data
      * @return
      */
-    private fun toViewPoint(data: Data, ids: Int, timeSteps: Float): Point? {
-        if (dataAdpater == null) {
-            return null
-        }
+    private fun toViewPoint(data: Data, ids: Int, timeSteps: Float): Point {
         val point = Point()
-        point.set(ALIGN_PADDING_LEFT + (ids * timeSteps).toInt(), ALIGN_PADDING_TOP + ((dataAdpater!!.weightBiggest - data.weight) * mHeight.toFloat() / dataAdpater!!.height) as Int)
+        point.set(ALIGN_PADDING_LEFT + (ids * timeSteps).toInt(), ALIGN_PADDING_TOP + ((dataAdpater.weightBiggest - data.weight) * mHeight.toFloat() / dataAdpater.height).toInt())
         return point
     }
 
     private fun toYPoint(weight: Float): Int {
-        return ALIGN_PADDING_TOP + ((dataAdpater!!.weightBiggest - weight) * mHeight.toFloat() / dataAdpater!!.height).toInt()
+        return ALIGN_PADDING_TOP + ((dataAdpater.weightBiggest - weight) * mHeight.toFloat() / dataAdpater.height).toInt()
     }
 
 }

@@ -1,6 +1,7 @@
 package com.plbear.iweight.model.main
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -16,6 +17,7 @@ import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.AppCompatActivity
 import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,7 @@ import android.widget.Toast
 
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.R
+import com.plbear.iweight.activity.BaseActivity
 import com.plbear.iweight.model.other.AboutActivity
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.details.DetailsActivity
@@ -47,14 +50,15 @@ import java.util.TimerTask
  * Created by yanyongjun on 16/11/5.
  */
 
-class MainActivity : FragmentActivity() {
+class MainActivity : BaseActivity() {
     private val mSwitchLab = SparseArray<TextView>()
     private var mXmlListener: XMLHelper.OnXMLListener? = null
 
+    override fun getLayout(): Int {
+        return R.layout.activity_main
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun afterLayout() {
         init()
         btn_record.setOnClickListener(View.OnClickListener {
             MyLog.d(TAG, "input weight")
@@ -77,7 +81,6 @@ class MainActivity : FragmentActivity() {
      * init all the view
      */
     private fun init() {
-        MyLog.i(TAG,"init enter")
         initNav()
 
         mXmlListener = object:XMLHelper.OnXMLListener{
@@ -113,7 +116,7 @@ class MainActivity : FragmentActivity() {
         }
 
         val exitButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_exit)
-        exitButton.setOnClickListener { System.exit(0) }
+        exitButton.setOnClickListener { exitAll() }
 
 
         val detailsButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_detail)
@@ -203,6 +206,7 @@ class MainActivity : FragmentActivity() {
 
 
     override fun onResume() {
+        MyLog.e(TAG,"onResume")
         super.onResume()
         view_pager_main.currentItem = 0
         chooseFrag(0)

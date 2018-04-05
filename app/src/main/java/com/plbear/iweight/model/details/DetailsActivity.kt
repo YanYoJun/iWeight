@@ -24,6 +24,7 @@ import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.activity.BaseActivity
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.main.MainActivity
+import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.include_title.*
@@ -40,7 +41,7 @@ import java.util.TimerTask
 
 class DetailsActivity : BaseActivity() {
 
-    private var mAdapter: DetailsAdapter? = null
+    lateinit var mAdapter: DetailsAdapter
     private var mDataList: ArrayList<Data>? = null
     private val mCallback = object : DetailsAdapter.OnItemClick {
         override fun itemClick(mSelectMap: HashMap<Int, Boolean>, selectCount: Int) {
@@ -105,7 +106,9 @@ class DetailsActivity : BaseActivity() {
     }
 
     override fun onStart() {
+        MyLog.e(TAG,"onStart1")
         this.contentResolver.registerContentObserver(Constant.CONTENT_URI, true, mObserver)
+        MyLog.e(TAG,"onStart 2")
         super.onStart()
     }
 
@@ -114,7 +117,6 @@ class DetailsActivity : BaseActivity() {
         Utils.sortDataBigToSmall(mDataList!!)
         mAdapter = DetailsAdapter(this, mDataList!!, mCallback)
         listview_details.adapter = mAdapter
-
         listview_details.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> }
         btn_details_select_all.setOnClickListener { mAdapter!!.onSelectAllClick() }
         btn_details_change.setOnClickListener { showChangeDialog() }
@@ -145,15 +147,16 @@ class DetailsActivity : BaseActivity() {
     }
 
     private fun showChangeDialog() {
-        val list = mAdapter!!.selectData
+        val list = mAdapter.selectData
+        MyLog.e(TAG,"yanlog list $list")
         val data = list[0]
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
-        val layout = inflater.inflate(R.layout.dialog_main_input_weight, findViewById<View>(R.id.dialog_layout) as ViewGroup)
+        val layout = inflater.inflate(R.layout.dialog_main_input_weight, null)
         builder.setView(layout)
         val dialog = builder.create()
-        val btnSubmit = layout.findViewById<View>(R.id.dialog_submit) as Button
-        val editText = layout.findViewById<View>(R.id.dialog_input_weight) as EditText
+        val btnSubmit = layout.findViewById<Button>(R.id.dialog_submit)
+        val editText = layout.findViewById<EditText>(R.id.dialog_input_weight)
         editText.setText(""+data.weight)
         editText.setSelection(editText.text.length)
         btnSubmit.setOnClickListener(View.OnClickListener {

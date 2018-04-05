@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.preference.PreferenceActivity
+import com.plbear.iweight.utils.AppManager
 
 import com.plbear.iweight.utils.MyLog
 
@@ -22,23 +23,18 @@ class BasePreferenceActivity : PreferenceActivity() {
             }
             val action = intent!!.action
             MyLog.d(TAG, "onReceive action:" + action!!)
-            if (BaseActivity.ACTION_EXIT == action) {
-                finish()
-            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val filter = IntentFilter()
-        filter.addAction(BaseActivity.ACTION_EXIT)
-        registerReceiver(mReceiver, filter)
         MyLog.d(TAG, "onCreate")
+        AppManager.getAppManager().addToStack(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(mReceiver)
+        AppManager.getAppManager().removeFromStack(this)
     }
 
     companion object {
