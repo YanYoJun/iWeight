@@ -9,7 +9,7 @@ import android.preference.PreferenceActivity
 import com.plbear.iweight.utils.MyLog
 
 /**
- * Created by yanyongjun on 2017/4/1.
+ * Created by yanyongjun on 2017/normal_4/normal_1.
  */
 
 class BasePreferenceActivity : PreferenceActivity() {

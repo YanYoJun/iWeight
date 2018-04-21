@@ -1,8 +1,6 @@
 package com.plbear.iweight.model.main.activity
 
 import android.Manifest
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -11,44 +9,36 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
-import android.util.SparseArray
 import android.view.View
-import android.view.inputmethod.InputMethodManager
+import android.view.WindowManager
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.R
-import com.plbear.iweight.R.id.*
 import com.plbear.iweight.base.BaseActivity
 import com.plbear.iweight.model.other.AboutActivity
 import com.plbear.iweight.data.Data
-import com.plbear.iweight.utils.details.DetailsActivity
+import com.plbear.iweight.model.details.DetailsActivity
 import com.plbear.iweight.model.main.fragment.MainDataFragment
-import com.plbear.iweight.model.main.adapter.MainDataFragmentAdapter
+import com.plbear.iweight.model.main.view.KeyboardBuilder
 import com.plbear.iweight.utils.MyLog
-import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.utils.Utils
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.storage.XMLHelper
+import com.plbear.iweight.utils.MySPUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_main.*
 import kotlinx.android.synthetic.main.title.*
 
-import java.util.Timer
-import java.util.TimerTask
-
 /**
- * Created by yanyongjun on 16/11/5.
+ * Created by yanyongjun on 16/11/normal_5.
  */
 
 class MainActivity : BaseActivity() {
     private var mXmlListener: XMLHelper.OnXMLListener? = null
     var mFragList = ArrayList<Fragment>()
-    var mPagerAdapter = object: FragmentPagerAdapter(supportFragmentManager){
+    var mPagerAdapter = object : FragmentPagerAdapter(supportFragmentManager) {
         override fun getItem(position: Int): Fragment {
             return mFragList[position]
         }
@@ -66,7 +56,7 @@ class MainActivity : BaseActivity() {
         init()
         btn_record.setOnClickListener(View.OnClickListener {
             MyLog.d(TAG, "input weight")
-            val onceEveryDay = SPUtils.getSp().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
+            val onceEveryDay = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
             if (onceEveryDay) {
                 val lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime())
                 MyLog.d(TAG, "lastTime:" + lastTime)
@@ -75,9 +65,9 @@ class MainActivity : BaseActivity() {
                     return@OnClickListener
                 }
             }
-            showRecordDialog()
+            recordWeight()
         })
-
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         btn_title_more.setOnClickListener { drawer_layout_main.openDrawer(nav_main_view) }
     }
 
@@ -87,7 +77,7 @@ class MainActivity : BaseActivity() {
     private fun init() {
         initNav()
 
-        mXmlListener = object:XMLHelper.OnXMLListener{
+        mXmlListener = object : XMLHelper.OnXMLListener {
             override fun onReadSuccess() {
                 Toast.makeText(this@MainActivity, "文件读取成功", Toast.LENGTH_SHORT).show()
             }
@@ -112,7 +102,7 @@ class MainActivity : BaseActivity() {
     /**
      * 初始化侧边栏
      */
-    private fun initNav(){
+    private fun initNav() {
         val btnAbout = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_about)
         btnAbout.setOnClickListener {
             val intent = Intent(this@MainActivity, AboutActivity::class.java)
@@ -138,10 +128,10 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun initTabLayout(){
+    private fun initTabLayout() {
         try {
             tab_main.setupWithViewPager(view_pager_main)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         tab_main.tabMode = TabLayout.MODE_FIXED
@@ -153,7 +143,7 @@ class MainActivity : BaseActivity() {
     /**
      * 初始化折线图
      */
-    private fun initCharView(){
+    private fun initCharView() {
         //init fragment
         val weekFrag = MainDataFragment()
         weekFrag.tag = "weekFrag"
@@ -171,16 +161,16 @@ class MainActivity : BaseActivity() {
         mFragList.add(allFrag)
 
         view_pager_main.adapter = mPagerAdapter
-        MyLog.e(TAG,"initCharView")
+        MyLog.e(TAG, "initCharView")
         initTabLayout()
     }
 
 
     override fun onResume() {
-        MyLog.e(TAG,"onResume")
+        MyLog.e(TAG, "onResume")
         super.onResume()
 
-        val isExOn = SPUtils.getSp().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
+        val isExOn = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
         val importButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_import)
         if (isExOn) {
             importButton.visibility = View.VISIBLE
@@ -227,47 +217,31 @@ class MainActivity : BaseActivity() {
     /**
      * 弹出记录体重的弹框
      */
-    private fun showRecordDialog() {
-        //builder.setTitle(R.string.)
-        val builder = AlertDialog.Builder(this)
-        val layout = layoutInflater.inflate(R.layout.dialog_main_input_weight,null)
-        builder.setView(layout)
-        val dialog = builder.create()
-        val btnSubmit = layout.findViewById<View>(R.id.dialog_submit) as Button
-        val editText = layout.findViewById<View>(R.id.dialog_input_weight) as EditText
-        btnSubmit.setOnClickListener(View.OnClickListener {
-            val time = System.currentTimeMillis()
-            try {
-                val weight = java.lang.Float.parseFloat(editText.text.toString())
-                if (!Utils.checkWeightValue(weight)) {
-                    Toast.makeText(this@MainActivity, "您输入的值太不合理了，在逗我玩吧~", Toast.LENGTH_SHORT).show()
-                    return@OnClickListener
+    private fun recordWeight() {
+        btn_record.visibility = View.GONE
+        edit_num.visibility = View.VISIBLE
+        edit_num.setText("")
+        var keyboardBuilder = KeyboardBuilder(this@MainActivity, keyboard_main, R.xml.main_keyboard, edit_num, object : KeyboardBuilder.OnStatusChanged {
+            override fun onChanged(status: Int) {
+                when (status) {
+                    KeyboardBuilder.STATUS_CANCEL -> {
+                        btn_record.visibility = View.VISIBLE
+                        edit_num.visibility = View.GONE
+                    }
+                    KeyboardBuilder.STATUS_SUBMIT -> {
+                        btn_record.visibility = View.VISIBLE
+                        edit_num.visibility = View.GONE
+                        //TODO
+                        val time = System.currentTimeMillis()
+                        val data = Data(-1, time, edit_num.text.toString().toFloat())
+                        val isOnlyOneTime = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
+                        MyLog.d(TAG, "isOnlyOnceEveryday" + isOnlyOneTime)
+                        DataManager.getInstance(this@MainActivity)!!.add(data)
+                    }
                 }
-                val data = Data(-1, time, weight)
-                val isOnlyOneTime = SPUtils.getSp().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
-                MyLog.d(TAG, "isOnlyOnceEveryday" + isOnlyOneTime)
-                DataManager.getInstance(this@MainActivity)!!.add(data)
-
-                dialog.dismiss()
-            } catch (e: Exception) {
-                Toast.makeText(this@MainActivity, "输入值不合法，请重新输入~", Toast.LENGTH_SHORT).show()
             }
         })
-        val btnCancel = layout.findViewById<View>(R.id.dialog_cacnel) as Button
-        btnCancel.setOnClickListener { dialog.dismiss() }
-        dialog.show()
-        editText.requestFocus()
-        editText.isFocusable = true
-        editText.isFocusableInTouchMode = true
-        val timer = Timer()
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                if (editText != null) {
-                    val imm = this@MainActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED)
-                }
-            }
-        }, 200)
+        keyboardBuilder.showKeyboard(edit_num)
 
     }
 

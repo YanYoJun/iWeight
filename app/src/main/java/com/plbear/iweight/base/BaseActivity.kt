@@ -2,10 +2,11 @@ package com.plbear.iweight.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.plbear.iweight.utils.LogInfo
 import com.plbear.iweight.utils.MyLog
 
 /**
- * Created by yanyongjun on 2018/1/28.
+ * Created by yanyongjun on 2018/normal_1/28.
  */
 abstract class BaseActivity : AppCompatActivity() {
     abstract fun getLayout(): Int
@@ -14,7 +15,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayout())
+        var layout = getLayout()
+        if (layout != 0) {
+            setContentView(getLayout())
+        }
         MyLog.d(TAG, "onCreate")
         AppManager.getAppManager().addToStack(this)
         afterLayout()
@@ -44,5 +48,13 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun finish() {
         AppManager.getAppManager().removeFromStack(this)
         super.finish()
+    }
+
+    fun loginfo(info: String) {
+        LogInfo.e(TAG, info)
+    }
+
+    fun logerror(error: String) {
+        LogInfo.e(TAG, error)
     }
 }

@@ -1,50 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.plbear.iweight.model.main.activity.MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="600"
-        android:background="@color/background">
+        android:orientation="vertical">
 
-        <include layout="@layout/title" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="600"
+            android:background="@color/background">
 
-        <Button
-            android:id="@+id/btn_record"
-            android:layout_width="145dp"
-            android:layout_height="145dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/btn_bg"
-            android:text="@string/btn_input_weight"
-            android:textColor="@color/background"
-            android:textSize="50sp"
-            android:typeface="serif" />
-    </RelativeLayout>
+            <include layout="@layout/title" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_main"
+            <FrameLayout
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:id="@+id/btn_record"
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:background="@drawable/btn_bg"
+                    android:text="@string/btn_input_weight"
+                    android:textColor="@color/background"
+                    android:textSize="50sp"
+                    android:typeface="serif" />
+
+                <EditText
+                    android:gravity="center"
+                    android:id="@+id/edit_num"
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:background="@drawable/bg_normal"
+                    android:hint="0.0"
+                    android:textColor="@color/background"
+                    android:textSize="50sp"
+                    android:visibility="gone"
+                    android:singleLine="true"
+                    android:typeface="serif" />
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_main"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/background"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/background"
+            app:tabTextColor="@color/main_dlg_btn_gray"></android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager_main"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="360"></android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+    <com.plbear.iweight.model.main.view.MyKeyboardView
+        android:id="@+id/keyboard_main"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/background"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/background"
-        app:tabTextColor="@color/main_dlg_btn_gray"></android.support.design.widget.TabLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager_main"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="360"></android.support.v4.view.ViewPager>
-
-</LinearLayout>
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:keyTextColor="@color/black"
+        android:background="@null"
+        android:visibility="gone"></com.plbear.iweight.model.main.view.MyKeyboardView>
+</FrameLayout>

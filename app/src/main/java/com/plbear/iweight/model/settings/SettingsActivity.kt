@@ -8,7 +8,7 @@ import com.plbear.iweight.base.BaseActivity
 import kotlinx.android.synthetic.main.include_title.*
 
 /**
- * Created by HuHu on 2017/3/13.
+ * Created by HuHu on 2017/normal_3/13.
  */
 
 class SettingsActivity : BaseActivity() {
@@ -34,7 +34,7 @@ class SettingsActivity : BaseActivity() {
         val PREFERENCE_KEY_SET_TARGET_WEIGHT = "set_target_weight"
         val PREFERENCE_KEY_ONLY_ONCE_EVERYDAY = "only_once_everyday"
         val PREFERENCE_KEY_EXPORT_IMPORT = "export_import_switch"
-        val PREFERENCE_KEY_UNIT = "value_unit"
+        public val PREFERENCE_KEY_UNIT = "value_unit"
 
         private val TAG = "SettingsActivity"
     }

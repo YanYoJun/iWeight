@@ -12,16 +12,13 @@ import android.preference.PreferenceFragment
 import android.preference.PreferenceScreen
 import android.preference.SwitchPreference
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 
 import com.plbear.iweight.R
 import com.plbear.iweight.utils.MyLog
-import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.utils.Utils
 import com.plbear.iweight.model.main.fragment.MainDataFragment
 
@@ -29,9 +26,11 @@ import java.util.Timer
 import java.util.TimerTask
 
 import android.content.ContentValues.TAG
+import com.plbear.iweight.utils.MySPUtils
+import com.plbear.iweight.utils.MyUtils
 
 /**
- * Created by yanyongjun on 2017/4/1.
+ * Created by yanyongjun on 2017/normal_4/normal_1.
  */
 
 class SettingsFragment : PreferenceFragment() {
@@ -69,16 +68,16 @@ class SettingsFragment : PreferenceFragment() {
 
     private fun init() {
         mContext = activity
-        mSP = SPUtils.getSp()
+        mSP = MySPUtils.getSP()
         mSPEditor = mSP!!.edit()
     }
 
     override fun onResume() {
         val valUnitWeight = findPreference(SettingsActivity.PREFERENCE_KEY_UNIT) as ListPreference
-        val value = mSP!!.getString(SettingsActivity.PREFERENCE_KEY_UNIT, "1")
+        val value = mSP!!.getString(SettingsActivity.PREFERENCE_KEY_UNIT, "normal_1")
         initUnitPreference(value)
         valUnitWeight.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
-            Utils.clearValueUnit()
+            MyUtils.clearValueUnit()
             initUnitPreference(newValue as String)
             val intent = Intent(MainDataFragment.ACTION_DATA_CHANED)
             activity.sendBroadcast(intent)
@@ -90,9 +89,9 @@ class SettingsFragment : PreferenceFragment() {
     private fun initUnitPreference(value: String) {
         val valUnitWeight = findPreference(SettingsActivity.PREFERENCE_KEY_UNIT) as ListPreference
 
-        if (value == "1") {
+        if (value == "normal_1") {
             valUnitWeight.summary = String.format(getString(R.string.current_unit), "公斤")
-        } else if (value == "2") {
+        } else if (value == "normal_2") {
             valUnitWeight.summary = String.format(getString(R.string.current_unit), "斤")
         }
     }

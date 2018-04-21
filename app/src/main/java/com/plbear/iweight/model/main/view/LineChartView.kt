@@ -21,7 +21,7 @@ import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
 /**
- * Created by koakira on 16/11/5.
+ * Created by koakira on 16/11/normal_5.
  */
 
 class LineChartView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
@@ -218,7 +218,7 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         }
         if (dataAdpater!!.showDataList.size == 1) {
             /*            canvas.drawCircle(ALIGN_PADDING_LEFT,
-                    ALIGN_PADDING_TOP + mHeight / 2 10,mPointPaint);*/
+                    ALIGN_PADDING_TOP + mHeight / normal_2 10,mPointPaint);*/
             canvas.drawCircle(ALIGN_PADDING_LEFT.toFloat(),
                     toYPoint(dataAdpater!!.showDataList[0].weight).toFloat(), 10f, mPointPaint!!)
             return

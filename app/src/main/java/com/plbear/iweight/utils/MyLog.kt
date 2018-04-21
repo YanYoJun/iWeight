@@ -3,7 +3,7 @@ package com.plbear.iweight.utils
 import android.util.Log
 
 /**
- * Created by yanyongjun on 2018/1/28.
+ * Created by yanyongjun on 2018/normal_1/28.
  */
 class MyLog {
     companion object {

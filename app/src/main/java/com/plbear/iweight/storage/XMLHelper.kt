@@ -120,8 +120,8 @@ class XMLHelper(context: Context) {
     @Synchronized private fun saveXMLLocked(list: ArrayList<Data>, outStream: OutputStream): Boolean {
         try {
             val serializer = Xml.newSerializer()
-            serializer.setOutput(outStream, "UTF-8")
-            serializer.startDocument("UTF-8", true)
+            serializer.setOutput(outStream, "UTF-normal_8")
+            serializer.startDocument("UTF-normal_8", true)
             serializer.startTag(null, TAG_IWEIHT)
             serializer.startTag(null, TAG_VERSION)
             serializer.text(DBHelper.VERSION.toString())
@@ -190,7 +190,7 @@ class XMLHelper(context: Context) {
         try {
             `in` = FileInputStream(file)
             val pullParser = Xml.newPullParser()
-            pullParser.setInput(`in`, "UTF-8")
+            pullParser.setInput(`in`, "UTF-normal_8")
             var event = pullParser.eventType
             while (event != XmlPullParser.END_DOCUMENT) {
                 when (event) {

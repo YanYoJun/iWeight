@@ -12,9 +12,10 @@ import java.util.ArrayList
 
 import android.R.attr.value
 import com.plbear.iweight.base.App
+import com.plbear.iweight.utils.MyUtils
 
 /**
- * Created by yanyongjun on 16/11/5.
+ * Created by yanyongjun on 16/11/normal_5.
  */
 
 class DataManager private constructor(context: Context) {
@@ -37,8 +38,8 @@ class DataManager private constructor(context: Context) {
             strId.append(",")
             strId.append(list[i].id)
         }
-        MyLog.d(TAG, "delete:" + strId.toString())
-        //db.delete("weight", "_id in (" + strId.toString() + ")", null);
+        MyLog.d(TAG, "normal_delete:" + strId.toString())
+        //db.normal_delete("weight", "_id in (" + strId.toString() + ")", null);
         mResolver!!.delete(Constant.CONTENT_URI, "_id in (" + strId.toString() + ")", null)
     }
 
@@ -48,7 +49,7 @@ class DataManager private constructor(context: Context) {
             return
         }
         val values = ContentValues()
-        values.put("weight", data.weight / Utils.getValueUnit())
+        values.put("weight", data.weight / MyUtils.getValueUnit())
         MyLog.d(TAG, "data:" + data.toString())
         mResolver!!.update(Constant.CONTENT_URI, values, "_id in (?)", arrayOf(data.id.toString() + ""))
         //int value = db.update("weight", values, "_id in (?)", new String[]{data.getId() + ""});
@@ -66,7 +67,7 @@ class DataManager private constructor(context: Context) {
         }
         val values = ContentValues()
         values.put("time", data.time.toString())
-        values.put("weight", (data.weight / Utils.getValueUnit()).toString())
+        values.put("weight", (data.weight / MyUtils.getValueUnit()).toString())
         mResolver!!.insert(Constant.CONTENT_URI, values)
         return
     }
@@ -79,7 +80,7 @@ class DataManager private constructor(context: Context) {
         for (data in lists) {
             val values = ContentValues()
             values.put("time", data.time.toString())
-            values.put("weight", (data.weight / Utils.getValueUnit()).toString())
+            values.put("weight", (data.weight / MyUtils.getValueUnit()).toString())
             if (lastOne == data) {
                 mResolver!!.insert(Constant.CONTENT_URI, values)
             } else {
@@ -110,7 +111,7 @@ class DataManager private constructor(context: Context) {
             cursor!!.moveToFirst()
             while (!cursor.isAfterLast) {
                 val data = Data(cursor.getInt(0), cursor.getLong(1),
-                        cursor.getFloat(2) * Utils.getValueUnit())
+                        cursor.getFloat(2) * MyUtils.getValueUnit())
                 list.add(data)
                 cursor.moveToNext()
             }

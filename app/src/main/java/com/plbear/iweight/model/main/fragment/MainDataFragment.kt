@@ -20,7 +20,7 @@ import com.plbear.iweight.model.main.adapter.LineChartAdapter
 import com.plbear.iweight.model.main.view.LineChartView
 
 /**
- * Created by yanyongjun on 2017/7/22.
+ * Created by yanyongjun on 2017/normal_7/22.
  */
 
 class MainDataFragment : Fragment() {
@@ -69,48 +69,6 @@ class MainDataFragment : Fragment() {
         mShowAllData = flag
     }
 
-    override fun onStart() {
-        MyLog.i(TAG, "onStart")
-        val filter = IntentFilter()
-        filter.addAction(ACTION_DATA_CHANED)
-        activity.registerReceiver(mReceiver, filter)
-        super.onStart()
-    }
-
-    override fun onResume() {
-        MyLog.i(TAG, "onResume")
-        super.onResume()
-        mAdapter!!.setShowNum(mShowNum)
-        mAdapter!!.setShowAllData(mShowAllData)
-        mValley!!.text = (mAdapter!!.trueWeightSmallest + 5).toString()
-        mPeak!!.text = (mAdapter!!.trueWeightBiggest - 5).toString()
-        activity.contentResolver.registerContentObserver(Constant.CONTENT_URI, true, mObserver)
-        if (mDataChanged) {
-            mAdapter!!.notifyDataSetChange()
-            mValley!!.text = (mAdapter!!.trueWeightSmallest + 5).toString()
-            mPeak!!.text = (mAdapter!!.trueWeightBiggest - 5).toString()
-            mDataChanged = false
-        }
-    }
-
-    override fun onPause() {
-        MyLog.i(TAG, "onPause")
-        activity.contentResolver.unregisterContentObserver(mObserver)
-        activity.unregisterReceiver(mReceiver)
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        MyLog.i(TAG, "onDestroy")
-        super.onDestroy()
-    }
-
-    override fun onStop() {
-        MyLog.i(TAG, "onStop")
-
-        super.onStop()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         MyLog.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
@@ -126,9 +84,52 @@ class MainDataFragment : Fragment() {
         return v
     }
 
+    override fun onStart() {
+        MyLog.i(TAG, "onStart")
+        val filter = IntentFilter()
+        filter.addAction(ACTION_DATA_CHANED)
+        activity.registerReceiver(mReceiver, filter)
+        super.onStart()
+    }
+
+
+    override fun onResume() {
+        MyLog.i(TAG, "onResume")
+        super.onResume()
+        mAdapter!!.setShowNum(mShowNum)
+        mAdapter!!.setShowAllData(mShowAllData)
+        mValley!!.text = (mAdapter!!.trueWeightSmallest + 5).toString()
+        mPeak!!.text = (mAdapter!!.trueWeightBiggest - 5).toString()
+        activity.contentResolver.registerContentObserver(Constant.CONTENT_URI, true, mObserver)
+        if (mDataChanged) {
+            mAdapter!!.notifyDataSetChange()
+            mValley!!.text = (mAdapter!!.trueWeightSmallest + 5).toString()
+            mPeak!!.text = (mAdapter!!.trueWeightBiggest - 5).toString()
+            mDataChanged = false
+        }
+        MyLog.i(TAG,"onResume out")
+    }
+
+    override fun onPause() {
+        MyLog.i(TAG, "onPause")
+        activity.contentResolver.unregisterContentObserver(mObserver)
+        super.onPause()
+        MyLog.i(TAG,"onPause out")
+    }
+
+    override fun onStop() {
+        MyLog.i(TAG, "onStop")
+        activity.unregisterReceiver(mReceiver)
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        MyLog.i(TAG, "onDestroy")
+        super.onDestroy()
+    }
+
     companion object {
         val ACTION_DATA_CHANED = "com.plbear.iweight.data_changed"
     }
-
 
 }

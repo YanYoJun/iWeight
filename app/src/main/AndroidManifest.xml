@@ -18,6 +18,10 @@
         <activity
             android:name="com.plbear.iweight.model.main.activity.MainActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".model.other.SplashActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.plbear.iweight.model.settings.SettingsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".utils.details.DetailsActivity"></activity>
+        <activity android:name="com.plbear.iweight.model.details.DetailsActivity"></activity>
         <activity android:name=".model.other.AboutActivity">
 
         </activity>
@@ -39,6 +44,9 @@
             android:authorities="com.plbear.iweight.provider"
             android:exported="false"
             android:multiprocess="false"></provider>
+        <meta-data
+            android:name="YOUMI_CHANNEL"
+            android:value="10360"></meta-data>
 
     </application>
 

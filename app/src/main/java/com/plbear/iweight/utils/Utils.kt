@@ -1,6 +1,5 @@
 package com.plbear.iweight.utils
 
-import android.content.Context
 import android.graphics.Point
 import android.widget.Toast
 import com.plbear.iweight.base.App
@@ -10,18 +9,21 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Created by yanyongjun on 2018/1/13.
+ * Created by yanyongjun on 2018/normal_1/13.
  */
 open class Utils {
     companion object {
         val TAG = "Utils"
-        private var VALUE_UNIT = -1f//体重单位
 
         fun checkWeightValue(value: Float): Boolean {
             if (value < 2 || value > 400) {
                 return false
             }
             return true
+        }
+
+        fun checkWeightValueFat(value: Float): Boolean {
+            return value <= 400
         }
 
         fun formatTime(time: Long): String {
@@ -58,30 +60,6 @@ open class Utils {
             }
         }
 
-
-        /**
-         * 获取体重单位
-         */
-        fun getValueUnit(): Float {
-            if (VALUE_UNIT > 0) {
-                return VALUE_UNIT
-            }
-            try {
-                val sp = SPUtils.getSp()
-                val value = sp.getString(SettingsActivity.PREFERENCE_KEY_UNIT, "1")
-                VALUE_UNIT = java.lang.Float.parseFloat(value)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            return VALUE_UNIT
-        }
-
-        fun clearValueUnit() {
-            VALUE_UNIT = -1f
-        }
-
-
         /**
          * 以begin end 为起始点构造一条直线，求param点关于这条直线的对称点
          *
@@ -107,8 +85,8 @@ open class Utils {
             Toast.makeText(App.getAppContext(), str, Toast.LENGTH_SHORT).show()
         }
 
-        fun showToast(str:Int){
-            Toast.makeText(App.getAppContext(),str,Toast.LENGTH_SHORT).show()
+        fun showToast(str: Int) {
+            Toast.makeText(App.getAppContext(), str, Toast.LENGTH_SHORT).show()
         }
     }
 }

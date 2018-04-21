@@ -15,7 +15,7 @@ import com.plbear.iweight.utils.MyLog
 import java.util.HashMap
 
 /**
- * Created by yanyongjun on 2017/7/15.
+ * Created by yanyongjun on 2017/normal_7/15.
  */
 
 class DBProvider : ContentProvider() {
@@ -75,7 +75,7 @@ class DBProvider : ContentProvider() {
         var count = 0
         when (uriMatcher.match(uri)) {
             Constant.PROVIDER_ITEM -> count = db.delete(DBHelper.TABLE, selection, selectionArgs)
-            else -> throw IllegalArgumentException("delete Error uri:" + uri)
+            else -> throw IllegalArgumentException("normal_delete Error uri:" + uri)
         }
         mResolver!!.notifyChange(uri, null)
         return count

@@ -16,7 +16,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:textColor= "@color/black"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <CheckBox
         android:layout_marginTop="9dp"
@@ -37,5 +37,5 @@
         android:layout_toLeftOf="@id/checkbox_details_item_select"
         android:textColor="@color/black"
         android:layout_marginBottom="12dp"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 </RelativeLayout>

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 /**
- * Created by yanyongjun on 16/11/5.
+ * Created by yanyongjun on 16/11/normal_5.
  */
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, VERSION) {

@@ -5,16 +5,17 @@ import com.plbear.iweight.data.Data
 
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.utils.MyLog
-import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.base.App
+import com.plbear.iweight.utils.MySPUtils
+import com.plbear.iweight.utils.MyUtils
 import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
 import java.util.Collections
 
 /**
- * Created by yanyongjun on 16/11/5.
+ * Created by yanyongjun on 16/11/normal_5.
  */
 
 class LineChartAdapter() {
@@ -99,8 +100,8 @@ class LineChartAdapter() {
      * @returnd
      */
     private fun init() {
-        val sp = SPUtils.getSp()
-        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * Utils.getValueUnit()
+        val sp = MySPUtils.getSP()
+        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * MyUtils.getValueUnit()
 
         val db = DataManager.getInstance(App.getAppContext())
         val list = db!!.queryAll()
@@ -131,8 +132,8 @@ class LineChartAdapter() {
      * 通知注册Adapter Lisntenr的类进行刷新
      */
     private fun notifyDataChange() {
-        val sp = SPUtils.getSp()
-        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * Utils.getValueUnit()
+        val sp = MySPUtils.getSP()
+        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * MyUtils.getValueUnit()
         for (listener in mListener) {
             listener.onChange()
         }

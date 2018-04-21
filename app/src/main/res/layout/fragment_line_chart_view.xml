@@ -56,15 +56,6 @@
             android:gravity="top|center_horizontal"
             android:layout_toRightOf="@id/lab_lowest"
             android:text="@string/lowest_default" />
-
-        <TextView
-            style="@style/LabTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="top|center_horizontal"
-            android:layout_marginRight="10dp"
-            android:text="@string/unit" />
     </RelativeLayout>
 
     <com.plbear.iweight.model.main.view.LineChartView

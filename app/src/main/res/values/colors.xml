@@ -14,4 +14,14 @@
     <color name="line_color">#267c64</color>
     <color name="point_color">#267c64</color>
     <color name = "target_weight">#e97533</color>
+    <color name="submit">#00a0e9</color>
+    <color name="submit_pressed">#0068b7</color>
+
+    <color name="cancel">#f39800</color>
+    <color name="cancel_press">#FFC47C03</color>
+    <color name="text_main">#0a0a0a</color>
+    <color name="text_1">#494949</color>
+
+    <color name="key_normal">#FCFCFC</color>
+    <color name="key_press">#ECECEC</color>
 </resources>

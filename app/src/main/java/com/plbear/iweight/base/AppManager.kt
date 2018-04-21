@@ -4,7 +4,7 @@ import android.app.Activity
 import java.util.*
 
 /**
- * Created by yanyongjun on 2018/4/5.
+ * Created by yanyongjun on 2018/4/normal_5.
  */
 class AppManager {
     companion object {

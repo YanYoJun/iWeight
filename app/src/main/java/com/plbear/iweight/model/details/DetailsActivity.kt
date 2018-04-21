@@ -1,4 +1,4 @@
-package com.plbear.iweight.utils.details
+package com.plbear.iweight.model.details
 
 import android.app.AlertDialog
 import android.content.Context
@@ -72,7 +72,6 @@ class DetailsActivity : BaseActivity() {
                 btn_details_delete.isClickable = false
                 btn_details_delete.setTextColor(resources.getColor(R.color.details_item_bg))
             } else {
-                btn_details_select_all.visibility = View.GONE
                 btn_details_change.visibility = View.GONE
                 btn_details_delete.visibility = View.GONE
             }
@@ -100,9 +99,9 @@ class DetailsActivity : BaseActivity() {
     }
 
     override fun onStart() {
-        MyLog.e(TAG,"onStart1")
+        MyLog.e(TAG, "onStart1")
         this.contentResolver.registerContentObserver(Constant.CONTENT_URI, true, mObserver)
-        MyLog.e(TAG,"onStart 2")
+        MyLog.e(TAG, "onStart normal_2")
         super.onStart()
     }
 
@@ -112,19 +111,29 @@ class DetailsActivity : BaseActivity() {
         mAdapter = DetailsAdapter(this, mDataList!!, mCallback)
         listview_details.adapter = mAdapter
         listview_details.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> }
-        btn_details_select_all.setOnClickListener { mAdapter!!.onSelectAllClick() }
+
+        //初始化标题栏
+        btn_details_select_all.setOnClickListener {
+            if (mAdapter.isEditMode) {
+                mAdapter.onSelectAllClick()
+            } else {
+                mAdapter.enterEditMode()
+            }
+        }
+        btn_details_select_all.setText("编辑")
+
         btn_details_change.setOnClickListener { showChangeDialog() }
         btn_details_delete.setOnClickListener { showDeleteDialog() }
     }
 
-    fun onClick_back(v:View){
+    fun onClick_back(v: View) {
         finish()
     }
 
     private fun showDeleteDialog() {
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
-        val layout = inflater.inflate(R.layout.dialog_details_delete, findViewById<View>(R.id.dialog_layout) as ViewGroup)
+        val layout = inflater.inflate(R.layout.dialog_details_delete, null)
         builder.setView(layout)
         val dialog = builder.create()
         val btnSubmit = layout.findViewById<View>(R.id.dialog_submit) as Button
@@ -135,14 +144,14 @@ class DetailsActivity : BaseActivity() {
             mAdapter!!.exitEditMode()
         }
 
-        val btnCancel = layout.findViewById<View>(R.id.dialog_cacnel) as Button
+        val btnCancel = layout.findViewById<Button>(R.id.dialog_cacnel)
         btnCancel.setOnClickListener { dialog.dismiss() }
         dialog.show()
     }
 
     private fun showChangeDialog() {
         val list = mAdapter.selectData
-        MyLog.e(TAG,"yanlog list $list")
+        MyLog.e(TAG, "yanlog list $list")
         val data = list[0]
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
@@ -151,7 +160,7 @@ class DetailsActivity : BaseActivity() {
         val dialog = builder.create()
         val btnSubmit = layout.findViewById<Button>(R.id.dialog_submit)
         val editText = layout.findViewById<EditText>(R.id.dialog_input_weight)
-        editText.setText(""+data.weight)
+        editText.setText("" + data.weight)
         editText.setSelection(editText.text.length)
         btnSubmit.setOnClickListener(View.OnClickListener {
             try {
@@ -192,6 +201,7 @@ class DetailsActivity : BaseActivity() {
         val adapter = listview_details.adapter as DetailsAdapter
         if (adapter.isEditMode) {
             adapter.exitEditMode()
+            btn_details_select_all.setText("编辑")
             return
         }
         super.onBackPressed()

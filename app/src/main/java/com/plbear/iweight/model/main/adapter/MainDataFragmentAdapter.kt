@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
 /**
- * Created by yanyongjun on 2017/7/22.
+ * Created by yanyongjun on 2017/normal_7/22.
  */
 
 class MainDataFragmentAdapter(fm: FragmentManager, private val mFragLists: List<Fragment>) : FragmentPagerAdapter(fm) {
