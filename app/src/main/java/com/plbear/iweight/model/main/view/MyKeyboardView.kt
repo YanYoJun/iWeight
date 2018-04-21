@@ -18,7 +18,7 @@ class MyKeyboardView(context: Context, attrs: AttributeSet) : KeyboardView(conte
     private var mKeyPaint = Paint()
     private var mKeyPressPaint = Paint()
     private var mBlackPaint = Paint()
-    private var mDeleteBitmap = BitmapFactory.decodeResource(resources, R.drawable.delete)
+    private var mDeleteBitmap = BitmapFactory.decodeResource(resources, R.drawable.keyboard_delete)
     private var mLinePaint = Paint()
 
     companion object {
@@ -27,19 +27,19 @@ class MyKeyboardView(context: Context, attrs: AttributeSet) : KeyboardView(conte
     }
 
     init {
-        mSubmitPaint.color = resources.getColor(R.color.submit)
-        mSubmitPaintPress.color = resources.getColor(R.color.submit_pressed)
+        mSubmitPaint.color = resources.getColor(R.color.keyboard_key_submit_normal)
+        mSubmitPaintPress.color = resources.getColor(R.color.keyboard_key_submit_pressed)
 //        mSubmitPaint.style = Paint.Style.STROKE
 //        mSubmitPaint.strokeWidth = 2f
 
         mWhitePaint.color = resources.getColor(R.color.white)
         mWhitePaint.textSize = TEXT_SIZE
 
-        mCancelPaint.color = resources.getColor(R.color.cancel)
-        mCancePressPaint.color = resources.getColor(R.color.cancel_press)
+        mCancelPaint.color = resources.getColor(R.color.keyboard_key_cancel_normal)
+        mCancePressPaint.color = resources.getColor(R.color.keyboard_key_cancel_pressed)
 
-        mKeyPaint.color = resources.getColor(R.color.key_normal)
-        mKeyPressPaint.color = resources.getColor(R.color.key_press)
+        mKeyPaint.color = resources.getColor(R.color.keyboard_key_normal)
+        mKeyPressPaint.color = resources.getColor(R.color.keyboard_key_pressed)
 
         mBlackPaint.color = resources.getColor(R.color.black)
         mBlackPaint.textSize = TEXT_SIZE_NUM
@@ -71,7 +71,7 @@ class MyKeyboardView(context: Context, attrs: AttributeSet) : KeyboardView(conte
                     canvas?.drawRect(key.x.toFloat(), key.y.toFloat(), (key.x + key.width).toFloat(), (key.y + key.height).toFloat(), mCancelPaint)
                 }
                 canvas?.drawText(key.label.toString(), key.x.toFloat() + key.width / 2 - TEXT_SIZE, key.y.toFloat() + key.height / 2 + TEXT_SIZE / 2 - 10, mWhitePaint)
-            } else if (!key.label.equals("delete")) {
+            } else if (!key.label.equals("keyboard_delete")) {
                 if (key.pressed) {
                     canvas?.drawRect(key.x.toFloat(), key.y.toFloat(), (key.x + key.width).toFloat(), (key.y + key.height).toFloat(), mKeyPressPaint)
                 } else {

@@ -2,17 +2,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:layout="@layout/preference_category_widget"
-        android:title="@string/base_settings">
+        android:title="@string/settings_base_setting">
         <Preference
             android:defaultValue="23"
             android:key="set_target_weight"
             android:persistent="true"
-            android:summary="@string/set_target_weight_summary"
-            android:title="@string/set_target_weight_title"></Preference>
+            android:summary="@string/settings_target_summary"
+            android:title="@string/settings_target_title"></Preference>
         <SwitchPreference
             android:defaultValue="true"
             android:key="only_once_everyday"
-            android:title="@string/only_once_everyday"></SwitchPreference>
+            android:title="@string/settings_perference_only_once"></SwitchPreference>
         <ListPreference
             android:defaultValue="1"
             android:dialogTitle="请选择单位"
@@ -25,12 +25,12 @@
 
     <PreferenceCategory
         android:layout="@layout/preference_category_widget"
-        android:title="@string/adv_settings">
+        android:title="@string/settings_adv_settings">
         <SwitchPreference
             android:defaultValue="false"
             android:key="export_import_switch"
-            android:summary="@string/export_import_switch_summery"
-            android:title="@string/export_import_switch"></SwitchPreference>
+            android:summary="@string/settings_preference_export_summery"
+            android:title="@string/settings_perference_export"></SwitchPreference>
     </PreferenceCategory>
 
 </PreferenceScreen>

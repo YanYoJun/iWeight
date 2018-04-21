@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/btn_dialog"
-            android:text="@string/details_delete"
+            android:background="@drawable/dialog_btn_bg"
+            android:text="@string/delete"
             android:textColor="@color/details_item_bg"
             android:visibility="gone"
             android:textSize="15sp" />
@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/details_item_bg"
-            android:background="@drawable/btn_dialog"
-            android:text="@string/details_change"
+            android:background="@drawable/dialog_btn_bg"
+            android:text="@string/change"
             android:visibility="gone"
             android:textSize="15sp" />
     </LinearLayout>

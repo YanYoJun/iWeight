@@ -9,13 +9,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dialog_title"
+        android:text="@string/details_dialog_input_title"
         android:textColor="@color/white"
         android:paddingTop="10dp"
         android:paddingLeft="15dp"
         android:paddingBottom="10dp"
         android:id="@+id/dialog_lab_title"
-        android:background="@color/background"
+        android:background="@color/app_bg"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialog_weight"
+            android:text="@string/details_dialog_input_weight_key"
             android:textColor="@color/black"
             android:paddingBottom="0dp"
             android:textSize="16sp" />
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="@string/cacel"
             android:textColor="@color/black"
-            android:background="@drawable/btn_dialog"
+            android:background="@drawable/dialog_btn_bg"
             android:textSize="15sp" />
 
         <Button
@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:background="@drawable/btn_dialog"
+            android:background="@drawable/dialog_btn_bg"
             android:text="@string/submit"
             android:textSize="15sp" />
 

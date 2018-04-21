@@ -9,18 +9,18 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/include_main"
+        layout="@layout/activity_main_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_main_view"
         android:layout_width="180dp"
-        android:background="@color/main_nav_gray"
+        android:background="@color/main_nav_btn_normal"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/include_main_navigation"
+        app:headerLayout="@layout/activity_main_navigation"
          />
 
 </android.support.v4.widget.DrawerLayout>

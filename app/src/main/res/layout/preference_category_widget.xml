@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
         android:paddingTop="16dp"
-        android:textColor="@color/settings_category_gray"
+        android:textColor="@color/settings_category_text"
         android:text="indroduce"
         android:textSize="14sp" />
 

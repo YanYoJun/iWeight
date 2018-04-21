@@ -109,7 +109,7 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         mDottedLinePaint.isAntiAlias = true
         mDottedLinePaint.alpha = 150
 
-        mPolyLinePaint.color = resources.getColor(R.color.line_color)
+        mPolyLinePaint.color = resources.getColor(R.color.main_data_view_line)
         mPolyLinePaint.style = Paint.Style.STROKE
         mPolyLinePaint.strokeWidth = 5f
         mPolyLinePaint.isAntiAlias = true
@@ -121,15 +121,15 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         mTextPaint.alpha = 150
         mTextPaint.strokeWidth = 1f
 
-        mPointPaint.color = resources.getColor(R.color.point_color)
+        mPointPaint.color = resources.getColor(R.color.main_data_view_point)
         mPointPaint.strokeWidth = 20f
 
-        mTargetPaint.color = resources.getColor(R.color.target_weight)
+        mTargetPaint.color = resources.getColor(R.color.main_data_view_target_line)
         mTargetPaint.style = Paint.Style.STROKE
         mTargetPaint.strokeWidth = 4f
         mTargetPaint.isAntiAlias = true
 
-        mTargetTextPaint.color = resources.getColor(R.color.target_weight)
+        mTargetTextPaint.color = resources.getColor(R.color.main_data_view_target_line)
         mTargetTextPaint.textSize = 38f
         mTargetTextPaint.isAntiAlias = true
         mTargetTextPaint.style = Paint.Style.FILL
@@ -204,7 +204,7 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         end.set(width - ALIGN_PADDING_RIGHT, y)
         MyLog.e(TAG, "begin:$begin end:$end")
         drawDottedLine(canvas, begin, end, mTargetPaint)
-        canvas.drawText(mContext!!.resources.getString(R.string.target_weight), (end.x - 120).toFloat(), (end.y + 40).toFloat(), mTargetTextPaint!!)
+        canvas.drawText(mContext!!.resources.getString(R.string.main_data_view_target_weight), (end.x - 120).toFloat(), (end.y + 40).toFloat(), mTargetTextPaint!!)
     }
 
     /**

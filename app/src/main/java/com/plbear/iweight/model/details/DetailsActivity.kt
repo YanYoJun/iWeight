@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Handler
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.Button
@@ -41,9 +40,9 @@ class DetailsActivity : BaseActivity() {
         override fun itemClick(mSelectMap: HashMap<Int, Boolean>, selectCount: Int) {
             val size = mDataList!!.size
             if (size != selectCount) {
-                btn_details_select_all.setText(R.string.select_all)
+                btn_details_select_all.setText(R.string.details_title_select_all)
             } else {
-                btn_details_select_all.setText(R.string.disselect_all)
+                btn_details_select_all.setText(R.string.details_title_disselect_all)
             }
             if (selectCount == 1) {
                 btn_details_change.isClickable = true
@@ -66,7 +65,7 @@ class DetailsActivity : BaseActivity() {
                 btn_details_select_all.visibility = View.VISIBLE
                 btn_details_change.visibility = View.VISIBLE
                 btn_details_delete.visibility = View.VISIBLE
-                btn_details_select_all.setText(R.string.select_all)
+                btn_details_select_all.setText(R.string.details_title_select_all)
                 btn_details_change.isClickable = false
                 btn_details_change.setTextColor(resources.getColor(R.color.details_item_bg))
                 btn_details_delete.isClickable = false

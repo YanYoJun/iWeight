@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="45dp"
     android:id="@+id/include_title"
-    android:background="@color/background"
+    android:background="@color/app_bg"
     android:orientation="horizontal">
 
     <ImageButton
@@ -17,7 +17,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:onClick="onClick_back"
-        android:src="@drawable/back"/>
+        android:src="@drawable/title_back"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
         android:paddingRight="0dp"
         android:paddingLeft="0dp"
         android:background="@null"
-        android:text="@string/select_all"
+        android:text="@string/details_title_select_all"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:visibility="visible" />

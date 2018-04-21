@@ -76,7 +76,7 @@ class MainDataFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         MyLog.i(TAG, "onCreateView")
-        val v = inflater!!.inflate(R.layout.fragment_line_chart_view, null)
+        val v = inflater!!.inflate(R.layout.fragment_main_data, null)
         mView = v.findViewById<View>(R.id.show_weight) as LineChartView
         mAdapter = mView!!.dataAdpater
         mValley = v.findViewById<View>(R.id.lab_lowest_values) as TextView

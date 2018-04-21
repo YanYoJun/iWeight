@@ -25,7 +25,7 @@
             android:layout_marginLeft="5dp"
             android:gravity="top"
             android:paddingBottom="0dp"
-            android:text="@string/highest_lab" />
+            android:text="@string/main_lab_high_key" />
 
         <TextView
             android:id="@+id/lab_highest_value"
@@ -35,7 +35,7 @@
             android:gravity="top|center_horizontal"
             android:layout_marginLeft="3dp"
             android:layout_toRightOf="@id/lab_highest"
-            android:text="@string/highest_default" />
+            android:text="@string/main_lab_high_value" />
 
         <TextView
             android:id="@+id/lab_lowest"
@@ -45,7 +45,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="top|center_horizontal"
             android:layout_toRightOf="@id/lab_highest_value"
-            android:text="@string/lowest_lab" />
+            android:text="@string/main_lab_low_key" />
 
         <TextView
             android:id="@+id/lab_lowest_values"
@@ -55,7 +55,7 @@
             android:layout_marginLeft="3dp"
             android:gravity="top|center_horizontal"
             android:layout_toRightOf="@id/lab_lowest"
-            android:text="@string/lowest_default" />
+            android:text="@string/main_lab_low_value" />
     </RelativeLayout>
 
     <com.plbear.iweight.model.main.view.LineChartView

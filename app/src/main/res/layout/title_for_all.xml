@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:text="@string/app_title"
+        android:text="@string/main_title_name"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -29,5 +29,5 @@
         android:paddingRight="15dp"
         android:scaleType="fitCenter"
         android:paddingTop="8dp"
-        android:src="@drawable/more" />
+        android:src="@drawable/title_more" />
 </RelativeLayout>

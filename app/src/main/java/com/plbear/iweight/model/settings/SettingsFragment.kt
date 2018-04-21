@@ -114,7 +114,7 @@ class SettingsFragment : PreferenceFragment() {
         val inflater = mContext!!.layoutInflater
         val layout = inflater.inflate(R.layout.dialog_main_input_weight, null)
         val labTitle = layout.findViewById<View>(R.id.dialog_lab_title) as TextView
-        labTitle.setText(R.string.dialog_target_widget_title)
+        labTitle.setText(R.string.settings_dialog_target_title)
         builder.setView(layout)
         val dialog = builder.create()
         val btnSubmit = layout.findViewById<View>(R.id.dialog_submit) as Button
@@ -135,7 +135,7 @@ class SettingsFragment : PreferenceFragment() {
                     return@OnClickListener
                 }
                 savePreferences(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, weight)
-                Utils.showToast(R.string.save_target_weight_success)
+                Utils.showToast(R.string.settings_toast_save_target_success)
                 dialog.dismiss()
             } catch (e: Exception) {
                 Utils.showToast("输入值不合法，请重新输入~")

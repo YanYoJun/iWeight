@@ -3,6 +3,6 @@
     <item android:state_pressed="false"
         android:drawable="@color/white"></item>
     <item android:state_pressed="true"
-        android:drawable="@color/main_dlg_btn_gray">
+        android:drawable="@color/main_dlg_btn_pressed">
     </item>
 </selector>

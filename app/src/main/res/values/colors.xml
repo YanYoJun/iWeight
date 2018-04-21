@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- 基础颜色 -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- 引用颜色 命名规范 使用界面_控件名称_状态-->
+
+    <!-- APP通用颜色-->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="black">#000000</color>
-    <color name="settings_category_gray">#777777</color>
-    <color name="white">#FFFFFF</color>
-    <color name = "background">#3b589c</color>
-    <color name="main_nav_gray">#3f4751</color>
-    <color name="main_nav_btn_pressed_gray">#1e2227</color>
-    <color name="main_dlg_btn_gray">#888888</color>
+    <color name="app_bg">#3b589c</color>
+    <color name="app_text_main">#0a0a0a</color>
+
+    <!-- 主界面使用颜色-->
+    <color name="main_nav_btn_normal">#3f4751</color>
+    <color name="main_nav_btn_pressed">#1e2227</color>
+    <color name="main_dlg_btn_pressed">#888888</color>
+
+    <color name="main_data_view_line">#267c64</color>
+    <color name="main_data_view_point">#267c64</color>
+    <color name="main_data_view_target_line">#e97533</color>
+
+    <!--键盘使用颜色-->
+    <color name="keyboard_key_submit_normal">#00a0e9</color>
+    <color name="keyboard_key_submit_pressed">#0068b7</color>
+    <color name="keyboard_key_cancel_normal">#f39800</color>
+    <color name="keyboard_key_cancel_pressed">#FFC47C03</color>
+    <color name="keyboard_key_normal">#FCFCFC</color>
+    <color name="keyboard_key_pressed">#ECECEC</color>
+
+    <!--数据详情界面使用颜色-->
     <color name="details_item_bg">#BBBBBB</color>
-    <color name="line_color">#267c64</color>
-    <color name="point_color">#267c64</color>
-    <color name = "target_weight">#e97533</color>
-    <color name="submit">#00a0e9</color>
-    <color name="submit_pressed">#0068b7</color>
 
-    <color name="cancel">#f39800</color>
-    <color name="cancel_press">#FFC47C03</color>
-    <color name="text_main">#0a0a0a</color>
-    <color name="text_1">#494949</color>
+    <!-- 设置界面使用颜色-->
+    <color name="settings_category_text">#777777</color>
 
-    <color name="key_normal">#FCFCFC</color>
-    <color name="key_press">#ECECEC</color>
 </resources>

@@ -16,9 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="600"
-            android:background="@color/background">
+            android:background="@color/app_bg">
 
-            <include layout="@layout/title" />
+            <include layout="@layout/title_for_all" />
 
             <FrameLayout
                 android:layout_width="145dp"
@@ -31,9 +31,9 @@
                     android:id="@+id/btn_record"
                     android:layout_width="145dp"
                     android:layout_height="145dp"
-                    android:background="@drawable/btn_bg"
-                    android:text="@string/btn_input_weight"
-                    android:textColor="@color/background"
+                    android:background="@drawable/main_input_bg"
+                    android:text="@string/main_btn_input"
+                    android:textColor="@color/app_bg"
                     android:textSize="50sp"
                     android:typeface="serif" />
 
@@ -42,9 +42,9 @@
                     android:id="@+id/edit_num"
                     android:layout_width="145dp"
                     android:layout_height="145dp"
-                    android:background="@drawable/bg_normal"
+                    android:background="@drawable/main_input_bg_normal"
                     android:hint="0.0"
-                    android:textColor="@color/background"
+                    android:textColor="@color/app_bg"
                     android:textSize="50sp"
                     android:visibility="gone"
                     android:singleLine="true"
@@ -58,11 +58,11 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/background"
+            app:tabIndicatorColor="@color/app_bg"
             app:tabIndicatorHeight="2dp"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/background"
-            app:tabTextColor="@color/main_dlg_btn_gray"></android.support.design.widget.TabLayout>
+            app:tabSelectedTextColor="@color/app_bg"
+            app:tabTextColor="@color/main_dlg_btn_pressed"></android.support.design.widget.TabLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager_main"

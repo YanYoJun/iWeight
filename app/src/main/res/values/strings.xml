@@ -1,57 +1,64 @@
 <resources>
-    <string name="app_name">记录体重</string>
-    <string name="highest_lab">最大:</string>
-    <string name="lowest_lab">最小:</string>
-    <string name="highest_default">0</string>
-    <string name="lowest_default">0</string>
-    <string name="unit">单位: 公斤</string>
-    <string name="btn_input_weight">记</string>
-    <string name="app_title">瘦</string>
-    <string name="dialog_title">请输入体重值</string>
-    <string name="dialog_weight">体重值:</string>
-    <string name="dialog_time">时  间</string>
+    <!-- 基础字符串-->
     <string name="cacel">取 消</string>
     <string name="submit">确 认</string>
     <string name="month">月</string>
     <string name="day">日</string>
     <string name="hour">时</string>
-    <string name="hour_hint">24小时制</string>
-    <string name="weight_hint">单位：公斤；如50</string>
-    <string name="about">这是我闲着没事做着玩的</string>
-    <string name="email">欢迎吐槽:\nyanyojun@foxmail.com</string>
-    <string name="editor">--------闫先生的大作</string>
-    <string name="version">--------记录体重7.1.4版本</string>
+    <string name="delete">删除</string>
+    <string name="change">修改</string>
+    <string name="settings">设置</string>
+
+    <!-- 命名规范: 使用界面_控件名称_描述-->
+    <string name="app_name">记录体重</string>
+
+    <!--main-->
+    <string name="main_lab_high_key">最大:</string>
+    <string name="main_lab_low_key">最小:</string>
+    <string name="main_lab_high_value">0</string>
+    <string name="main_lab_low_value">0</string>
+    <string name="main_btn_input">记</string>
+    <string name="main_title_name">瘦</string>
     <string name="main_nav_import">导&#160;&#160;入</string>
     <string name="main_nav_export">导&#160;&#160;出</string>
     <string name="main_nav_about">关&#160;&#160;于</string>
     <string name="main_nav_exit">退&#160;&#160;出</string>
     <string name="main_nav_detail">数&#160;&#160;据</string>
+    <string name="main_nav_settings">设&#160;&#160;置</string>
+    <string name="main_data_view_target_weight">目标值</string>
+    <string name="main_toast_notify_only_once">亲，今天已经打过卡啦</string>
+    <string name="main_fragment_tab_week">本周</string>
+    <string name="main_fragment_tab_month">当月</string>
+    <string name="main_fragment_tab_all">全部</string>
+
+    <!-- details-->
+    <string name="details_dialog_input_title">请输入体重值</string>
+    <string name="details_dialog_input_weight_key">体重值:</string>
+    <string name="details_dialog_input_weight_time">时  间</string>
     <string name="details_lab_title">记录体重</string>
     <string name="details_item_time">16/11/26&#160;11:07</string>
     <string name="details_item_weight">188.0</string>
-    <string name="select_all">全选</string>
-    <string name="disselect_all">取消全选</string>
-    <string name="details_delete">删除</string>
-    <string name="details_change">修改</string>
-    <string name="dialog_delete_msg">你确定要删除这条记录吗？</string>
-    <string name="main_nav_settings">设&#160;&#160;置</string>
-    <string name="settings">设置</string>
-    <string name="sett_target_weight">设置目标体重</string>
-    <string name="sett_target_weight2">yanyongjun</string>
-    <string name="set_target_weight_title">设置目标体重</string>
-    <string name="dialog_target_widget_title">请输入目标体重</string>
-    <string name="set_target_weight_summary">设置后，目标体重会在主界面显示出来</string>
-    <string name="base_settings">基础设置</string>
-    <string name="target_weight">目标值</string>
-    <string name="save_target_weight_success">保存目标体重值成功</string>
-    <string name="only_once_everyday">一天只记录一次体重</string>
-    <string name="toast_notify_only_once_everyday">亲，今天已经打过卡啦</string>
-    <string name="adv_settings">高级设置</string>
-    <string name="export_import_switch">导入导出功能</string>
-    <string name="export_import_switch_summery">将数据保存到本地，以防数据丢失</string>
-    <string name="week_data">本周</string>
-    <string name="month_data">当月</string>
-    <string name="year_data">今年</string>
-    <string name="all_data">全部</string>
+    <string name="details_title_select_all">全选</string>
+    <string name="details_title_disselect_all">取消全选</string>
+    <string name="details_dialog_delete_title">你确定要删除这条记录吗？</string>
+
+    <!-- about-->
+    <string name="about_text_1">这是我闲着没事做着玩的</string>
+    <string name="about_text_2">欢迎吐槽:\nyanyojun@foxmail.com</string>
+    <string name="about_text_version">--------记录体重7.1.4版本</string>
+
+    <!--settings-->
+    <string name="settings_target_title">设置目标体重</string>
+    <string name="settings_dialog_target_title">请输入目标体重</string>
+    <string name="settings_target_summary">设置后，目标体重会在主界面显示出来</string>
+    <string name="settings_toast_save_target_success">保存目标体重值成功</string>
+    <string name="settings_perference_only_once">一天只记录一次体重</string>
+    <string name="settings_base_setting">基础设置</string>
+    <string name="settings_adv_settings">高级设置</string>
+    <string name="settings_perference_export">导入导出功能</string>
+    <string name="settings_preference_export_summery">将数据保存到本地，以防数据丢失</string>
+
+    <!--废弃部分-->
+    <string name="unit">单位: 公斤</string>
     <string name="current_unit">当前单位：%S</string>
 </resources>

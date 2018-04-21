@@ -28,8 +28,8 @@ import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.storage.XMLHelper
 import com.plbear.iweight.utils.MySPUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.include_main.*
-import kotlinx.android.synthetic.main.title.*
+import kotlinx.android.synthetic.main.activity_main_1.*
+import kotlinx.android.synthetic.main.title_for_all.*
 
 /**
  * Created by yanyongjun on 16/11/normal_5.
@@ -61,7 +61,7 @@ class MainActivity : BaseActivity() {
                 val lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime())
                 MyLog.d(TAG, "lastTime:" + lastTime)
                 if (lastTime == Utils.formatTime(System.currentTimeMillis())) {
-                    Toast.makeText(this@MainActivity, R.string.toast_notify_only_once_everyday, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, R.string.main_toast_notify_only_once, Toast.LENGTH_SHORT).show()
                     return@OnClickListener
                 }
             }
