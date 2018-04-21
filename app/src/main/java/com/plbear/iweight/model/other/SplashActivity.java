@@ -12,7 +12,6 @@ import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseActivity;
 import com.plbear.iweight.model.main.activity.MainActivity;
 import com.plbear.iweight.utils.LogInfo;
-import com.plbear.iweight.utils.MyLog;
 import com.plbear.iweight.utils.PermissionHelper;
 import com.plbear.iweight.utils.WatchDog;
 
@@ -119,7 +118,6 @@ public class SplashActivity extends BaseActivity {
         SpotManager.getInstance(mContext).requestSpot(new SpotRequestListener() {
             @Override
             public void onRequestSuccess() {
-                MyLog.Companion.d(TAG, "请求插播广告成功");
                 //				// 应用安装后首次展示开屏会因为本地没有数据而跳过
                 //              // 如果开发者需要在首次也能展示开屏，可以在请求广告成功之前展示应用的logo，请求成功后再加载开屏
                 watchDog.stop();
@@ -186,7 +184,7 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onShowSuccess() {
-                        LogInfo.d(TAG, "开屏展示成功");
+                        loginfo("开屏展示成功");
                     }
 
                     @Override
@@ -217,13 +215,11 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onSpotClosed() {
-                        LogInfo.d(TAG, "开屏被关闭");
                         startMainActivity();
                     }
 
                     @Override
                     public void onSpotClicked(boolean isWebPage) {
-                        LogInfo.d(TAG, "开屏被点击");
                         loginfo(String.format("是否是网页广告？%s", isWebPage ? "是" : "不是"));
                     }
                 });

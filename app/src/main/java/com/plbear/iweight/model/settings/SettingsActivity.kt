@@ -3,7 +3,6 @@ package com.plbear.iweight.model.settings
 import android.view.View
 
 import com.plbear.iweight.R
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.base.BaseActivity
 import kotlinx.android.synthetic.main.include_title.*
 
@@ -18,7 +17,6 @@ class SettingsActivity : BaseActivity() {
     }
 
     override fun afterLayout() {
-        MyLog.d(TAG, "onCreate")
         init()
     }
 

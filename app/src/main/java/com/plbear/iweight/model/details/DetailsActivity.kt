@@ -18,7 +18,6 @@ import com.plbear.iweight.base.Constant
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.base.BaseActivity
 import com.plbear.iweight.data.Data
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.include_title.*
@@ -98,9 +97,7 @@ class DetailsActivity : BaseActivity() {
     }
 
     override fun onStart() {
-        MyLog.e(TAG, "onStart1")
         this.contentResolver.registerContentObserver(Constant.CONTENT_URI, true, mObserver)
-        MyLog.e(TAG, "onStart normal_2")
         super.onStart()
     }
 
@@ -150,7 +147,6 @@ class DetailsActivity : BaseActivity() {
 
     private fun showChangeDialog() {
         val list = mAdapter.selectData
-        MyLog.e(TAG, "yanlog list $list")
         val data = list[0]
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater

@@ -5,13 +5,12 @@ import android.content.ContentValues
 import android.content.Context
 
 import com.plbear.iweight.base.Constant
-import com.plbear.iweight.utils.MyLog
-import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
 
 import android.R.attr.value
 import com.plbear.iweight.base.App
+import com.plbear.iweight.utils.LogInfo
 import com.plbear.iweight.utils.MyUtils
 
 /**
@@ -29,7 +28,7 @@ class DataManager private constructor(context: Context) {
 
     fun delete(list: ArrayList<Data>?) {
         if (list == null || list.size == 0) {
-            MyLog.e(TAG, "list is empty")
+            LogInfo.e(TAG, "list is empty")
             return
         }
         val strId = StringBuffer()
@@ -38,22 +37,21 @@ class DataManager private constructor(context: Context) {
             strId.append(",")
             strId.append(list[i].id)
         }
-        MyLog.d(TAG, "normal_delete:" + strId.toString())
+        LogInfo.i(TAG, "normal_delete:" + strId.toString())
         //db.normal_delete("weight", "_id in (" + strId.toString() + ")", null);
         mResolver!!.delete(Constant.CONTENT_URI, "_id in (" + strId.toString() + ")", null)
     }
 
     fun update(data: Data?) {
         if (data == null) {
-            MyLog.e(TAG, "update error")
+            LogInfo.e(TAG, "update error")
             return
         }
         val values = ContentValues()
         values.put("weight", data.weight / MyUtils.getValueUnit())
-        MyLog.d(TAG, "data:" + data.toString())
+        LogInfo.i(TAG, "data:" + data.toString())
         mResolver!!.update(Constant.CONTENT_URI, values, "_id in (?)", arrayOf(data.id.toString() + ""))
         //int value = db.update("weight", values, "_id in (?)", new String[]{data.getId() + ""});
-        MyLog.d(TAG, "update result:" + value)
     }
 
     /**

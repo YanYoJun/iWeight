@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 
 import com.plbear.iweight.base.Constant
-import com.plbear.iweight.utils.MyLog
 
 import java.util.HashMap
 
@@ -54,7 +53,6 @@ class DBProvider : ContentProvider() {
 
 
     override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
-        MyLog.i(TAG,"query in")
         val db = mDBHelper!!.readableDatabase
         val sqlBuilder = SQLiteQueryBuilder()
         val item = uriMatcher.match(uri)
@@ -98,7 +96,6 @@ class DBProvider : ContentProvider() {
         private val TAG = "DBProvider"
 
         init {
-            MyLog.e(TAG,"DB Provider init")
             uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
             uriMatcher.addURI(Constant.PROVIDER_AUTHORITY, "items", Constant.PROVIDER_ITEM)
             uriMatcher.addURI(Constant.PROVIDER_AUTHORITY, "items_without_notify", Constant.PROVIDER_ITEMS_WITHOUT_NOTIFY)

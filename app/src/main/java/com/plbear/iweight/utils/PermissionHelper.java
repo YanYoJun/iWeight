@@ -169,7 +169,7 @@ public class PermissionHelper {
                     return;
                 }
 
-                LogInfo.d(TAG, "onRequestPermissionsResult:" + requestCode);
+                LogInfo.i(TAG, "onRequestPermissionsResult:" + requestCode);
                 // 到这里就表示用户允许了本次请求，我们继续检查是否还有待申请的权限没有申请
                 if (isAllRequestedPermissionGranted()) {
                     if (mOnApplyPermissionListener != null) {
@@ -210,13 +210,13 @@ public class PermissionHelper {
      */
     public boolean isAllRequestedPermissionGranted() {
         for (PermissionModel model : mPermissionModels) {
-            LogInfo.d(TAG,"model:"+model);
+            LogInfo.i(TAG,"model:"+model);
             if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(mActivity, model.permission)) {
-                LogInfo.d(TAG,"return false");
+                LogInfo.i(TAG,"return false");
                 return false;
             }
         }
-        LogInfo.d(TAG,"all permission is granted return true");
+        LogInfo.i(TAG,"all permission is granted return true");
         return true;
     }
 

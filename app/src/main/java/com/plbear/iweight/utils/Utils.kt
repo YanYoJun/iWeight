@@ -66,7 +66,6 @@ open class Utils {
          * @return
          */
         fun getOppPoint(begin: Point?, end: Point?, param: Point?): Point? {
-            MyLog.Companion.d(TAG, "getOppPoint:$begin:end:$end:param:$param")
             if (begin == null || end == null || param == null || begin == end || begin == param || end == param) {
                 return null
             }
@@ -77,7 +76,6 @@ open class Utils {
             val result = Point()
             result.x = (((b * b - a * a) * param.x - 2.0 * a * b * param.y.toDouble() - 2.0 * a * c) / (a * a + b * b)).toInt()
             result.y = (((a * a - b * b) * param.y - 2.0 * a * b * param.x.toDouble() - 2.0 * b * c) / (a * a + b * b)).toInt()
-            MyLog.Companion.d(TAG, "getOppPoint result:" + result)
             return result
         }
 

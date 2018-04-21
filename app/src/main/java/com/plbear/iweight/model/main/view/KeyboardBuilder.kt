@@ -1,20 +1,12 @@
 package com.plbear.iweight.model.main.view
 
 import android.app.Activity
-import android.inputmethodservice.InputMethodService
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
-import android.os.AsyncTask
-import android.provider.SyncStateContract.Helpers.insert
-import android.renderscript.ScriptGroup
-import android.text.Editable
 import android.text.TextUtils
 import android.view.View
-import android.view.inputmethod.InputMethod
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.Toast
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
 /**
@@ -113,7 +105,6 @@ class KeyboardBuilder(activity: Activity, keyboardView: KeyboardView, keyRes: In
 
         mKeyboardView.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
-                MyLog.e(TAG, "yanlog v:$v hasFocus:$hasFocus")
                 if (!hasFocus) {
                     hideKeyboard()
                     mStatusListener.onChanged(STATUS_CANCEL)

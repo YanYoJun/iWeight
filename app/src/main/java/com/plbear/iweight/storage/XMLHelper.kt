@@ -8,11 +8,9 @@ import android.util.Xml
 
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.data.Data
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
 import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlSerializer
 
 import java.io.File
 import java.io.FileInputStream
@@ -69,7 +67,6 @@ class XMLHelper(context: Context) {
     init {
         mContext = context
         mDirPath = Environment.getExternalStorageDirectory().absolutePath + File.separator + "jilutizhong"
-        MyLog.e(TAG, "savePath:" + mDirPath!!)
     }
 
     /**
@@ -78,15 +75,12 @@ class XMLHelper(context: Context) {
      * @return if save success ,return true,else ,return false
      */
     fun saveXML(listener: OnXMLListener): Boolean {
-        MyLog.d(TAG, "saveXML")
         Thread(Runnable {
             if (saveXMLLocked()) {
-                MyLog.d(TAG, "save suceesss")
                 val msg = mHandler.obtainMessage(MSG_ON_SAVE_SUCC)
                 msg.obj = listener
                 mHandler.sendMessage(msg)
             } else {
-                MyLog.d(TAG, "save fail")
                 val msg = mHandler.obtainMessage(MSG_ON_SAVE_FAIL)
                 msg.obj = listener
                 mHandler.sendMessage(msg)
@@ -102,7 +96,6 @@ class XMLHelper(context: Context) {
             return false
         }
         val dir = File(mDirPath!!)
-        MyLog.d(TAG, "makedir:" + dir.mkdirs())
         val file = File(dir, mFileName)
         try {
             if (!file.exists()) {
@@ -151,7 +144,6 @@ class XMLHelper(context: Context) {
 
     fun readXML(listener: OnXMLListener): Boolean {
         Thread(Runnable {
-            MyLog.d(TAG, "readXML")
             val list = readXMLLocked()
             if (list == null) {
                 val msg = mHandler.obtainMessage(MSG_ON_READ_FAIL)
@@ -198,7 +190,6 @@ class XMLHelper(context: Context) {
                     }
                     XmlPullParser.START_TAG -> {
                         val name = pullParser.name
-                        MyLog.d(TAG, "xmlname:" + name)
                         if (TAG_ITEM == name) {
                             val count = pullParser.attributeCount
                             val data = Data(0,0,0.0f)

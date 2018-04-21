@@ -4,12 +4,10 @@ import android.util.SparseArray
 import com.plbear.iweight.data.Data
 
 import com.plbear.iweight.data.DataManager
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.base.App
 import com.plbear.iweight.utils.MySPUtils
 import com.plbear.iweight.utils.MyUtils
-import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
 import java.util.Collections
@@ -91,7 +89,6 @@ class LineChartAdapter() {
 
     fun setTag(tag: String) {
         TAG += tag
-        MyLog.e(TAG, "setTag")
     }
 
     /**
@@ -140,7 +137,6 @@ class LineChartAdapter() {
     }
 
     fun notifyDataSetChange() {
-        MyLog.e(TAG, "notifyDataSetChange")
         val db = DataManager.getInstance(App.getAppContext())
         val list = db!!.queryAll()
         mDataList.clear()
@@ -164,7 +160,6 @@ class LineChartAdapter() {
             timeBiggest = 0
             return
         }
-        MyLog.e(TAG, "setShowList:$mShowPointCount:mShowAllData:$mShowAllData")
         if (mShowAllData) {
             showDataList = allList
             showDataStartId = mDataList[0].id

@@ -11,6 +11,8 @@ import com.plbear.iweight.model.settings.SettingsActivity;
 public class MyUtils {
     private static float VALUE_UNIT = -1f;//体重单位
 
+    public static final boolean DEBUG = true;
+
     /**
      * 获取体重单位
      */

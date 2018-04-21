@@ -17,7 +17,6 @@ import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.R
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.main.adapter.LineChartAdapter
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
 /**
@@ -65,7 +64,6 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         override fun handleMessage(msg: Message) {
             when (msg.what) {
                 MSG_DATA_CHANGE -> {
-                    MyLog.d(TAG, "Msg_data_change")
                     this@LineChartView.invalidate()
                 }
                 else -> {
@@ -139,11 +137,9 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
     }
 
     private fun init() {
-        MyLog.e(TAG, "init")
         dataAdpater!!.setTag(TAG)
         dataAdpater!!.registerDataListener(object : LineChartAdapter.DataChangeListener {
             override fun onChange() {
-                MyLog.d(TAG, "LineChartView data changed")
                 val msg = mHandler.obtainMessage(MSG_DATA_CHANGE)
                 mHandler.sendMessage(msg)
             }
@@ -160,7 +156,6 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
             mBottom = bottom
             mWidth = mRight - mLeft - ALIGN_PADDING_LEFT - ALIGN_PADDING_RIGHT
             mHeight = mBottom - mTop - ALIGN_PADDING_TOP - ALIGN_PADDING_BOTTOM
-            MyLog.d(TAG, "mLeft:$mLeft mRight:$mRight mTop:$mTop mBottom:$mBottom mWeight:$mWidth mHeight:$mHeight")
             mLineSpacing = (mBottom - mTop - ALIGN_PADDING_BOTTOM - ALIGN_PADDING_TOP) / SPACES_COUNT
         }
     }
@@ -194,7 +189,6 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
     private fun drawTargetLine(canvas: Canvas) {
         val targetWeight = dataAdpater!!.targetWeight
         if (targetWeight == -1f) {
-            MyLog.e(TAG, "target weight is not set return")
             return
         }
         val y = toYPoint(targetWeight)
@@ -202,7 +196,6 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
         begin.set(ALIGN_PADDING_TOP, y)
         val end = Point()
         end.set(width - ALIGN_PADDING_RIGHT, y)
-        MyLog.e(TAG, "begin:$begin end:$end")
         drawDottedLine(canvas, begin, end, mTargetPaint)
         canvas.drawText(mContext!!.resources.getString(R.string.main_data_view_target_weight), (end.x - 120).toFloat(), (end.y + 40).toFloat(), mTargetTextPaint!!)
     }

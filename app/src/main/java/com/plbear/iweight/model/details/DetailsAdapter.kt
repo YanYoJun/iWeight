@@ -11,7 +11,6 @@ import android.widget.TextView
 import com.plbear.iweight.R
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.data.DataManager
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
@@ -108,7 +107,6 @@ class DetailsAdapter(context: Context, list: ArrayList<Data>, callback: OnItemCl
     }
 
     override fun getCount(): Int {
-        MyLog.e(TAG,"yanlog getcount:"+mListData.size)
         return mListData.size
     }
 

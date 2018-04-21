@@ -3,7 +3,6 @@ package com.plbear.iweight.base
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.plbear.iweight.utils.LogInfo
-import com.plbear.iweight.utils.MyLog
 
 /**
  * Created by yanyongjun on 2018/normal_1/28.
@@ -19,7 +18,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (layout != 0) {
             setContentView(getLayout())
         }
-        MyLog.d(TAG, "onCreate")
+        loginfo("onCreate")
         AppManager.getAppManager().addToStack(this)
         afterLayout()
     }
@@ -28,17 +27,17 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         AppManager.getAppManager().removeFromStack(this)
-        MyLog.d(TAG, "onDestroy")
+        loginfo("onDestroy")
     }
 
     override fun onStart() {
         super.onStart()
-        MyLog.d(TAG, "onStart")
+        loginfo("onStart")
     }
 
     override fun onResume() {
         super.onResume()
-        MyLog.d(TAG, "onResume")
+        loginfo("onresume")
     }
 
     protected fun exitAll() {
@@ -51,7 +50,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun loginfo(info: String) {
-        LogInfo.e(TAG, info)
+        LogInfo.i(TAG, info)
     }
 
     fun logerror(error: String) {

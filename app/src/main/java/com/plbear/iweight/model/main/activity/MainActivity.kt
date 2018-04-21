@@ -22,7 +22,6 @@ import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.details.DetailsActivity
 import com.plbear.iweight.model.main.fragment.MainDataFragment
 import com.plbear.iweight.model.main.view.KeyboardBuilder
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.storage.XMLHelper
@@ -55,11 +54,9 @@ class MainActivity : BaseActivity() {
     override fun afterLayout() {
         init()
         btn_record.setOnClickListener(View.OnClickListener {
-            MyLog.d(TAG, "input weight")
             val onceEveryDay = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
             if (onceEveryDay) {
                 val lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime())
-                MyLog.d(TAG, "lastTime:" + lastTime)
                 if (lastTime == Utils.formatTime(System.currentTimeMillis())) {
                     Toast.makeText(this@MainActivity, R.string.main_toast_notify_only_once, Toast.LENGTH_SHORT).show()
                     return@OnClickListener
@@ -115,14 +112,12 @@ class MainActivity : BaseActivity() {
 
         val detailsButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_detail)
         detailsButton.setOnClickListener {
-            MyLog.d(TAG, "detailsButton click")
             val intent = Intent(this@MainActivity, DetailsActivity::class.java)
             startActivity(intent)
         }
 
         val settingsButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_settings)
         settingsButton.setOnClickListener {
-            MyLog.d(TAG, "settingsButton click")
             val intent = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(intent)
         }
@@ -161,13 +156,11 @@ class MainActivity : BaseActivity() {
         mFragList.add(allFrag)
 
         view_pager_main.adapter = mPagerAdapter
-        MyLog.e(TAG, "initCharView")
         initTabLayout()
     }
 
 
     override fun onResume() {
-        MyLog.e(TAG, "onResume")
         super.onResume()
 
         val isExOn = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
@@ -175,7 +168,6 @@ class MainActivity : BaseActivity() {
         if (isExOn) {
             importButton.visibility = View.VISIBLE
             importButton.setOnClickListener(View.OnClickListener {
-                MyLog.d(TAG, "importButton click")
                 val xmlHelper = XMLHelper(this@MainActivity)
                 if (Build.VERSION.SDK_INT >= 23) {
                     val checkPermission = ContextCompat.checkSelfPermission(this@MainActivity, android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -198,7 +190,6 @@ class MainActivity : BaseActivity() {
         if (isExOn) {
             exportButton.visibility = View.VISIBLE
             exportButton.setOnClickListener(View.OnClickListener {
-                MyLog.d(TAG, "exportButton click")
                 val helper = XMLHelper(this@MainActivity)
                 if (Build.VERSION.SDK_INT >= 23) {
                     val checkPermission = ContextCompat.checkSelfPermission(this@MainActivity, android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -235,7 +226,6 @@ class MainActivity : BaseActivity() {
                         val time = System.currentTimeMillis()
                         val data = Data(-1, time, edit_num.text.toString().toFloat())
                         val isOnlyOneTime = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
-                        MyLog.d(TAG, "isOnlyOnceEveryday" + isOnlyOneTime)
                         DataManager.getInstance(this@MainActivity)!!.add(data)
                     }
                 }

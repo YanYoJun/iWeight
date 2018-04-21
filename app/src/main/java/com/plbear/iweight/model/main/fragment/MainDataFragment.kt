@@ -15,7 +15,6 @@ import android.widget.TextView
 
 import com.plbear.iweight.R
 import com.plbear.iweight.base.Constant
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.model.main.adapter.LineChartAdapter
 import com.plbear.iweight.model.main.view.LineChartView
 
@@ -38,7 +37,6 @@ class MainDataFragment : Fragment() {
     private val mReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
-            MyLog.i(TAG, "action:" + action!!)
             if (ACTION_DATA_CHANED == action) {
                 mDataChanged = true
             }
@@ -48,7 +46,6 @@ class MainDataFragment : Fragment() {
 
     private val mObserver = object : ContentObserver(mHandler) {
         override fun onChange(selfChange: Boolean) {
-            MyLog.e(TAG, "mObserver onChange")
             mAdapter!!.notifyDataSetChange()
             mValley!!.text = (mAdapter!!.trueWeightSmallest + 5).toString()
             mPeak!!.text = (mAdapter!!.trueWeightBiggest - 5).toString()
@@ -65,17 +62,14 @@ class MainDataFragment : Fragment() {
     }
 
     fun setShowAllData(flag: Boolean) {
-        MyLog.e(TAG, "setShowAllData:" + flag)
         mShowAllData = flag
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        MyLog.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        MyLog.i(TAG, "onCreateView")
         val v = inflater!!.inflate(R.layout.fragment_main_data, null)
         mView = v.findViewById<View>(R.id.show_weight) as LineChartView
         mAdapter = mView!!.dataAdpater
@@ -85,7 +79,6 @@ class MainDataFragment : Fragment() {
     }
 
     override fun onStart() {
-        MyLog.i(TAG, "onStart")
         val filter = IntentFilter()
         filter.addAction(ACTION_DATA_CHANED)
         activity.registerReceiver(mReceiver, filter)
@@ -94,7 +87,6 @@ class MainDataFragment : Fragment() {
 
 
     override fun onResume() {
-        MyLog.i(TAG, "onResume")
         super.onResume()
         mAdapter!!.setShowNum(mShowNum)
         mAdapter!!.setShowAllData(mShowAllData)
@@ -107,24 +99,19 @@ class MainDataFragment : Fragment() {
             mPeak!!.text = (mAdapter!!.trueWeightBiggest - 5).toString()
             mDataChanged = false
         }
-        MyLog.i(TAG,"onResume out")
     }
 
     override fun onPause() {
-        MyLog.i(TAG, "onPause")
         activity.contentResolver.unregisterContentObserver(mObserver)
         super.onPause()
-        MyLog.i(TAG,"onPause out")
     }
 
     override fun onStop() {
-        MyLog.i(TAG, "onStop")
         activity.unregisterReceiver(mReceiver)
         super.onStop()
     }
 
     override fun onDestroy() {
-        MyLog.i(TAG, "onDestroy")
         super.onDestroy()
     }
 

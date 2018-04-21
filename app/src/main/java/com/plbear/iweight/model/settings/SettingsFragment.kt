@@ -18,7 +18,6 @@ import android.widget.EditText
 import android.widget.TextView
 
 import com.plbear.iweight.R
-import com.plbear.iweight.utils.MyLog
 import com.plbear.iweight.utils.Utils
 import com.plbear.iweight.model.main.fragment.MainDataFragment
 
@@ -45,7 +44,6 @@ class SettingsFragment : PreferenceFragment() {
     }
 
     override fun onPreferenceTreeClick(preferenceScreen: PreferenceScreen, preference: Preference): Boolean {
-        MyLog.i(TAG, "onPreferenceTreeclick:" + preference.key)
         val key = preference.key
         when (key) {
             SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT -> showSetTargetDialog()

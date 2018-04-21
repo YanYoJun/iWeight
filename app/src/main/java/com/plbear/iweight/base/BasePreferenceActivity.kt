@@ -5,28 +5,28 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceActivity
-
-import com.plbear.iweight.utils.MyLog
+import com.plbear.iweight.utils.LogInfo
 
 /**
  * Created by yanyongjun on 2017/normal_4/normal_1.
  */
 
 class BasePreferenceActivity : PreferenceActivity() {
+    protected val TAG = this.javaClass.simpleName
 
     internal var mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent == null || context == null) {
-                MyLog.e(TAG, "onReceive context == null or intent == null")
+                logerror("onReceive context == null or intent == null")
             }
             val action = intent!!.action
-            MyLog.d(TAG, "onReceive action:" + action!!)
+            loginfo("onReceive action:" + action!!)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MyLog.d(TAG, "onCreate")
+        loginfo("onCreate")
         AppManager.getAppManager().addToStack(this)
     }
 
@@ -35,7 +35,11 @@ class BasePreferenceActivity : PreferenceActivity() {
         AppManager.getAppManager().removeFromStack(this)
     }
 
-    companion object {
-        private val TAG = "BasePreferenceActivity"
+    fun loginfo(info: String) {
+        LogInfo.i(TAG, info)
+    }
+
+    fun logerror(error: String) {
+        LogInfo.e(TAG, error)
     }
 }
