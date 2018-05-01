@@ -17,11 +17,11 @@ import android.widget.Toast
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.R
 import com.plbear.iweight.base.BaseActivity
-import com.plbear.iweight.model.other.AboutActivity
 import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.details.DetailsActivity
 import com.plbear.iweight.model.main.fragment.MainDataFragment
 import com.plbear.iweight.model.main.view.KeyboardBuilder
+import com.plbear.iweight.model.other.AboutJActivity
 import com.plbear.iweight.utils.Utils
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.storage.XMLHelper
@@ -102,7 +102,7 @@ class MainActivity : BaseActivity() {
     private fun initNav() {
         val btnAbout = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_about)
         btnAbout.setOnClickListener {
-            val intent = Intent(this@MainActivity, AboutActivity::class.java)
+            val intent = Intent(this@MainActivity, AboutJActivity::class.java)
             startActivity(intent)
         }
 

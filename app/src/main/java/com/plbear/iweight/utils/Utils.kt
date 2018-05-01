@@ -34,7 +34,7 @@ open class Utils {
 
         fun formatTimeFull(time: Long): String {
             val date = Date(time)
-            val format = SimpleDateFormat("yy/MM/dd hh:mm")
+            val format = SimpleDateFormat("yy/MM/dd HH:mm")
             return format.format(date)
         }
 

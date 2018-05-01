@@ -2,6 +2,7 @@ package com.plbear.iweight.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import butterknife.ButterKnife
 import com.plbear.iweight.utils.LogInfo
 
 /**
@@ -17,6 +18,7 @@ abstract class BaseActivity : AppCompatActivity() {
         var layout = getLayout()
         if (layout != 0) {
             setContentView(getLayout())
+            ButterKnife.bind(this)
         }
         loginfo("onCreate")
         AppManager.getAppManager().addToStack(this)

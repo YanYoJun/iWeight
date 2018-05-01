@@ -26,6 +26,7 @@ class SettingsActivity : BaseActivity() {
 
     private fun init() {
         lab_title.setText(R.string.settings)
+        btn_details_select_all.visibility = View.GONE
     }
 
     companion object {

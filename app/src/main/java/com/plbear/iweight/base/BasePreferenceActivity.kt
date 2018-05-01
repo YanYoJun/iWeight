@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceActivity
+import butterknife.ButterKnife
 import com.plbear.iweight.utils.LogInfo
 
 /**
@@ -28,6 +29,7 @@ class BasePreferenceActivity : PreferenceActivity() {
         super.onCreate(savedInstanceState)
         loginfo("onCreate")
         AppManager.getAppManager().addToStack(this)
+        ButterKnife.bind(this)
     }
 
     override fun onDestroy() {
