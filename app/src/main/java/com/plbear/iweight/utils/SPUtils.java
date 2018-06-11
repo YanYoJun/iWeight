@@ -9,7 +9,7 @@ import com.plbear.iweight.base.App;
  * Created by yanyongjun on 2018/4/21.
  */
 
-public class MySPUtils {
+public class SPUtils {
     private static final String TAG = "Sputils";
     private static SharedPreferences SP = null;
 
@@ -17,7 +17,7 @@ public class MySPUtils {
         if (SP != null) {
             return SP;
         }
-        SP = PreferenceManager.getDefaultSharedPreferences(App.Companion.getAppContext());
+        SP = PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
         return SP;
     }
 

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 
 import com.plbear.iweight.base.Constant
+import com.plbear.iweight.utils.LogInfo
 
 import java.util.HashMap
 
@@ -35,6 +36,8 @@ class DBProvider : ContentProvider() {
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
+        LogInfo.i(TAG, "insert uri:" + uri + " values:" + values)
+
         val db = mDBHelper!!.writableDatabase
         var id: Long = -1
         when (uriMatcher.match(uri)) {
@@ -53,6 +56,7 @@ class DBProvider : ContentProvider() {
 
 
     override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
+        LogInfo.i(TAG, "query:" + uri)
         val db = mDBHelper!!.readableDatabase
         val sqlBuilder = SQLiteQueryBuilder()
         val item = uriMatcher.match(uri)
@@ -65,10 +69,12 @@ class DBProvider : ContentProvider() {
         }
         val cursor = sqlBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder)
         cursor.setNotificationUri(mResolver, uri)
+        LogInfo.i(TAG,cursor)
         return cursor
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
+        LogInfo.i(TAG, "delele uri:" + uri)
         val db = mDBHelper!!.writableDatabase
         var count = 0
         when (uriMatcher.match(uri)) {
@@ -80,6 +86,7 @@ class DBProvider : ContentProvider() {
     }
 
     override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {
+        LogInfo.i(TAG, "update uri:" + uri + " values:" + values)
         val db = mDBHelper!!.writableDatabase
         var count = 0
         when (uriMatcher.match(uri)) {

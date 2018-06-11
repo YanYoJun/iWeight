@@ -44,8 +44,8 @@
 
     <!-- about-->
     <string name="about_text_1">这是我闲着没事做着玩的</string>
-    <string name="about_text_2">欢迎吐槽:\nyanyojun@foxmail.com</string>
-    <string name="about_text_version">--------记录体重7.1.4版本</string>
+    <string name="about_text_2"></string>
+    <string name="about_text_version">--------记录体重7.1.5版本</string>
 
     <!--settings-->
     <string name="settings_target_title">设置目标体重</string>

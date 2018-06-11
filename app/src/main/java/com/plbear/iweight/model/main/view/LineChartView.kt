@@ -188,7 +188,7 @@ class LineChartView(context: Context, attributeSet: AttributeSet) : View(context
      */
     private fun drawTargetLine(canvas: Canvas) {
         val targetWeight = dataAdpater!!.targetWeight
-        if (targetWeight == -1f) {
+        if (targetWeight == -1f|| targetWeight == 0f) {
             return
         }
         val y = toYPoint(targetWeight)

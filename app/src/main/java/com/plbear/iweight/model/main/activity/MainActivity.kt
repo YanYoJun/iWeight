@@ -21,11 +21,11 @@ import com.plbear.iweight.data.Data
 import com.plbear.iweight.model.details.DetailsActivity
 import com.plbear.iweight.model.main.fragment.MainDataFragment
 import com.plbear.iweight.model.main.view.KeyboardBuilder
-import com.plbear.iweight.model.other.AboutJActivity
+import com.plbear.iweight.model.other.AboutActivity
 import com.plbear.iweight.utils.Utils
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.storage.XMLHelper
-import com.plbear.iweight.utils.MySPUtils
+import com.plbear.iweight.utils.SPUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_1.*
 import kotlinx.android.synthetic.main.title_for_all.*
@@ -54,7 +54,7 @@ class MainActivity : BaseActivity() {
     override fun afterLayout() {
         init()
         btn_record.setOnClickListener(View.OnClickListener {
-            val onceEveryDay = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
+            val onceEveryDay = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
             if (onceEveryDay) {
                 val lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime())
                 if (lastTime == Utils.formatTime(System.currentTimeMillis())) {
@@ -102,7 +102,7 @@ class MainActivity : BaseActivity() {
     private fun initNav() {
         val btnAbout = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_about)
         btnAbout.setOnClickListener {
-            val intent = Intent(this@MainActivity, AboutJActivity::class.java)
+            val intent = Intent(this@MainActivity, AboutActivity::class.java)
             startActivity(intent)
         }
 
@@ -163,7 +163,7 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
 
-        val isExOn = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
+        val isExOn = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false)
         val importButton = nav_main_view.getHeaderView(0).findViewById<Button>(R.id.btn_main_nav_import)
         if (isExOn) {
             importButton.visibility = View.VISIBLE
@@ -224,8 +224,9 @@ class MainActivity : BaseActivity() {
                         edit_num.visibility = View.GONE
                         //TODO
                         val time = System.currentTimeMillis()
+                        loginfo("edit_num:"+edit_num.text)
                         val data = Data(-1, time, edit_num.text.toString().toFloat())
-                        val isOnlyOneTime = MySPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
+                        val isOnlyOneTime = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true)
                         DataManager.getInstance(this@MainActivity)!!.add(data)
                     }
                 }

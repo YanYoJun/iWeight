@@ -6,7 +6,7 @@ import com.plbear.iweight.data.Data
 import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.base.App
-import com.plbear.iweight.utils.MySPUtils
+import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.utils.MyUtils
 
 import java.util.ArrayList
@@ -97,7 +97,7 @@ class LineChartAdapter() {
      * @returnd
      */
     private fun init() {
-        val sp = MySPUtils.getSP()
+        val sp = SPUtils.getSP()
         targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * MyUtils.getValueUnit()
 
         val db = DataManager.getInstance(App.getAppContext())
@@ -129,7 +129,7 @@ class LineChartAdapter() {
      * 通知注册Adapter Lisntenr的类进行刷新
      */
     private fun notifyDataChange() {
-        val sp = MySPUtils.getSP()
+        val sp = SPUtils.getSP()
         targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * MyUtils.getValueUnit()
         for (listener in mListener) {
             listener.onChange()

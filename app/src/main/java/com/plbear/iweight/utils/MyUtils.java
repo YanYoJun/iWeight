@@ -9,9 +9,9 @@ import com.plbear.iweight.model.settings.SettingsActivity;
  */
 
 public class MyUtils {
-    private static float VALUE_UNIT = -1f;//体重单位
+    private static float VALUE_UNIT = 1f;//体重单位
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     /**
      * 获取体重单位
@@ -21,8 +21,8 @@ public class MyUtils {
             return VALUE_UNIT;
         }
         try {
-            SharedPreferences sp = MySPUtils.getSP();
-            String value = sp.getString(SettingsActivity.Companion.getPREFERENCE_KEY_UNIT(), "0");
+            SharedPreferences sp = SPUtils.getSP();
+            String value = sp.getString(SettingsActivity.Companion.getPREFERENCE_KEY_UNIT(), "1");
             VALUE_UNIT = java.lang.Float.parseFloat(value);
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,6 +31,6 @@ public class MyUtils {
     }
 
     public static void clearValueUnit() {
-        VALUE_UNIT = -1f;
+        VALUE_UNIT = 1f;
     }
 }

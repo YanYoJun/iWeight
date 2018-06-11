@@ -24,8 +24,7 @@ import com.plbear.iweight.model.main.fragment.MainDataFragment
 import java.util.Timer
 import java.util.TimerTask
 
-import android.content.ContentValues.TAG
-import com.plbear.iweight.utils.MySPUtils
+import com.plbear.iweight.utils.SPUtils
 import com.plbear.iweight.utils.MyUtils
 
 /**
@@ -66,7 +65,7 @@ class SettingsFragment : PreferenceFragment() {
 
     private fun init() {
         mContext = activity
-        mSP = MySPUtils.getSP()
+        mSP = SPUtils.getSP()
         mSPEditor = mSP!!.edit()
     }
 

@@ -15,7 +15,7 @@ import butterknife.OnClick;
  * Created by yanyongjun on 2018/5/1.
  */
 
-public class AboutJActivity extends BaseActivity{
+public class AboutActivity extends BaseActivity{
     @BindView(R.id.btn_details_select_all) Button mBtnSelectAll;
 
     @Override

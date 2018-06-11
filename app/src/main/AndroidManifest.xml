@@ -35,7 +35,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
         <activity android:name="com.plbear.iweight.model.details.DetailsActivity"></activity>
-        <activity android:name=".model.other.AboutJActivity">
+        <activity android:name=".model.other.AboutActivity">
 
         </activity>
 
