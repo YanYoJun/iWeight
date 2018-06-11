@@ -8,10 +8,9 @@ import com.plbear.iweight.base.Constant
 
 import java.util.ArrayList
 
-import android.R.attr.value
 import com.plbear.iweight.base.App
 import com.plbear.iweight.utils.LogInfo
-import com.plbear.iweight.utils.MyUtils
+import com.plbear.iweight.utils.Utils
 
 /**
  * Created by yanyongjun on 16/11/normal_5.
@@ -48,7 +47,7 @@ class DataManager private constructor(context: Context) {
             return
         }
         val values = ContentValues()
-        values.put("weight", data.weight / MyUtils.getValueUnit())
+        values.put("weight", data.weight / Utils.getValueUnit())
         LogInfo.i(TAG, "data:" + data.toString())
         mResolver!!.update(Constant.CONTENT_URI, values, "_id in (?)", arrayOf(data.id.toString() + ""))
         //int value = db.update("weight", values, "_id in (?)", new String[]{data.getId() + ""});
@@ -65,7 +64,7 @@ class DataManager private constructor(context: Context) {
         }
         val values = ContentValues()
         values.put("time", data.time.toString())
-        values.put("weight", (data.weight / MyUtils.getValueUnit()).toString())
+        values.put("weight", (data.weight / Utils.getValueUnit()).toString())
         mResolver!!.insert(Constant.CONTENT_URI, values)
         return
     }
@@ -78,7 +77,7 @@ class DataManager private constructor(context: Context) {
         for (data in lists) {
             val values = ContentValues()
             values.put("time", data.time.toString())
-            values.put("weight", (data.weight / MyUtils.getValueUnit()).toString())
+            values.put("weight", (data.weight / Utils.getValueUnit()).toString())
             if (lastOne == data) {
                 mResolver!!.insert(Constant.CONTENT_URI, values)
             } else {
@@ -109,7 +108,7 @@ class DataManager private constructor(context: Context) {
             cursor!!.moveToFirst()
             while (!cursor.isAfterLast) {
                 val data = Data(cursor.getInt(0), cursor.getLong(1),
-                        cursor.getFloat(2) * MyUtils.getValueUnit())
+                        cursor.getFloat(2) * Utils.getValueUnit())
                 list.add(data)
                 cursor.moveToNext()
             }

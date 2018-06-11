@@ -25,7 +25,6 @@ import java.util.Timer
 import java.util.TimerTask
 
 import com.plbear.iweight.utils.SPUtils
-import com.plbear.iweight.utils.MyUtils
 
 /**
  * Created by yanyongjun on 2017/normal_4/normal_1.
@@ -74,7 +73,7 @@ class SettingsFragment : PreferenceFragment() {
         val value = mSP!!.getString(SettingsActivity.PREFERENCE_KEY_UNIT, "normal_1")
         initUnitPreference(value)
         valUnitWeight.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
-            MyUtils.clearValueUnit()
+            Utils.clearValueUnit()
             initUnitPreference(newValue as String)
             val intent = Intent(MainDataFragment.ACTION_DATA_CHANED)
             activity.sendBroadcast(intent)
@@ -86,9 +85,9 @@ class SettingsFragment : PreferenceFragment() {
     private fun initUnitPreference(value: String) {
         val valUnitWeight = findPreference(SettingsActivity.PREFERENCE_KEY_UNIT) as ListPreference
 
-        if (value == "normal_1") {
+        if (value == "1") {
             valUnitWeight.summary = String.format(getString(R.string.current_unit), "公斤")
-        } else if (value == "normal_2") {
+        } else if (value == "2") {
             valUnitWeight.summary = String.format(getString(R.string.current_unit), "斤")
         }
     }

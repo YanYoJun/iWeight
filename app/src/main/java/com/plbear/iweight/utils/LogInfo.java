@@ -19,13 +19,13 @@ public class LogInfo {
     }
 
     public static void i(String tag_key, String info) {
-        if (MyUtils.DEBUG) {
+        if (Utils.DEBUG) {
             Log.i(TAG + tag_key, info);
         }
     }
 
     public static void i(String tag_key, Cursor cursor) {
-        if (!MyUtils.DEBUG) {
+        if (!Utils.DEBUG) {
             return;
         }
         if (cursor == null || cursor.getCount() == 0) {

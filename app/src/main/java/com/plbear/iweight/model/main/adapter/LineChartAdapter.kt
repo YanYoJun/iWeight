@@ -7,7 +7,7 @@ import com.plbear.iweight.data.DataManager
 import com.plbear.iweight.model.settings.SettingsActivity
 import com.plbear.iweight.base.App
 import com.plbear.iweight.utils.SPUtils
-import com.plbear.iweight.utils.MyUtils
+import com.plbear.iweight.utils.Utils
 
 import java.util.ArrayList
 import java.util.Collections
@@ -98,7 +98,7 @@ class LineChartAdapter() {
      */
     private fun init() {
         val sp = SPUtils.getSP()
-        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * MyUtils.getValueUnit()
+        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * Utils.getValueUnit()
 
         val db = DataManager.getInstance(App.getAppContext())
         val list = db!!.queryAll()
@@ -130,7 +130,7 @@ class LineChartAdapter() {
      */
     private fun notifyDataChange() {
         val sp = SPUtils.getSP()
-        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * MyUtils.getValueUnit()
+        targetWeight = sp.getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1f) * Utils.getValueUnit()
         for (listener in mListener) {
             listener.onChange()
         }
