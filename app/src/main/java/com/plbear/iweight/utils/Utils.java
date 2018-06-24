@@ -33,7 +33,7 @@ public class Utils {
         }
         try {
             SharedPreferences sp = SPUtils.getSP();
-            String value = sp.getString(SettingsActivity.Companion.getPREFERENCE_KEY_UNIT(), "1");
+            String value = sp.getString(SettingsActivity.PREFERENCE_KEY_UNIT, "1");
             VALUE_UNIT = java.lang.Float.parseFloat(value);
         } catch (Exception e) {
             e.printStackTrace();
