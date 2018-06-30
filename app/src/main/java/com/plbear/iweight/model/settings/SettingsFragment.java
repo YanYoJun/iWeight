@@ -78,7 +78,7 @@ public class SettingsFragment extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Utils.clearValueUnit();
                 initUnitPreference((String) newValue);
-                Intent intent = new Intent(MainDataFragment.Companion.getACTION_DATA_CHANED());
+                Intent intent = new Intent(MainDataFragment.ACTION_DATA_CHANED);
                 getActivity().sendBroadcast(intent);
                 return true;
             }

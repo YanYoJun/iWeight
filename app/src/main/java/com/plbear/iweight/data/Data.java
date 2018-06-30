@@ -15,6 +15,10 @@ public class Data {
         mWeight = weight;
     }
 
+    public Data(){
+
+    }
+
     public void setId(int id) {
         mId = id;
     }

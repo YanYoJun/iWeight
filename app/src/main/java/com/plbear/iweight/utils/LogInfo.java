@@ -24,6 +24,8 @@ public class LogInfo {
         }
     }
 
+
+
     public static void i(String tag_key, Cursor cursor) {
         if (!Utils.DEBUG) {
             return;
