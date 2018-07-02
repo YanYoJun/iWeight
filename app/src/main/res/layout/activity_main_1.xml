@@ -71,7 +71,7 @@
             android:layout_weight="360"></android.support.v4.view.ViewPager>
     </LinearLayout>
 
-    <com.plbear.iweight.model.main.view.MyKeyboardView
+    <com.plbear.iweight.model.main.view.MyKeyboradView
         android:id="@+id/keyboard_main"
         android:layout_width="match_parent"
         android:layout_height="400dp"
@@ -81,5 +81,5 @@
         android:focusableInTouchMode="true"
         android:keyTextColor="@color/black"
         android:background="@null"
-        android:visibility="gone"></com.plbear.iweight.model.main.view.MyKeyboardView>
+        android:visibility="gone"/>
 </FrameLayout>

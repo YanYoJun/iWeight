@@ -2,6 +2,7 @@ package com.plbear.iweight.utils;
 
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.plbear.iweight.base.App;
@@ -20,9 +21,10 @@ import java.util.Date;
  */
 
 public class Utils {
+    private final static String TAG = "Utils";
     private static float VALUE_UNIT = 1f;//体重单位
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     /**
      * 获取体重单位
@@ -53,6 +55,7 @@ public class Utils {
     }
 
     public static boolean checkWeightValueFat(float value) {
+        LogInfo.e(TAG,"yanlog checkFag:"+value);
         return value <= 400;
     }
 

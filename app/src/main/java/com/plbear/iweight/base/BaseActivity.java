@@ -1,13 +1,18 @@
 package com.plbear.iweight.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
+import com.plbear.iweight.R;
+import com.plbear.iweight.model.main.activity.MainActivity;
 import com.plbear.iweight.utils.LogInfo;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by yanyongjun on 2018/6/11.
@@ -70,4 +75,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         AppManager.getAppManager().removeFromStack(this);
         super.finish();
     }
+
+    public void onClick_back(View v){
+        loginfo("onCick_back");
+        finish();
+    }
+
 }

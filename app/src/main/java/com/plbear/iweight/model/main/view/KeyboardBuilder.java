@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.Utils;
 
 /**
@@ -24,7 +25,7 @@ public class KeyboardBuilder {
     public final static int STATUS_CANCEL = 1;
 
     private Activity mActivity;
-    private KeyboardView mKeyboardView;
+    private MyKeyboradView mKeyboardView;
     private int mRes;
     private KeyboardBuilder.OnStatusChanged mStatusListener;
     private EditText mEditText;
@@ -64,8 +65,8 @@ public class KeyboardBuilder {
                     }
                     break;
                 default:
-                    if (check(editable.toString(), primaryCode)) {
-                        editable.insert(start, ((char)primaryCode)+"");
+                    if (check(editable.toString(), (char)primaryCode)) {
+                        editable.insert(start, ((char) primaryCode) + "");
                     }
                     break;
             }
@@ -99,7 +100,7 @@ public class KeyboardBuilder {
 
     public KeyboardBuilder(Activity activity, View keyboardView, int keyRes, EditText editText, KeyboardBuilder.OnStatusChanged listener) {
         mActivity = activity;
-        mKeyboardView = (KeyboardView) keyboardView;
+        mKeyboardView = (MyKeyboradView) keyboardView;
         mRes = keyRes;
         mEditText = editText;
         mStatusListener = listener;
@@ -136,7 +137,8 @@ public class KeyboardBuilder {
 
     private int mFailsTimes = 0;
 
-    private boolean check(String str, int c) {
+    private boolean check(String str, char c) {
+        LogInfo.i(TAG, "check:" + str + " c:" + c);
         if (TextUtils.isEmpty(str) && c == '.') {
             return false;
         }

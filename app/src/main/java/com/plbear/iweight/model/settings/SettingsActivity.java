@@ -30,10 +30,6 @@ public class SettingsActivity extends BaseActivity {
         init();
     }
 
-    private void onClick_back(View v){
-        finish();
-    }
-
     public void init(){
         lab_title.setText(R.string.settings);
         btn_details_select_all.setVisibility(View.GONE);

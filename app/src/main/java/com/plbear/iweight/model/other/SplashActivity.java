@@ -13,6 +13,7 @@ import com.plbear.iweight.base.BaseActivity;
 import com.plbear.iweight.model.main.activity.MainActivity;
 import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.PermissionHelper;
+import com.plbear.iweight.utils.Utils;
 import com.plbear.iweight.utils.WatchDog;
 
 import sd.sazs.erd.AdManager;
@@ -98,6 +99,11 @@ public class SplashActivity extends BaseActivity {
     private void preloadAd() {
         loginfo("preloadAd in");
         //增加一个看门狗，预防SDK没有像响应
+        int watchDogTime = 3000;
+        if (Utils.DEBUG) {
+            watchDogTime = 500;
+        }
+
         final WatchDog watchDog = new WatchDog(new WatchDog.WatchDogListener() {
             @Override
             public void onTimeoutListener() {
@@ -110,7 +116,7 @@ public class SplashActivity extends BaseActivity {
             public void onCancelListener() {
                 loginfo("watch dog is canceled");
             }
-        },3000);
+        }, watchDogTime);
         watchDog.start();
         loginfo("watch dog is start");
 
@@ -120,13 +126,17 @@ public class SplashActivity extends BaseActivity {
             public void onRequestSuccess() {
                 //				// 应用安装后首次展示开屏会因为本地没有数据而跳过
                 //              // 如果开发者需要在首次也能展示开屏，可以在请求广告成功之前展示应用的logo，请求成功后再加载开屏
-                watchDog.stop();
+                if (!Utils.DEBUG) {
+                    watchDog.stop();
+                }
                 setupSplashAd();
             }
 
             @Override
             public void onRequestFailed(int errorCode) {
-                watchDog.stop();
+                if (!Utils.DEBUG) {
+                    watchDog.stop();
+                }
                 logerror(String.format("请求插播广告失败，errorCode: %s", errorCode));
                 switch (errorCode) {
                     case ErrorCode.NON_NETWORK:

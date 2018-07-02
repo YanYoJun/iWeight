@@ -15,7 +15,7 @@
         <Key
             android:codes="-5"
             android:keyHeight="120dp"
-            android:keyLabel="delete"
+            android:keyLabel="回退"
             android:keyIcon="@drawable/keyboard_delete"></Key>
     </Row>
     <Row>

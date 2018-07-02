@@ -21,35 +21,36 @@ import java.util.HashMap;
  * Created by yanyongjun on 2018/6/28.
  */
 
-public class DetailsAdapter extends BaseAdapter{
+public class DetailsAdapter extends BaseAdapter {
     private final static String TAG = "DetailsAdapter";
     private Context mContext;
     private ArrayList<Data> mListData;
     private LayoutInflater mInflater;
     boolean isEditMode = false;
-    private HashMap<Integer,Boolean> mSelectMap = new HashMap<>();
+    private HashMap<Integer, Boolean> mSelectMap = new HashMap<>();
     private int mSelectCount = 0;
     private DetailsAdapter.OnItemClick mCallback;
     private ArrayList<Data> selectData;
-    public ArrayList<Data> getSelectData(){
+
+    public ArrayList<Data> getSelectData() {
         ArrayList<Data> list = new ArrayList<>(mSelectCount);
         java.util.Iterator<Integer> it = mSelectMap.keySet().iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             int key = it.next();
-            if(mSelectMap.get(key) == true){
+            if (mSelectMap.get(key) == true) {
                 list.add(mListData.get(key));
             }
         }
         return list;
     }
 
-    public interface OnItemClick{
-        void itemClick(HashMap<Integer, Boolean> mSelectMap,int selectCount);
+    public interface OnItemClick {
+        void itemClick(HashMap<Integer, Boolean> mSelectMap, int selectCount);
 
         void longItemClick(boolean editMode);
     }
 
-    public void notifyDataSetChanged(){
+    public void notifyDataSetChanged() {
         DataManager db = DataManager.getInstance(mContext);
         mListData = db.queryAll();
         Utils.sortDataBigToSmall(mListData);
@@ -57,7 +58,7 @@ public class DetailsAdapter extends BaseAdapter{
     }
 
 
-    public DetailsAdapter(Context context, ArrayList<Data> list, DetailsAdapter.OnItemClick callback){
+    public DetailsAdapter(Context context, ArrayList<Data> list, DetailsAdapter.OnItemClick callback) {
         mContext = context;
         mListData = list;
         mCallback = callback;
@@ -67,40 +68,40 @@ public class DetailsAdapter extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view;
-        if(isEditMode){
-            view = mInflater.inflate(R.layout.item_details_editmode,null);
-        }else{
-            view = mInflater.inflate(R.layout.item_details,null);
+        if (isEditMode) {
+            view = mInflater.inflate(R.layout.item_details_editmode, null);
+        } else {
+            view = mInflater.inflate(R.layout.item_details, null);
         }
 
         TextView labDate = view.findViewById(R.id.lab_details_item_date);
         TextView labWeight = view.findViewById(R.id.lab_details_item_weight);
         Data data = mListData.get(position);
         labDate.setText(Utils.formatTimeFull(data.getTime()));
-        labWeight.setText(""+data.getWeight());
-        if(isEditMode){
+        labWeight.setText("" + data.getWeight());
+        if (isEditMode) {
             final CheckBox selectBox = view.findViewById(R.id.checkbox_details_item_select);
             selectBox.setVisibility(View.VISIBLE);
             selectBox.setOnClickListener(null);
             selectBox.setClickable(false);
-            boolean isCheck = mSelectMap.get(position);
-            selectBox.setClickable(true==isCheck);
+            Boolean isCheck = mSelectMap.get(position);
+            selectBox.setClickable(isCheck != null && true == isCheck);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean temp = mSelectMap.get(position);
-                    boolean click = temp;
-                    mSelectMap.put(position,!click);
-                    if(click){
+                    Boolean temp = mSelectMap.get(position);
+                    boolean click = temp != null && true == temp;
+                    mSelectMap.put(position, !click);
+                    if (click) {
                         mSelectCount--;
-                    }else{
+                    } else {
                         mSelectCount++;
                     }
                     selectBox.setChecked(!click);
-                    mCallback.itemClick(mSelectMap,mSelectCount);
+                    mCallback.itemClick(mSelectMap, mSelectCount);
                 }
             });
-        }else{
+        } else {
             view.setClickable(false);
             view.setOnClickListener(null);
             view.setOnClickListener(new View.OnClickListener() {
@@ -113,15 +114,15 @@ public class DetailsAdapter extends BaseAdapter{
         return view;
     }
 
-    public long getItemId(int position){
-        return (long)position;
+    public long getItemId(int position) {
+        return (long) position;
     }
 
-    public Object getItem(int position){
+    public Object getItem(int position) {
         return mListData.get(position);
     }
 
-    public int getCount(){
+    public int getCount() {
         return mListData.size();
     }
 

@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -13,10 +15,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.plbear.iweight.R;
@@ -26,13 +30,17 @@ import com.plbear.iweight.data.DataManager;
 import com.plbear.iweight.model.details.DetailsActivity;
 import com.plbear.iweight.model.main.fragment.MainDataFragment;
 import com.plbear.iweight.model.main.view.KeyboardBuilder;
+import com.plbear.iweight.model.main.view.MyKeyboradView;
 import com.plbear.iweight.model.other.AboutActivity;
 import com.plbear.iweight.model.settings.SettingsActivity;
 import com.plbear.iweight.storage.XMLHelper;
+import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.SPUtils;
 import com.plbear.iweight.utils.Utils;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Timer;
 
 import butterknife.BindView;
 
@@ -45,6 +53,7 @@ public class MainActivity extends BaseActivity {
     public final static int REQUSET_EXPORT_CODE_PERMISSION = 2;
     private XMLHelper.OnXMLListener mXmlListener;
     private ArrayList<MainDataFragment> mFragList = new ArrayList<>();
+    private boolean mIsExiting = false;
     private FragmentPagerAdapter mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
         @Override
         public Fragment getItem(int position) {
@@ -61,7 +70,7 @@ public class MainActivity extends BaseActivity {
     Button mBtnRecord;
 
     @BindView(R.id.btn_title_more)
-    Button mBtnTitleMore;
+    ImageButton mBtnTitleMore;
 
     @BindView(R.id.drawer_layout_main)
     DrawerLayout mDrawLayoutMain;
@@ -71,6 +80,16 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.view_pager_main)
     ViewPager mViewPager;
+
+    @BindView(R.id.keyboard_main)
+    MyKeyboradView myKeyboardView;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     public int getLayout() {
@@ -93,12 +112,12 @@ public class MainActivity extends BaseActivity {
                 }
                 recordWeight();
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                mBtnTitleMore.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mDrawLayoutMain.openDrawer(mNavView);
-                    }
-                });
+            }
+        });
+        mBtnTitleMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawLayoutMain.openDrawer(mNavView);
             }
         });
     }
@@ -262,8 +281,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.edit_num)
     EditText mEditText;
 
-    @BindView(R.id.keyboard_main)
-    View myKeyboardView;
 
     /**
      * 弹出记录体重的弹框
@@ -320,6 +337,33 @@ public class MainActivity extends BaseActivity {
                 helper.readXML(mXmlListener);
                 break;
             }
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitBy2Click();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 双击退出
+     */
+    private void exitBy2Click() {
+        if (!mIsExiting) {
+            mIsExiting = true;
+            Utils.showToast("再按一次退出程序");
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mIsExiting = false;
+                }
+            }, 2000);
+        } else {
+            exitAll();
         }
     }
 }

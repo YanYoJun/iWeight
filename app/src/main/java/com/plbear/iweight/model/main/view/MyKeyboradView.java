@@ -82,7 +82,7 @@ public class MyKeyboradView extends KeyboardView {
                     canvas.drawRect(key.x, key.y, (key.x + key.width), (key.y + key.height), mCancelPaint);
                 }
                 canvas.drawText(key.label.toString(), key.x + key.width / 2 - TEXT_SIZE, key.y + key.height / 2 + TEXT_SIZE / 2 - 10, mWhitePaint);
-            } else if (!key.label.equals("keyboard_delete")) {
+            } else if (!key.label.equals("回退")) {
                 if (key.pressed) {
                     canvas.drawRect(key.x, key.y, (key.x + key.width), (key.y + key.height), mKeyPressPaint);
                 } else {
