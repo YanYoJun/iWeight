@@ -19,8 +19,6 @@ import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
 import com.plbear.iweight.utils.Utils;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
@@ -49,7 +47,7 @@ public class DetailsActivity extends BaseActivity {
     private ArrayList<Data> mDataList;
     private DetailsAdapter.OnItemClick mCallback = new DetailsAdapter.OnItemClick() {
         @Override
-        public void itemClick(@NotNull HashMap<Integer, Boolean> mSelectMap, int selectCount) {
+        public void itemClick(HashMap<Integer, Boolean> mSelectMap, int selectCount) {
             int size = mDataList.size();
             if (size != selectCount) {
                 mBtnSelectAll.setText(R.string.details_title_select_all);

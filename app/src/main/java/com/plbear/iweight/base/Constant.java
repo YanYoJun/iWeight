@@ -12,6 +12,7 @@ public class Constant {
     public final static int PROVIDER_ITEM = 1;
     public final static int PROVIDER_ITEMS_WITHOUT_NOTIFY = 2;
     public final static int PROVIDER_POS = 3;
+    public final static String BUGLY_ID = "934c6ebddb";
 
     public static Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_AUTHORITY + "/items");
     public static Uri CONTENT_URI_WITHOUT_NOTIRY = Uri.parse("content://" + PROVIDER_AUTHORITY + "/items_without_notify");

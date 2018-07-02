@@ -3,6 +3,9 @@ package com.plbear.iweight.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.plbear.iweight.utils.Utils;
+import com.tencent.bugly.crashreport.CrashReport;
+
 /**
  * Created by yanyongjun on 2018/6/11.
  */
@@ -17,6 +20,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         mContext = getApplicationContext();
+        CrashReport.initCrashReport(getApplicationContext(),Constant.BUGLY_ID, Utils.DEBUG);
         super.onCreate();
     }
 }

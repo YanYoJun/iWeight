@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseActivity;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import butterknife.BindView;
 

@@ -1,8 +1,5 @@
 apply plugin: 'com.android.application'
 
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -31,9 +28,10 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation fileTree(dir: 'libs', include: ['*.aar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     compile 'com.android.support:design:26.0.0-beta1'
     compile 'com.android.support:support-v4:26.0.0-beta1'
+    compile 'com.tencent.bugly:crashreport:2.6.6'
     implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
