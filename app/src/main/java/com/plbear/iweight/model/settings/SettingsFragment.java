@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.plbear.iweight.R;
+import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.Utils;
 import com.plbear.iweight.model.main.fragment.MainDataFragment;
 
@@ -33,6 +34,7 @@ import com.plbear.iweight.utils.SPUtils;
  */
 
 public class SettingsFragment extends PreferenceFragment {
+    private final static String TAG = "SettingsFragment";
     private Activity mContext = null;
     private SharedPreferences mSP = null;
     private SharedPreferences.Editor mSPEditor = null;
@@ -44,17 +46,17 @@ public class SettingsFragment extends PreferenceFragment {
         init();
     }
 
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference ) {
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         String key = preference.getKey();
 
-        if(key.equals(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT)){
+        if (key.equals(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT)) {
             showSetTargetDialog();
-        }else if (key.equals(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY)){
-            SwitchPreference swPre = (SwitchPreference)preference;
+        } else if (key.equals(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY)) {
+            SwitchPreference swPre = (SwitchPreference) preference;
             mSPEditor.putBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, swPre.isChecked());
             mSPEditor.commit();
-        }else if (key.equals(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT)){
-            SwitchPreference swEx = (SwitchPreference)preference;
+        } else if (key.equals(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT)) {
+            SwitchPreference swEx = (SwitchPreference) preference;
             mSPEditor.putBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, swEx.isChecked());
             mSPEditor.commit();
         }
@@ -70,9 +72,10 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public void onResume() {
-        ListPreference valUnitWeight = (ListPreference)findPreference(SettingsActivity.PREFERENCE_KEY_UNIT);
+        ListPreference valUnitWeight = (ListPreference) findPreference(SettingsActivity.PREFERENCE_KEY_UNIT);
         String value = mSP.getString(SettingsActivity.PREFERENCE_KEY_UNIT, "1");
         initUnitPreference(value);
+        LogInfo.i(TAG,"onResume："+value);
         valUnitWeight.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -88,16 +91,16 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void initUnitPreference(String value) {
-        ListPreference valUnitWeight = (ListPreference)findPreference(SettingsActivity.PREFERENCE_KEY_UNIT);
+        ListPreference valUnitWeight = (ListPreference) findPreference(SettingsActivity.PREFERENCE_KEY_UNIT);
 
-        if (value == "1") {
+        if (value.equals("1")) {
             valUnitWeight.setSummary(String.format(getString(R.string.current_unit), "公斤"));
-        } else if (value == "2") {
+        } else if (value.equals("2")) {
             valUnitWeight.setSummary(String.format(getString(R.string.current_unit), "斤"));
         }
     }
 
-    private void savePreferences(String key,int values) {
+    private void savePreferences(String key, int values) {
         mSPEditor.putInt(key, values);
         mSPEditor.commit();
     }
@@ -131,16 +134,16 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public void onClick(View v) {
                 long time = System.currentTimeMillis();
-                try{
+                try {
                     long weight = Long.parseLong(editText.getText().toString());
-                    if(!Utils.checkWeightValue(weight)){
+                    if (!Utils.checkWeightValue(weight)) {
                         Utils.showToast("您输入的值太不合理了，在逗我玩吧~");
                         return;
                     }
-                    savePreferences(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT,weight);
+                    savePreferences(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, weight);
                     Utils.showToast(R.string.settings_toast_save_target_success);
                     dialog.dismiss();
-                }catch (Exception e){
+                } catch (Exception e) {
                     Utils.showToast("输入值不合法，请重新输入~");
                 }
             }
@@ -163,7 +166,7 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public void run() {
                 if (editText != null) {
-                    InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
                 }
             }
