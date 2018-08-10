@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:paddingTop="5dp"
-            android:text="v7.1.6"
+            android:text="@string/splash_version"
             android:textColor="@color/details_item_bg"
             android:textSize="10sp" />
     </LinearLayout>

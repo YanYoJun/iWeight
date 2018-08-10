@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 boolean onceEveryDay = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true);
-                if (onceEveryDay) {
+                if (onceEveryDay && !Utils.DEBUG) {
                     String lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime());
                     if (lastTime.equals(Utils.formatTime(System.currentTimeMillis()))) {
                         Utils.showToast(R.string.main_toast_notify_only_once);

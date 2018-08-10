@@ -16,12 +16,13 @@ import com.plbear.iweight.utils.PermissionHelper;
 import com.plbear.iweight.utils.Utils;
 import com.plbear.iweight.utils.WatchDog;
 
-import sd.sazs.erd.AdManager;
-import sd.sazs.erd.nm.cm.ErrorCode;
-import sd.sazs.erd.nm.sp.SplashViewSettings;
-import sd.sazs.erd.nm.sp.SpotListener;
-import sd.sazs.erd.nm.sp.SpotManager;
-import sd.sazs.erd.nm.sp.SpotRequestListener;
+import xvv.sde.yfd.AdManager;
+import xvv.sde.yfd.nm.cm.ErrorCode;
+import xvv.sde.yfd.nm.sp.SplashViewSettings;
+import xvv.sde.yfd.nm.sp.SpotListener;
+import xvv.sde.yfd.nm.sp.SpotManager;
+import xvv.sde.yfd.nm.sp.SpotRequestListener;
+
 
 /**
  * Created by yanyonigjun on 2018/4/15.

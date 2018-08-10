@@ -55,8 +55,17 @@ public class Utils {
     }
 
     public static boolean checkWeightValueFat(float value) {
-        LogInfo.e(TAG,"yanlog checkFag:"+value);
         return value <= 400;
+    }
+
+    public static boolean checkWeightValueFat(String value) {
+        try {
+            float fValue = Float.parseFloat(value);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public static String formatTime(long time) {

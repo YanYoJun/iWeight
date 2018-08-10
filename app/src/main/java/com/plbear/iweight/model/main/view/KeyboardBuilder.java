@@ -153,7 +153,7 @@ public class KeyboardBuilder {
             }
             return false;
         }
-        if (!Utils.checkWeightValueFat(Float.parseFloat(str + c))) {
+        if (!Utils.checkWeightValueFat(str + c)) {
             mFailsTimes++;
             if (mFailsTimes > 6) {
                 Utils.showToast("你能不能长点心~~~");

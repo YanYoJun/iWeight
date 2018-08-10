@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.plbear.iweight.R;
 import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
+import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.Utils;
 
 import java.lang.reflect.Array;
@@ -37,7 +38,7 @@ public class DetailsAdapter extends BaseAdapter {
         java.util.Iterator<Integer> it = mSelectMap.keySet().iterator();
         while (it.hasNext()) {
             int key = it.next();
-            if (mSelectMap.get(key) == true) {
+            if (mSelectMap.get(key)) {
                 list.add(mListData.get(key));
             }
         }
@@ -86,6 +87,7 @@ public class DetailsAdapter extends BaseAdapter {
             selectBox.setClickable(false);
             Boolean isCheck = mSelectMap.get(position);
             selectBox.setClickable(isCheck != null && true == isCheck);
+            selectBox.setChecked(isCheck != null && true == isCheck);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -155,8 +157,9 @@ public class DetailsAdapter extends BaseAdapter {
             mSelectMap.clear();
             mSelectCount = 0;
         } else {
-            for (Data i : mListData) {
-                mSelectMap.put(i.getId(), true);
+            int i = 0;
+            for (Data data : mListData) {
+                mSelectMap.put(i++, true);
             }
             mSelectCount = mListData.size();
         }
