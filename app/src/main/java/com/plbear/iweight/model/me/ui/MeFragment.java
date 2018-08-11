@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.plbear.iweight.base.BaseFragment;
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.Constant;
-import com.plbear.iweight.model.other.AboutActivity;
+import com.plbear.iweight.model.me.ui.AboutActivity;
 import com.plbear.iweight.model.settings.SettingsActivity;
 import com.plbear.iweight.utils.SPUtils;
 import com.plbear.iweight.utils.Utils;

@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.main.view;
+package com.plbear.iweight.model.form.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -17,7 +16,7 @@ import android.view.View;
 import com.plbear.iweight.R;
 import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
-import com.plbear.iweight.model.main.adapter.LineChartAdapter;
+import com.plbear.iweight.model.form.adapter.LineChartAdapter;
 import com.plbear.iweight.utils.Utils;
 
 import java.util.ArrayList;
@@ -132,8 +131,9 @@ public class LineChartView extends View {
 
         mTargetPaint.setColor(getResources().getColor(R.color.main_data_view_target_line));
         mTargetPaint.setStyle(Paint.Style.STROKE);
-        mTargetPaint.setStrokeWidth(4f);
+        mTargetPaint.setStrokeWidth(2f);
         mTargetPaint.setAntiAlias(true);
+        mTargetPaint.setAlpha(150);
 
         mTargetTextPaint.setColor(getResources().getColor(R.color.main_data_view_target_line));
         mTargetTextPaint.setTextSize(38f);
@@ -203,11 +203,11 @@ public class LineChartView extends View {
         }
         int y = toYPoint(targetWeight);
         Point begin = new Point();
-        begin.set(ALIGN_PADDING_TOP, y);
+        begin.set(ALIGN_PADDING_LEFT, y);
         Point end = new Point();
         end.set(getWidth() - ALIGN_PADDING_RIGHT, y);
         drawDottedLine(canvas, begin, end, mTargetPaint);
-        canvas.drawText(mContext.getResources().getString(R.string.main_data_view_target_weight), (end.x - 120), (end.y + 40), mTargetTextPaint);
+        canvas.drawText(mContext.getResources().getString(R.string.main_data_view_target_weight), (end.x - 170), (end.y - 25), mTargetTextPaint);
     }
 
     /**

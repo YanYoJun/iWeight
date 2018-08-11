@@ -25,7 +25,7 @@
     <string name="main_nav_exit">退&#160;&#160;出</string>
     <string name="main_nav_detail">数&#160;&#160;据</string>
     <string name="main_nav_settings">设&#160;&#160;置</string>
-    <string name="main_data_view_target_weight">目标值</string>
+    <string name="main_data_view_target_weight">目标</string>
     <string name="main_toast_notify_only_once">亲，今天已经打过卡啦</string>
     <string name="main_fragment_tab_week">本周</string>
     <string name="main_fragment_tab_month">当月</string>

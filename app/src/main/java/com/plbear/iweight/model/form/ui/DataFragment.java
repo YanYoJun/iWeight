@@ -2,7 +2,7 @@ package com.plbear.iweight.model.Data.fragment;
 
 import com.plbear.iweight.base.BaseFragment;
 import com.plbear.iweight.R;
-import com.plbear.iweight.model.main.fragment.MainDataFragment;
+import com.plbear.iweight.model.form.ui.FormViewFrag;
 
 public class DataFragment extends BaseFragment {
     @Override
@@ -12,9 +12,9 @@ public class DataFragment extends BaseFragment {
 
     @Override
     public void afterLayout() {
-        MainDataFragment weekFrag = (MainDataFragment) getChildFragmentManager().findFragmentById(R.id.frag_week);
-        MainDataFragment monthFrag = (MainDataFragment) getChildFragmentManager().findFragmentById(R.id.frag_month);
-        MainDataFragment allFrag = (MainDataFragment) getChildFragmentManager().findFragmentById(R.id.frag_all);
+        FormViewFrag weekFrag = (FormViewFrag) getChildFragmentManager().findFragmentById(R.id.frag_week);
+        FormViewFrag monthFrag = (FormViewFrag) getChildFragmentManager().findFragmentById(R.id.frag_month);
+        FormViewFrag allFrag = (FormViewFrag) getChildFragmentManager().findFragmentById(R.id.frag_all);
 
         weekFrag.setTag("weekFrag");
         weekFrag.setShowDateNums(7);

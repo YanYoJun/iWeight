@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.main.fragment;
+package com.plbear.iweight.model.form.ui;
 
 import android.support.v4.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -12,19 +12,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.Constant;
-import com.plbear.iweight.model.main.adapter.LineChartAdapter;
-import com.plbear.iweight.model.main.view.LineChartView;
+import com.plbear.iweight.model.form.adapter.LineChartAdapter;
+import com.plbear.iweight.model.form.view.LineChartView;
 
 /**
  * Created by yanyongjun on 2018/6/27.
  */
 
-public class MainDataFragment extends Fragment {
-    private String TAG = "MainDataFragment--";
+public class FormViewFrag extends Fragment {
+    private String TAG = "FormViewFrag--";
     public final static String ACTION_DATA_CHANED = "com.plbear.iweight.data_changed";
     private LineChartView mView;
     private LineChartAdapter mAdapter;

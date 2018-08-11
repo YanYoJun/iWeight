@@ -58,7 +58,7 @@
             <!--android:text="@string/main_lab_low_value" />-->
     <!--</RelativeLayout>-->
 
-    <com.plbear.iweight.model.main.view.LineChartView
+    <com.plbear.iweight.model.form.view.LineChartView
         android:id="@+id/show_weight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

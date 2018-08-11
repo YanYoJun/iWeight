@@ -1,41 +1,22 @@
 package com.plbear.iweight.model.main.activity;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.plbear.iweight.R;
-import com.plbear.iweight.base.BaseActivity;
 import com.plbear.iweight.base.BaseFragment;
 import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
-import com.plbear.iweight.model.main.fragment.MainDataFragment;
-import com.plbear.iweight.model.main.view.KeyboardBuilder;
-import com.plbear.iweight.model.main.view.MyKeyboradView;
-import com.plbear.iweight.model.other.AboutActivity;
+import com.plbear.iweight.model.form.ui.FormViewFrag;
 import com.plbear.iweight.model.settings.SettingsActivity;
 import com.plbear.iweight.storage.XMLHelper;
 import com.plbear.iweight.utils.SPUtils;
@@ -45,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import butterknife.BindView;
-
 /**
  * Created by yanyongjun on 2018/6/30.
  */
@@ -55,7 +34,7 @@ public class MainFragment extends BaseFragment {
     public final static int REQUSET_IMPORT_CODE_PERMISSION = 1;
     public final static int REQUSET_EXPORT_CODE_PERMISSION = 2;
     private XMLHelper.OnXMLListener mXmlListener;
-    private ArrayList<MainDataFragment> mFragList = new ArrayList<>();
+    private ArrayList<FormViewFrag> mFragList = new ArrayList<>();
     private boolean mIsExiting = false;
     private FragmentPagerAdapter mPagerAdapter;
     private Button mBtnRecord;

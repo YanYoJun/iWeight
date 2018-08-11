@@ -46,7 +46,7 @@
 
                 <fragment
                     android:id="@+id/frag_week"
-                    android:name="com.plbear.iweight.model.main.fragment.MainDataFragment"
+                    android:name="com.plbear.iweight.model.form.ui.FormViewFrag"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
 
@@ -83,7 +83,7 @@
 
                 <fragment
                     android:id="@+id/frag_month"
-                    android:name="com.plbear.iweight.model.main.fragment.MainDataFragment"
+                    android:name="com.plbear.iweight.model.form.ui.FormViewFrag"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
 
@@ -121,7 +121,7 @@
 
                 <fragment
                     android:id="@+id/frag_all"
-                    android:name="com.plbear.iweight.model.main.fragment.MainDataFragment"
+                    android:name="com.plbear.iweight.model.form.ui.FormViewFrag"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
                 </fragment>

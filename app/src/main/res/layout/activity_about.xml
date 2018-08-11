@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context="com.plbear.iweight.model.other.AboutActivity">
+    tools:context="com.plbear.iweight.model.me.ui.AboutActivity">
 
     <RelativeLayout
         android:id="@+id/include_title"

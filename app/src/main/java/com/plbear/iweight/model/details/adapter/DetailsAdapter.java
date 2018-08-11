@@ -66,10 +66,8 @@ public class DetailsAdapter extends BaseAdapter {
         View view;
         Data data = mListData.get(position);
         if (isEditMode || data.isEditMode()) {
-            LogInfo.e(TAG, "yanlog getView isEditMode:" + data);
             view = mInflater.inflate(R.layout.item_details_editmode, null);
         } else {
-            LogInfo.e(TAG, "yanlog getView isNot in editMode:" + data);
             view = mInflater.inflate(R.layout.item_details, null);
         }
 
@@ -77,7 +75,6 @@ public class DetailsAdapter extends BaseAdapter {
         TextView labWeight = view.findViewById(R.id.lab_details_item_weight);
 
         labDate.setText(Utils.formatTimeFull(data.getTime()));
-        LogInfo.e(TAG,"yanlog getweight:"+data.getWeight());
         labWeight.setText("" + data.getWeight());
         if (isEditMode || data.isEditMode()) {
             Button btnChange = view.findViewById(R.id.btn_change);

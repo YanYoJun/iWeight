@@ -185,10 +185,8 @@ public class SlideCutListView extends ListView {
     private void scrollByDistanceX() {
         // 如果向左滚动的距离大于屏幕的二分之一，就让其删除
         if (itemView.getScrollX() >= SNAP_VELOCITY) {
-            LogInfo.e(TAG,"yanlog scroller left");
             scrollLeft();
         } else if (itemView.getScrollX() <= -SNAP_VELOCITY) {
-            LogInfo.e(TAG,"yanlog scroller right");
             scrollRight();
         } else {
             // 滚回到原始位置,为了偷下懒这里是直接调用scrollTo滚动

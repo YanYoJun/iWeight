@@ -97,12 +97,10 @@ public class DetailsFragment extends BaseFragment {
                 if (direction == SlideCutListView.RemoveDirection.LEFT) {
 
                     Data data = mDataList.get(position);
-                    loginfo("yanlog removeItem left:"+position+" data:"+data);
                     data.setEditMode(true);
                 } else {
 
                     Data data = mDataList.get(position);
-                    loginfo("yanlog removeItem right:"+position+" data:"+data);
                     data.setEditMode(false);
                 }
                 mAdapter.setChangePos(position);

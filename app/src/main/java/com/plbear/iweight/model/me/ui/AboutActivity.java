@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.other;
+package com.plbear.iweight.model.me.ui;
 
 import android.content.Intent;
 import android.view.View;

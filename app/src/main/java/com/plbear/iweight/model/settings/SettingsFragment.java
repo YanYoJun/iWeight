@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -22,7 +21,7 @@ import android.widget.TextView;
 import com.plbear.iweight.R;
 import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.Utils;
-import com.plbear.iweight.model.main.fragment.MainDataFragment;
+import com.plbear.iweight.model.form.ui.FormViewFrag;
 
 import java.util.Timer;;
 import java.util.TimerTask;
@@ -81,7 +80,7 @@ public class SettingsFragment extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Utils.clearValueUnit();
                 initUnitPreference((String) newValue);
-                Intent intent = new Intent(MainDataFragment.ACTION_DATA_CHANED);
+                Intent intent = new Intent(FormViewFrag.ACTION_DATA_CHANED);
                 getActivity().sendBroadcast(intent);
                 return true;
             }
