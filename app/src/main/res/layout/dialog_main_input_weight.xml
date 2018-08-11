@@ -68,6 +68,5 @@
             android:background="@drawable/dialog_btn_bg"
             android:text="@string/submit"
             android:textSize="15sp" />
-
     </LinearLayout>
 </LinearLayout>

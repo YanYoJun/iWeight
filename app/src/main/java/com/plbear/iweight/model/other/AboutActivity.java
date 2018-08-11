@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseActivity;
-import com.plbear.iweight.model.main.activity.MainActivity;
+import com.plbear.iweight.model.main.activity.MainFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -16,7 +16,6 @@ import butterknife.OnClick;
  */
 
 public class AboutActivity extends BaseActivity{
-    @BindView(R.id.btn_details_select_all) Button mBtnSelectAll;
 
     @Override
     public int getLayout() {
@@ -25,15 +24,12 @@ public class AboutActivity extends BaseActivity{
 
     @Override
     public void afterLayout() {
-        mBtnSelectAll.setVisibility(View.GONE);
+        View back = findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
-
-    @OnClick(R.id.btn_back)
-    public void onClick_back(View v){
-        logerror("onCick_back");
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
 }

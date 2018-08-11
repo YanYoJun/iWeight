@@ -64,11 +64,12 @@ public class DataManager {
             return;
         }
         ContentValues values = new ContentValues();
-        values.put("time", data.getTime()+"");
-        values.put("weight", (data.getWeight() / Utils.getValueUnit())+"");
+        values.put("time", data.getTime() + "");
+        values.put("weight", (data.getWeight() / Utils.getValueUnit()) + "");
         mResolver.insert(Constant.CONTENT_URI, values);
         return;
     }
+
     public void add(ArrayList<Data> lists) {
         if (lists == null || lists.size() == 0) {
             return;
@@ -76,8 +77,8 @@ public class DataManager {
         Data lastOne = lists.get(0);
         for (Data data : lists) {
             ContentValues values = new ContentValues();
-            values.put("time", data.getTime()+"");
-            values.put("weight", (data.getWeight() / Utils.getValueUnit())+"");
+            values.put("time", data.getTime() + "");
+            values.put("weight", (data.getWeight() / Utils.getValueUnit()) + "");
             if (lastOne == data) {
                 mResolver.insert(Constant.CONTENT_URI, values);
             } else {
@@ -86,6 +87,7 @@ public class DataManager {
         }
         return;
     }
+
     public Long queryLastDataTime() {
         Cursor cursor = mResolver.query(Constant.CONTENT_URI, new String[]{"max(time)"}, null, null, null);
         try {
@@ -97,6 +99,29 @@ public class DataManager {
             cursor.close();
         }
         return -1L;
+    }
+
+    public Data queryLastData() {
+        Data data = new Data();
+        Cursor cursor = mResolver.query(Constant.CONTENT_URI, new String[]{"max(time)"}, null, null, null);
+        try {
+            cursor.moveToFirst();
+            long time = cursor.getLong(0);
+
+            cursor.close();
+            LogInfo.e(TAG, "time:" + time);
+            cursor = mResolver.query(Constant.CONTENT_URI, new String[]{"weight"}, "time=?", new String[]{time + ""}, null);
+            cursor.moveToFirst();
+            float weight = cursor.getFloat(0) * Utils.getValueUnit();
+            data.setWeight(weight);
+            data.setTime(time);
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+        return null;
     }
 
     public ArrayList<Data> queryAll() {

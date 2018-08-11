@@ -8,6 +8,9 @@ public class Data {
     private int mId;
     private long mTime;
     private float mWeight;
+    private boolean mIsEditMode = false;
+
+    public boolean temp = false; //临时字段，不做任何的用途
 
     public Data(int id,long time,float weight){
         mId = id;
@@ -42,4 +45,13 @@ public class Data {
     public float getWeight() {
         return mWeight;
     }
+
+    public void setEditMode(boolean mode){
+        mIsEditMode = mode;
+    }
+
+    public boolean isEditMode(){
+        return mIsEditMode;
+    }
+
 }

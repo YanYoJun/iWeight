@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.plbear.iweight.model.main.activity.MainFragment">
+
+    <include layout="@layout/include_title_1" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_bg">
+
+
+        <Button
+            android:id="@+id/btn_record"
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:background="@drawable/main_input_bg"
+            android:text="@string/main_btn_input"
+            android:textColor="@color/app_bg"
+            android:textSize="50sp"
+            android:typeface="serif"
+            android:layout_marginBottom="30dp"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:id="@+id/lab_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="您今日还没有打卡，要坚持哦~~"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

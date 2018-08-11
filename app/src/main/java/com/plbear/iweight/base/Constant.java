@@ -16,4 +16,9 @@ public class Constant {
 
     public static Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_AUTHORITY + "/items");
     public static Uri CONTENT_URI_WITHOUT_NOTIRY = Uri.parse("content://" + PROVIDER_AUTHORITY + "/items_without_notify");
+
+    public static final String PREFERENCE_KEY_SET_TARGET_WEIGHT = "set_target_weight";
+    public static final String PREFERENCE_KEY_ONLY_ONCE_EVERYDAY = "only_once_everyday";
+    public static final String PREFERENCE_KEY_EXPORT_IMPORT = "export_import_switch";
+    public static final String PREFERENCE_KEY_UNIT = "value_unit";
 }

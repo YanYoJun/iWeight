@@ -3,7 +3,9 @@
 
     <!-- 基础颜色 -->
     <color name="white">#FFFFFF</color>
+    <color name="gray">#EEEEEE</color>
     <color name="black">#000000</color>
+    <color name="red">#FFFA7B7B</color>
 
     <!-- 引用颜色 命名规范 使用界面_控件名称_状态-->
 
@@ -11,15 +13,18 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="app_bg">#3b589c</color>
+    <color name="app_bg">#0068b7</color>
     <color name="app_text_main">#0a0a0a</color>
+    <color name="app_text_des">#AAAAAA</color>
 
     <!-- 主界面使用颜色-->
     <color name="main_nav_btn_normal">#3f4751</color>
     <color name="main_nav_btn_pressed">#1e2227</color>
     <color name="main_dlg_btn_pressed">#888888</color>
 
-    <color name="main_data_view_line">#267c64</color>
+    <color name="main_data_view_line">#59b3f8</color>
+    <color name="main_data_view_path">#bbe2ff</color>
+
     <color name="main_data_view_point">#267c64</color>
     <color name="main_data_view_target_line">#e97533</color>
 

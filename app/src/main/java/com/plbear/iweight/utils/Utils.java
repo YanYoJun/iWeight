@@ -24,7 +24,7 @@ public class Utils {
     private final static String TAG = "Utils";
     private static float VALUE_UNIT = -1f;//体重单位
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     /**
      * 获取体重单位
@@ -35,8 +35,7 @@ public class Utils {
         }
         try {
             SharedPreferences sp = SPUtils.getSP();
-            String value = sp.getString(SettingsActivity.PREFERENCE_KEY_UNIT, "1");
-            VALUE_UNIT = java.lang.Float.parseFloat(value);
+            VALUE_UNIT = sp.getFloat(SettingsActivity.PREFERENCE_KEY_UNIT, 1.0f);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,5 +128,39 @@ public class Utils {
         result.x = (int) (((b * b - a * a) * param.x - 2.0 * a * b * param.y - 2.0 * a * c) / (a * a + b * b));
         result.y = (int) (((a * a - b * b) * param.y - 2.0 * a * b * param.x - 2.0 * b * c) / (a * a + b * b));
         return result;
+    }
+
+    /**
+     * 将newList中的数据合并到src中，只更新weight字段，其他字段保留，新增数据进行添加
+     */
+    public static void mergeWeightData(ArrayList<Data> src, ArrayList<Data> newList) {
+
+        for (Data data : src) {
+            data.temp = false;
+        }
+
+        for (Data data : newList) {
+            boolean find = false;
+            for (Data srcData : src) {
+                if (srcData.getId() == data.getId()) {
+                    srcData.setWeight(data.getWeight());
+                    srcData.temp = true;
+                    find = true;
+                    break;
+                }
+            }
+            if (!find) {
+                data.temp = true;
+                src.add(data);
+            }
+        }
+
+        for (int i = src.size() - 1; i >= 0; i--) {
+            Data data = src.get(i);
+            if (!data.temp) {
+                src.remove(data);
+            }
+        }
+
     }
 }

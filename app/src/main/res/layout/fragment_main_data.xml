@@ -5,64 +5,63 @@
     android:background="@color/white">
 
 
-    <RelativeLayout
-        android:id="@+id/frag_rel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:paddingTop="1dp"
-        android:paddingBottom="2dp">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/frag_rel"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/white"-->
+        <!--android:paddingTop="1dp"-->
+        <!--android:paddingBottom="2dp">-->
 
-        <TextView
-            android:id="@+id/lab_highest"
-            style="@style/LabTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="0dp"
-            android:paddingTop="0dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="top"
-            android:paddingBottom="0dp"
-            android:text="@string/main_lab_high_key" />
+        <!--<TextView-->
+            <!--android:id="@+id/lab_highest"-->
+            <!--style="@style/LabTheme"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginBottom="0dp"-->
+            <!--android:paddingTop="0dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:gravity="top"-->
+            <!--android:paddingBottom="0dp"-->
+            <!--android:text="@string/main_lab_high_key" />-->
 
-        <TextView
-            android:id="@+id/lab_highest_value"
-            style="@style/LabTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="top|center_horizontal"
-            android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@id/lab_highest"
-            android:text="@string/main_lab_high_value" />
+        <!--<TextView-->
+            <!--android:id="@+id/lab_highest_value"-->
+            <!--style="@style/LabTheme"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="top|center_horizontal"-->
+            <!--android:layout_marginLeft="3dp"-->
+            <!--android:layout_toRightOf="@id/lab_highest"-->
+            <!--android:text="@string/main_lab_high_value" />-->
 
-        <TextView
-            android:id="@+id/lab_lowest"
-            style="@style/LabTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="top|center_horizontal"
-            android:layout_toRightOf="@id/lab_highest_value"
-            android:text="@string/main_lab_low_key" />
+        <!--<TextView-->
+            <!--android:id="@+id/lab_lowest"-->
+            <!--style="@style/LabTheme"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:gravity="top|center_horizontal"-->
+            <!--android:layout_toRightOf="@id/lab_highest_value"-->
+            <!--android:text="@string/main_lab_low_key" />-->
 
-        <TextView
-            android:id="@+id/lab_lowest_values"
-            style="@style/LabTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:gravity="top|center_horizontal"
-            android:layout_toRightOf="@id/lab_lowest"
-            android:text="@string/main_lab_low_value" />
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/lab_lowest_values"-->
+            <!--style="@style/LabTheme"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="3dp"-->
+            <!--android:gravity="top|center_horizontal"-->
+            <!--android:layout_toRightOf="@id/lab_lowest"-->
+            <!--android:text="@string/main_lab_low_value" />-->
+    <!--</RelativeLayout>-->
 
     <com.plbear.iweight.model.main.view.LineChartView
         android:id="@+id/show_weight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/frag_rel"
         android:layout_marginBottom="0dp"
         android:background="@color/white" />
 </RelativeLayout>

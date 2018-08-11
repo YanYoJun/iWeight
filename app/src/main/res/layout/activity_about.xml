@@ -4,37 +4,94 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     android:orientation="vertical"
-    android:background="@color/app_bg"
     tools:context="com.plbear.iweight.model.other.AboutActivity">
-    <include layout="@layout/include_title"></include>
-    <TextView
+
+    <RelativeLayout
+        android:id="@+id/include_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/app_bg"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:paddingBottom="14dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/title_back" />
+
+        <TextView
+            android:id="@+id/lab_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="left"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@id/btn_back"
+            android:padding="0dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img_1"
         android:layout_width="wrap_content"
-        android:layout_marginTop="175dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/about_text_1"
-        android:textColor = "@color/white"
-        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:src ="@drawable/ic_launcher"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"/>
+
+    <TextView
         android:id="@+id/more_about"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/img_1"
+        android:layout_marginTop="10dp"
+        android:text="记录体重"
+        android:textColor="@color/app_text_main"
+        android:textSize="13sp" />
+
     <TextView
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/more_about"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/about_text_2"
-        android:textColor = "@color/white"
-        android:textSize="20sp"
-        android:id="@+id/more_email"
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="1dp"
+        android:text="@string/about_version"
+        android:textColor="@color/app_text_des"
+        android:layout_centerHorizontal="true"
+        android:textSize="10sp" />
+
     <TextView
+        android:id="@+id/lab_2"
         android:layout_width="wrap_content"
-        android:layout_below="@id/more_email"
-        android:layout_marginLeft="110dp"
-        android:text="@string/about_text_version"
-        android:layout_marginTop="10dp"
-        android:textColor = "@color/white"
-        android:textSize="20sp"
-        android:id="@+id/more_version"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="10dp"
+        android:text="All Rights Reserved"
+        android:textColor="@color/app_text_des"
+        android:layout_centerHorizontal="true"
+        android:textSize="10sp" />
+    <TextView
+        android:id="@+id/lab_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lab_2"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="1dp"
+        android:text="YanYongJun 版权所有"
+        android:textColor="@color/app_text_des"
+        android:layout_centerHorizontal="true"
+        android:textSize="10sp" />
 </RelativeLayout>

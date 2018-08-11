@@ -30,7 +30,8 @@ public class LineChartView extends View {
     private String TAG = "LineChartView";
     private final int SPACES_COUNT = 5;
     private final int MSG_DATA_CHANGE = 0;
-    private final int ALIGN_PADDING_LEFT = 20;
+    private final int ALIGN_PADDING_LEFT = 120;
+    private final int ALIGN_PADDING_TEXT_LEFT = 30;
     private final int ALIGN_PADDING_RIGHT = 20;
     private final int ALIGN_PADDING_TOP = 10;
     private final int ALIGN_PADDING_BOTTOM = 40;
@@ -43,6 +44,7 @@ public class LineChartView extends View {
     private Paint mPointPaint = new Paint();
     private Paint mTargetPaint = new Paint();
     private Paint mTargetTextPaint = new Paint();
+    private Paint mPolyLinePathPaint = new Paint();
     private DataManager mDataManager = DataManager.getInstance();
 
     private int mTop = 0;
@@ -90,15 +92,14 @@ public class LineChartView extends View {
      */
     private void initPaints() {
         mBondLinePaint.setColor(Color.BLACK);
-        mBondLinePaint.setTypeface(Typeface.DEFAULT_BOLD);
         mBondLinePaint.setStyle(Paint.Style.STROKE);
-        mBondLinePaint.setStrokeWidth(3f);
+        mBondLinePaint.setStrokeWidth(2f);
         mBondLinePaint.setAntiAlias(true);
-        mBondLinePaint.setAlpha(130);
+        mBondLinePaint.setAlpha(90);
 
-        mLinePaint.setColor(Color.BLACK);
+        mLinePaint.setColor(getResources().getColor(R.color.details_item_bg));
         mLinePaint.setStyle(Paint.Style.STROKE);
-        mLinePaint.setStrokeWidth(3f);
+        mLinePaint.setStrokeWidth(1f);
         mLinePaint.setAlpha(90);
         mLinePaint.setAntiAlias(true);
 
@@ -110,8 +111,14 @@ public class LineChartView extends View {
 
         mPolyLinePaint.setColor(getResources().getColor(R.color.main_data_view_line));
         mPolyLinePaint.setStyle(Paint.Style.STROKE);
-        mPolyLinePaint.setStrokeWidth(5f);
+        mPolyLinePaint.setStrokeWidth(2f);
         mPolyLinePaint.setAntiAlias(true);
+
+        mPolyLinePathPaint.setColor(getResources().getColor(R.color.main_data_view_path));
+        mPolyLinePathPaint.setStyle(Paint.Style.FILL);
+        mPolyLinePathPaint.setStrokeWidth(2f);
+        mPolyLinePathPaint.setAntiAlias(true);
+        mPolyLinePathPaint.setAlpha(120);
 
         mTextPaint.setColor(Color.BLACK);
         mTextPaint.setTextSize(38f);
@@ -121,7 +128,7 @@ public class LineChartView extends View {
         mTextPaint.setStrokeWidth(1f);
 
         mPointPaint.setColor(getResources().getColor(R.color.main_data_view_point));
-        mPointPaint.setStrokeWidth(20f);
+        mPointPaint.setStrokeWidth(5f);
 
         mTargetPaint.setColor(getResources().getColor(R.color.main_data_view_target_line));
         mTargetPaint.setStyle(Paint.Style.STROKE);
@@ -164,13 +171,14 @@ public class LineChartView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawLine(ALIGN_PADDING_LEFT, ALIGN_PADDING_TOP, (mRight - ALIGN_PADDING_RIGHT),
-                ALIGN_PADDING_TOP, mBondLinePaint);
-        for (int i = 1; i <= SPACES_COUNT; i++) {
+//        canvas.drawLine(ALIGN_PADDING_LEFT, ALIGN_PADDING_TOP, (mRight - ALIGN_PADDING_RIGHT),
+//                ALIGN_PADDING_TOP, mBondLinePaint);
+        for (int i = 0; i <= SPACES_COUNT; i++) {
             canvas.drawLine(ALIGN_PADDING_LEFT, (ALIGN_PADDING_TOP + i * mLineSpacing), (mRight - ALIGN_PADDING_RIGHT), (ALIGN_PADDING_TOP + i * mLineSpacing),
                     mLinePaint);
         }
-        canvas.drawLine(ALIGN_PADDING_LEFT, (ALIGN_PADDING_TOP + SPACES_COUNT * mLineSpacing), (mRight - ALIGN_PADDING_RIGHT), (ALIGN_PADDING_TOP + SPACES_COUNT * mLineSpacing), mBondLinePaint);
+        canvas.drawLine(ALIGN_PADDING_LEFT, (ALIGN_PADDING_TOP + SPACES_COUNT * mLineSpacing),
+                (mRight - ALIGN_PADDING_RIGHT), (ALIGN_PADDING_TOP + SPACES_COUNT * mLineSpacing), mBondLinePaint);
         drawDottedLine(canvas);
         drawPolyLine(canvas);
         drawWeightText(canvas);
@@ -208,6 +216,9 @@ public class LineChartView extends View {
      * @param canvas
      */
     private void drawPoint(Canvas canvas) {
+        if(true){
+            return;
+        }
         if (dataAdpater == null || dataAdpater.getShowPointCount() == 0) {
             return;
         }
@@ -215,7 +226,7 @@ public class LineChartView extends View {
             /*            canvas.drawCircle(ALIGN_PADDING_LEFT,
                     ALIGN_PADDING_TOP + mHeight / normal_2 10,mPointPaint);*/
             canvas.drawCircle(ALIGN_PADDING_LEFT,
-                    toYPoint(dataAdpater.getShowDataList().get(0).getWeight()), 10f, mPointPaint);
+                    toYPoint(dataAdpater.getShowDataList().get(0).getWeight()), 5f, mPointPaint);
             return;
         }
         //int beginId = mDataAdapter.getShowDataStartId();
@@ -224,7 +235,7 @@ public class LineChartView extends View {
         int i = 0;
         for (Data data : list) {
             Point point = toViewPoint(data, i++, steps);
-            canvas.drawCircle(point.x, point.y, 10f, mPointPaint);
+            canvas.drawCircle(point.x, point.y, 5f, mPointPaint);
         }
     }
 
@@ -256,8 +267,8 @@ public class LineChartView extends View {
         long maxTime = dataAdpater.getTimeBiggest();
         canvas.drawText(Utils.formatTime(minTime), ALIGN_PADDING_LEFT, (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT),
                 mTextPaint);
-        canvas.drawText(Utils.formatTime((minTime + maxTime) / 2), (ALIGN_PADDING_LEFT + mWidth / 2 - 60), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT),
-                mTextPaint);
+//        canvas.drawText(Utils.formatTime((minTime + maxTime) / 2), (ALIGN_PADDING_LEFT + mWidth / 2 - 60), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT),
+//                mTextPaint);
         canvas.drawText(Utils.formatTime(maxTime), (ALIGN_PADDING_LEFT + mWidth - 110), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT),
                 mTextPaint);
     }
@@ -273,10 +284,10 @@ public class LineChartView extends View {
         }
         float maxvalue = dataAdpater.getWeightBiggest();
         float space = dataAdpater.getHeight() / SPACES_COUNT;
-        canvas.drawText(String.format("%.1f", maxvalue), ALIGN_PADDING_LEFT, (ALIGN_PADDING_TOP + 40), mTextPaint);
+        canvas.drawText(String.format("%.1f", maxvalue), ALIGN_PADDING_TEXT_LEFT, (ALIGN_PADDING_TOP + 18), mTextPaint);
         for (int i = 1;i <= SPACES_COUNT;i++) {
             canvas.drawText(String.format("%.1f", maxvalue - i * space),
-                    ALIGN_PADDING_LEFT, (ALIGN_PADDING_TOP + 40 + i * mLineSpacing), mTextPaint);
+                    ALIGN_PADDING_TEXT_LEFT, (ALIGN_PADDING_TOP + 18 + i * mLineSpacing), mTextPaint);
         }
     }
 
@@ -286,6 +297,9 @@ public class LineChartView extends View {
      * @param canvas
      */
     private void drawDottedLine(Canvas canvas ) {
+        if(true){
+            return;
+        }
         Path path = new Path();
         int space = 10;
         path.moveTo((mWidth / 2 + ALIGN_PADDING_LEFT), ALIGN_PADDING_TOP);
@@ -361,6 +375,7 @@ public class LineChartView extends View {
         int beginsId = dataAdpater.getShowDataStartId();
         int steps = (mWidth / (dataAdpater.getShowPointCount() - 1));
         Point begin = toViewPoint(list.get(0), 0, steps);
+        Point beginBegin = begin;
         Point end = null;
         path.moveTo(begin.x, begin.y);
         Point fixPoint_1 = new Point();
@@ -373,6 +388,11 @@ public class LineChartView extends View {
             begin = end;
         }
         canvas.drawPath(path, mPolyLinePaint);
+
+        path.lineTo(end.x,mHeight+ALIGN_PADDING_TOP);
+        path.lineTo(ALIGN_PADDING_LEFT,mHeight+ALIGN_PADDING_TOP);
+        path.lineTo(ALIGN_PADDING_LEFT,beginBegin.y);
+        canvas.drawPath(path,mPolyLinePathPaint);
     }
 
     /**

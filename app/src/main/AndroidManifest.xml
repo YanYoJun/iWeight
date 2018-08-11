@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name="com.plbear.iweight.model.main.activity.MainActivity"
+            android:name=".base.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -39,7 +39,6 @@
             android:name="com.plbear.iweight.model.settings.SettingsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
-        <activity android:name="com.plbear.iweight.model.details.DetailsActivity"></activity>
         <activity android:name=".model.other.AboutActivity">
 
         </activity>

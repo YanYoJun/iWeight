@@ -31,8 +31,8 @@ public class MainDataFragment extends Fragment {
     private int mShowNum = 7;
     private boolean mShowAllData = false;
     private Handler mHandler = new Handler();
-    private TextView mValley;
-    private TextView mPeak;
+//    private TextView mValley;
+//    private TextView mPeak;
     private boolean mDataChanged = false;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -49,8 +49,8 @@ public class MainDataFragment extends Fragment {
         @Override
         public void onChange(boolean selfChange) {
             mAdapter.notifyDataSetChange();
-            mValley.setText((mAdapter.getTrueWeightSmallest() + 5) + "");
-            mPeak.setText((mAdapter.getTrueWeightBiggest() - 5) + "");
+//            mValley.setText((mAdapter.getTrueWeightSmallest() + 5) + "");
+//            mPeak.setText((mAdapter.getTrueWeightBiggest() - 5) + "");
             super.onChange(selfChange);
         }
     };
@@ -73,8 +73,8 @@ public class MainDataFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_main_data, null);
         mView = (LineChartView) v.findViewById(R.id.show_weight);
         mAdapter = mView.getDataAdpater();
-        mValley = (TextView) v.findViewById(R.id.lab_lowest_values);
-        mPeak = (TextView) v.findViewById(R.id.lab_highest_value);
+//        mValley = (TextView) v.findViewById(R.id.lab_lowest_values);
+//        mPeak = (TextView) v.findViewById(R.id.lab_highest_value);
         return v;
     }
 
@@ -91,13 +91,13 @@ public class MainDataFragment extends Fragment {
         super.onResume();
         mAdapter.setShowNum(mShowNum);
         mAdapter.setShowAllData(mShowAllData);
-        mValley.setText((mAdapter.getTrueWeightSmallest() + 5) + "");
-        mPeak.setText((mAdapter.getTrueWeightBiggest() - 5) + "");
+//        mValley.setText((mAdapter.getTrueWeightSmallest() + 5) + "");
+//        mPeak.setText((mAdapter.getTrueWeightBiggest() - 5) + "");
         getActivity().getContentResolver().registerContentObserver(Constant.CONTENT_URI, true, mObserver);
         if (mDataChanged) {
             mAdapter.notifyDataSetChange();
-            mValley.setText((mAdapter.getTrueWeightSmallest() + 5) + "");
-            mPeak.setText((mAdapter.getTrueWeightBiggest() - 5) + "");
+//            mValley.setText((mAdapter.getTrueWeightSmallest() + 5) + "");
+//            mPeak.setText((mAdapter.getTrueWeightBiggest() - 5) + "");
             mDataChanged = false;
         }
     }

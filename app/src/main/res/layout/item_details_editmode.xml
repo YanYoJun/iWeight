@@ -2,40 +2,60 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relativelayout_item"
-    android:background="@drawable/item_bg"
-    >
+    android:id="@+id/scroll_rel"
+    android:background="@drawable/item_bg">
 
-    <TextView
-        android:id="@+id/lab_details_item_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"
-        android:text="@string/details_item_time"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:textColor= "@color/black"
-        android:textSize="16sp" />
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:background="@color/white">-->
 
-    <CheckBox
-        android:layout_marginTop="9dp"
-        android:id="@+id/checkbox_details_item_select"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/lab_details_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:text="@string/details_item_time"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/lab_details_item_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="80dp"
+            android:paddingRight="30dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/lab_details_item_date"
+            android:text="@string/details_item_weight"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:textSize="15sp" />
+    <!--</RelativeLayout>-->
+
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="10dp" />
+        android:background="@color/red"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
-    <TextView
-        android:layout_marginTop="12dp"
-        android:id="@+id/lab_details_item_weight"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="@string/details_item_weight"
-        android:layout_marginRight="30dp"
-        android:layout_toLeftOf="@id/checkbox_details_item_select"
-        android:textColor="@color/black"
-        android:layout_marginBottom="12dp"
-        android:textSize="16sp" />
+        android:layout_toLeftOf="@id/btn_delete"
+        android:background="@color/app_bg"
+        android:text="修改"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 </RelativeLayout>

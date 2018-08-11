@@ -34,4 +34,18 @@ public class SPUtils {
         editor.putBoolean(key, value);
         editor.commit();
     }
+
+    public static void save(String key, Float value) {
+        SharedPreferences sp = getSP();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putFloat(key, value);
+        editor.commit();
+    }
+
+    public static void save(String key, Integer value) {
+        SharedPreferences sp = getSP();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
 }

@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseActivity;
-import com.plbear.iweight.model.main.activity.MainActivity;
+import com.plbear.iweight.base.MainActivity;
 import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.PermissionHelper;
 import com.plbear.iweight.utils.Utils;
@@ -101,7 +101,8 @@ public class SplashActivity extends BaseActivity {
         loginfo("preloadAd in");
         //增加一个看门狗，预防SDK没有像响应
         int watchDogTime = 3000;
-        if (Utils.DEBUG) {
+        //TODO 这个地方需要移除掉广告
+        if (Utils.DEBUG || true) {
             watchDogTime = 500;
         }
 
