@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical"
+    tools:context="com.plbear.iweight.model.me.ui.AboutActivity">
+    <RelativeLayout
+        android:id="@+id/include_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/app_bg"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:paddingBottom="14dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/title_back" />
+
+        <TextView
+            android:id="@+id/lab_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="left"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@id/btn_back"
+            android:padding="0dp"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_name"
+        android:layout_below="@id/include_title"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名:"
+            android:textColor="@color/app_text_main"
+            android:textSize="14sp"
+            android:layout_marginLeft="30dp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="请输入用户名"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_pass"
+        android:layout_below="@id/linear_name"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密&#160;&#160;码："
+            android:textColor="@color/app_text_main"
+            android:textSize="14sp"
+            android:layout_marginLeft="30dp"
+            />
+        <EditText
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="请输入密码"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_below="@id/linear_pass"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:layout_marginRight="10dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_bg"
+            android:text="登录"
+            android:textSize="14sp"
+            android:id="@+id/btnLogin" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_bg"
+            android:text="去注册"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/btn_register" />
+
+    </LinearLayout>
+
+</RelativeLayout>

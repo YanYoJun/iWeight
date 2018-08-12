@@ -22,7 +22,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:text="微信登录"
+            android:text="登录\\注册"
             android:textColor="@color/app_text_main"
             android:textSize="15sp" />
 

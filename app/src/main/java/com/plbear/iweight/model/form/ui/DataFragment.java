@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.Data.fragment;
+package com.plbear.iweight.model.form.ui;
 
 import com.plbear.iweight.base.BaseFragment;
 import com.plbear.iweight.R;

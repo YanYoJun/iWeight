@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.me.fragment;
+package com.plbear.iweight.model.me.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -50,7 +50,8 @@ public class MeFragment extends BaseFragment {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                Intent i = new Intent(mActivity,LoginActivity.class);
+                mActivity.startActivity(i);
             }
         });
 

@@ -42,6 +42,9 @@
         <activity android:name=".model.me.ui.AboutActivity">
 
         </activity>
+        <activity android:name=".model.me.ui.LoginActivity"></activity>
+        <activity android:name=".model.me.ui.RegisterActivity"></activity>
+
 
         <provider
             android:name="com.plbear.iweight.storage.DBProvider"
