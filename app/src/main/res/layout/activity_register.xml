@@ -56,11 +56,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="用&#160;&#160;&#160;户&#160;&#160;&#160;名:"
+            android:text="用&#160;&#160;&#160;户&#160;&#160;名："
             android:textColor="@color/app_text_main"
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -89,6 +90,7 @@
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/edit_passwd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -117,6 +119,7 @@
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/edit_passwd_double"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -133,11 +136,11 @@
         android:layout_below="@id/linear_pass_double"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:paddingLeft="0dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="0dp">
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/login_bg"
@@ -147,15 +150,15 @@
     </LinearLayout>
 
     <TextView
-        android:text="两次密码输入不一致"
         android:id="@+id/lab_notify"
-        android:textColor="@color/red"
-        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_pass_double"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="2dp"
-        android:layout_below="@id/linear_pass_double"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="两次密码输入不一致"
+        android:textColor="@color/red"
+        android:textSize="12sp" />
 
 
 </RelativeLayout>

@@ -1,15 +1,9 @@
 package com.plbear.iweight.model.me.ui;
 
-import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseActivity;
-import com.plbear.iweight.model.main.activity.MainFragment;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by yanyongjun on 2018/5/1.

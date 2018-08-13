@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Network;
 import android.net.Uri;
 
 import com.plbear.iweight.base.App;
@@ -41,6 +42,12 @@ public class DataManager {
         }
         LogInfo.i(TAG, "normal_delete:" + strId.toString());
         mResolver.delete(Constant.CONTENT_URI, "_id in (" + strId.toString() + ")", null);
+
+        for (Data data : list) {
+            Data networkData = data.clone();
+            networkData.setWeight(data.getWeight() / Utils.getValueUnit());
+            NetworkDataManager.getsInstance().delete(networkData);
+        }
     }
 
     public void update(Data data) {
@@ -52,10 +59,14 @@ public class DataManager {
         values.put("weight", data.getWeight() / Utils.getValueUnit());
         LogInfo.i(TAG, "data:" + data.toString());
         mResolver.update(Constant.CONTENT_URI, values, "_id in (?)", new String[]{data.getId() + ""});
+
+        Data networkData = data.clone();
+        networkData.setWeight(data.getWeight() / Utils.getValueUnit());
+        NetworkDataManager.getsInstance().update(networkData);
     }
 
     /**
-     * 插入一组数据
+     * 向本地和云上一组数据
      *
      * @param data
      */
@@ -67,7 +78,21 @@ public class DataManager {
         values.put("time", data.getTime() + "");
         values.put("weight", (data.getWeight() / Utils.getValueUnit()) + "");
         mResolver.insert(Constant.CONTENT_URI, values);
+
+        Data networkData = data.clone();
+        networkData.setWeight(data.getWeight() / Utils.getValueUnit());
+        NetworkDataManager.getsInstance().add(networkData);
         return;
+    }
+
+    public void addLocalData(Data data) {
+        if (data == null) {
+            return;
+        }
+        ContentValues values = new ContentValues();
+        values.put("time", data.getTime() + "");
+        values.put("weight", (data.getWeight() / Utils.getValueUnit()) + "");
+        mResolver.insert(Constant.CONTENT_URI, values);
     }
 
     public void add(ArrayList<Data> lists) {
@@ -84,6 +109,9 @@ public class DataManager {
             } else {
                 mResolver.insert(Constant.CONTENT_URI_WITHOUT_NOTIRY, values);
             }
+            Data networkData = data.clone();
+            networkData.setWeight(data.getWeight() / Utils.getValueUnit());
+            NetworkDataManager.getsInstance().add(networkData);
         }
         return;
     }

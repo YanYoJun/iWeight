@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.plbear.iweight.R;
 import com.plbear.iweight.model.details.ui.DetailsFragment;
 import com.plbear.iweight.model.form.ui.DataFragment;
-import com.plbear.iweight.model.main.activity.MainFragment;
+import com.plbear.iweight.model.main.ui.MainFragment;
 import com.plbear.iweight.model.me.ui.MeFragment;
 import com.plbear.iweight.utils.Utils;
 

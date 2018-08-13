@@ -2,7 +2,9 @@ package com.plbear.iweight.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.Network;
 
+import com.plbear.iweight.data.NetworkDataManager;
 import com.plbear.iweight.utils.Utils;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -21,6 +23,7 @@ public class App extends Application {
     public void onCreate() {
         mContext = getApplicationContext();
         CrashReport.initCrashReport(getApplicationContext(),Constant.BUGLY_ID, Utils.DEBUG);
+        NetworkDataManager.getsInstance().sync();
         super.onCreate();
     }
 }

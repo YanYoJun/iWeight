@@ -59,10 +59,12 @@
             android:layout_marginLeft="30dp"
             />
         <EditText
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="请输入用户名"
             android:textSize="14sp"
+            android:text="yanyojun"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"/>
 
@@ -85,12 +87,14 @@
             android:layout_marginLeft="30dp"
             />
         <EditText
+            android:id="@+id/edit_passwd"
             android:textSize="14sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
             android:hint="请输入密码"
+            android:text="990"
             android:inputType="textPassword"/>
     </LinearLayout>
     
@@ -108,7 +112,7 @@
             android:background="@drawable/login_bg"
             android:text="登录"
             android:textSize="14sp"
-            android:id="@+id/btnLogin" />
+            android:id="@+id/btn_login" />
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"

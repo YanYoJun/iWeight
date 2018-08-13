@@ -3,6 +3,7 @@ package com.plbear.iweight.model.me.ui;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.UniversalTimeScale;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,6 +25,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MeFragment extends BaseFragment {
+    private TextView mLabLoginTitle = null;
+    private TextView mLabLoginNotify = null;
+
+
     @Override
     public int getLayout() {
         return R.layout.fragment_me;
@@ -50,8 +55,13 @@ public class MeFragment extends BaseFragment {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(mActivity,LoginActivity.class);
-                mActivity.startActivity(i);
+                boolean status = SPUtils.getSP().getBoolean(Constant.PRE_KEY_LOGIN_STATUS, false);
+                if (status) {
+                    Utils.showToast("已登录");
+                } else {
+                    Intent i = new Intent(mActivity, LoginActivity.class);
+                    mActivity.startActivity(i);
+                }
             }
         });
 
@@ -81,6 +91,33 @@ public class MeFragment extends BaseFragment {
             }
         });
 
+        mLabLoginTitle = mActivity.findViewById(R.id.lab_login_title);
+        mLabLoginNotify = mActivity.findViewById(R.id.lab_login_notify);
+
+        v = mActivity.findViewById(R.id.view_quit);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SPUtils.save(Constant.PRE_KEY_LOGIN_STATUS, false);
+                initLoginLab();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initLoginLab();
+    }
+
+    private void initLoginLab() {
+        if (SPUtils.getSP().getBoolean(Constant.PRE_KEY_LOGIN_STATUS, false)) {
+            mLabLoginNotify.setText("已登录，将自动备份数据");
+            mLabLoginTitle.setText(SPUtils.getSP().getString(Constant.PRE_KEY_LOGIN_NAME, ""));
+        } else {
+            mLabLoginNotify.setText("未登录，登录后将自动备份数据");
+            mLabLoginTitle.setText("登录、注册");
+        }
     }
 
     private void notifyChange() {
@@ -99,6 +136,7 @@ public class MeFragment extends BaseFragment {
         Utils.clearValueUnit();
 
     }
+
 
     /**
      * pop set target dialog

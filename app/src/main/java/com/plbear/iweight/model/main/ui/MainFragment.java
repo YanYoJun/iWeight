@@ -1,4 +1,4 @@
-package com.plbear.iweight.model.main.activity;
+package com.plbear.iweight.model.main.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,6 +16,7 @@ import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseFragment;
 import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
+import com.plbear.iweight.data.NetworkDataManager;
 import com.plbear.iweight.model.form.ui.FormViewFrag;
 import com.plbear.iweight.model.settings.SettingsActivity;
 import com.plbear.iweight.storage.XMLHelper;

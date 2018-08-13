@@ -1,5 +1,7 @@
 package com.plbear.iweight.data;
 
+import com.plbear.iweight.model.details.adapter.DetailsAdapter;
+
 /**
  * Created by yanyongjun on 2018/6/11.
  */
@@ -17,6 +19,7 @@ public class Data {
         mTime = time;
         mWeight = weight;
     }
+
 
     public Data(){
 
@@ -54,4 +57,10 @@ public class Data {
         return mIsEditMode;
     }
 
+    public Data clone(){
+        Data data = new Data(this.mId,this.mTime,this.mWeight);
+        return data;
+    }
+
 }
+

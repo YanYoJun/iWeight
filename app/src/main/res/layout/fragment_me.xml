@@ -16,7 +16,7 @@
         android:paddingRight="15dp">
 
         <TextView
-            android:id="@+id/lab_1"
+            android:id="@+id/lab_login_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -27,6 +27,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/lab_login_notify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -154,6 +155,27 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="关于"
+            android:textColor="@color/app_text_main"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/view_quit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/item_bg"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/lab_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="退出登录"
             android:textColor="@color/app_text_main"
             android:textSize="15sp" />
     </RelativeLayout>

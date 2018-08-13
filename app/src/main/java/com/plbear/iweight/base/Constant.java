@@ -21,4 +21,10 @@ public class Constant {
     public static final String PREFERENCE_KEY_ONLY_ONCE_EVERYDAY = "only_once_everyday";
     public static final String PREFERENCE_KEY_EXPORT_IMPORT = "export_import_switch";
     public static final String PREFERENCE_KEY_UNIT = "value_unit";
+
+    public static final String PRE_KEY_LOGIN_NAME = "login_name";
+    public static final String PRE_KEY_LOGIN_PASSWD = "login_passwd";
+    public static final String PRE_KEY_LOGIN_STATUS = "login_status";
+    public static final String PRE_KEY_USER_ID = "login_id";
+
 }
