@@ -60,7 +60,7 @@ public class MainFragment extends BaseFragment {
         mBtnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean onceEveryDay = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true);
+                boolean onceEveryDay = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false);
                 if (onceEveryDay&&!Utils.DEBUG) {
                     String lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime());
                     loginfo("lastTime:"+lastTime);

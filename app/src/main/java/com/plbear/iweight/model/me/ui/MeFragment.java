@@ -38,7 +38,7 @@ public class MeFragment extends BaseFragment {
     public void afterLayout() {
         final Switch swich = mActivity.findViewById(R.id.switch_once);
         swich.setClickable(false);
-        swich.setChecked(SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true));
+        swich.setChecked(SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false));
 
         notifyChange();
 
@@ -69,7 +69,7 @@ public class MeFragment extends BaseFragment {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean curValue = SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, true);
+                boolean curValue = SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false);
                 swich.setChecked(!curValue);
                 SPUtils.save(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, !curValue);
             }

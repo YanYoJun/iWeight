@@ -24,7 +24,7 @@ import okhttp3.Response;
 public class HttpPost {
     private static final String TAG = "HttpPost";
     private static HttpPost sInstance = null;
-    public static final String SERVER_URL = "http://192.168.43.198:8080/iweight";
+    public static final String SERVER_URL = "http://111.230.131.164:8080/iweight";
     public static final String URL_CREATE = SERVER_URL + "/create";
     public static final String URL_LOGIN = SERVER_URL + "/login";
     public static final String URL_ADDWEIGHT = SERVER_URL + "/addWeight";

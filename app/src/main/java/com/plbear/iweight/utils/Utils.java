@@ -24,7 +24,8 @@ public class Utils {
     private final static String TAG = "Utils";
     private static float VALUE_UNIT = -1f;//体重单位
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
+    public static final boolean IS_AD_ON = false;
 
     /**
      * 获取体重单位

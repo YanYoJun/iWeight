@@ -102,7 +102,7 @@ public class SplashActivity extends BaseActivity {
         //增加一个看门狗，预防SDK没有像响应
         int watchDogTime = 3000;
         //TODO 这个地方需要移除掉广告
-        if (Utils.DEBUG || true) {
+        if (Utils.DEBUG) {
             watchDogTime = 500;
         }
 
@@ -122,39 +122,41 @@ public class SplashActivity extends BaseActivity {
         watchDog.start();
         loginfo("watch dog is start");
 
-        // 注意：不必每次展示插播广告前都请求，只需在应用启动时请求一次
-        SpotManager.getInstance(mContext).requestSpot(new SpotRequestListener() {
-            @Override
-            public void onRequestSuccess() {
-                //				// 应用安装后首次展示开屏会因为本地没有数据而跳过
-                //              // 如果开发者需要在首次也能展示开屏，可以在请求广告成功之前展示应用的logo，请求成功后再加载开屏
-                if (!Utils.DEBUG) {
-                    watchDog.stop();
+        if (Utils.IS_AD_ON) {
+            // 注意：不必每次展示插播广告前都请求，只需在应用启动时请求一次
+            SpotManager.getInstance(mContext).requestSpot(new SpotRequestListener() {
+                @Override
+                public void onRequestSuccess() {
+                    //				// 应用安装后首次展示开屏会因为本地没有数据而跳过
+                    //              // 如果开发者需要在首次也能展示开屏，可以在请求广告成功之前展示应用的logo，请求成功后再加载开屏
+                    if (!Utils.DEBUG) {
+                        watchDog.stop();
+                    }
+                    setupSplashAd();
                 }
-                setupSplashAd();
-            }
 
-            @Override
-            public void onRequestFailed(int errorCode) {
-                if (!Utils.DEBUG) {
-                    watchDog.stop();
+                @Override
+                public void onRequestFailed(int errorCode) {
+                    if (!Utils.DEBUG) {
+                        watchDog.stop();
+                    }
+                    logerror(String.format("请求插播广告失败，errorCode: %s", errorCode));
+                    switch (errorCode) {
+                        case ErrorCode.NON_NETWORK:
+                            loginfo("网络异常");
+                            break;
+                        case ErrorCode.NON_AD:
+                            loginfo("暂无视频广告");
+                            break;
+                        default:
+                            loginfo("请稍后再试");
+                            break;
+                    }
+                    startMainActivity();
+                    finish();
                 }
-                logerror(String.format("请求插播广告失败，errorCode: %s", errorCode));
-                switch (errorCode) {
-                    case ErrorCode.NON_NETWORK:
-                        loginfo("网络异常");
-                        break;
-                    case ErrorCode.NON_AD:
-                        loginfo("暂无视频广告");
-                        break;
-                    default:
-                        loginfo("请稍后再试");
-                        break;
-                }
-                startMainActivity();
-                finish();
-            }
-        });
+            });
+        }
         loginfo("preloadAd out");
     }
 
