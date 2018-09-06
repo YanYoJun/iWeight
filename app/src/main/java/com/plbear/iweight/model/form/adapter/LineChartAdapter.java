@@ -263,10 +263,7 @@ public class LineChartAdapter {
         return list;
     }
 
-
     public float getHeight() {
         return getWeightBiggest() - getWeightSmallest();
     }
-
-
 }

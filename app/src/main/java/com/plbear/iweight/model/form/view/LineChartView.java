@@ -17,6 +17,7 @@ import com.plbear.iweight.R;
 import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
 import com.plbear.iweight.model.form.adapter.LineChartAdapter;
+import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.Utils;
 
 import java.util.ArrayList;
@@ -197,7 +198,8 @@ public class LineChartView extends View {
      */
     private void drawTargetLine(Canvas canvas) {
         float targetWeight = dataAdpater.getTargetWeight();
-        if (targetWeight == -1f || targetWeight == 0f) {
+        LogInfo.i(TAG,"drawTargetLine:"+targetWeight);
+        if (targetWeight <=0) {
             return;
         }
         int y = toYPoint(targetWeight);

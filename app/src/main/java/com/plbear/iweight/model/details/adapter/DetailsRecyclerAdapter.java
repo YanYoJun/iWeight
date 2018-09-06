@@ -22,6 +22,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class DetailsRecyclerAdapter extends RecyclerView.Adapter<DetailsRecyclerAdapter.MyViewHolder> {
     private static final String TAG = DetailsRecyclerAdapter.class.getSimpleName();
     private static final int VIEW_TYPE_EIDTMODE = 1;
@@ -205,29 +209,24 @@ public class DetailsRecyclerAdapter extends RecyclerView.Adapter<DetailsRecycler
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         int viewType = VIEW_TYPE_NORMAL;
-        TextView lab_details_item_date;
-        TextView lab_details_item_weight;
-        Button btn_delete;
-        Button btn_change;
+        @BindView(R.id.lab_details_item_date) TextView lab_details_item_date;
+        @BindView(R.id.lab_details_item_weight) TextView lab_details_item_weight;
+        @BindView(R.id.btn_delete) Button btn_delete;
+        @BindView(R.id.btn_change) Button btn_change;
 
         public MyViewHolder(View v) {
             super(v);
+            ButterKnife.bind(this,v);
             initView();
         }
 
         public void initView() {
-            lab_details_item_date = this.itemView.findViewById(R.id.lab_details_item_date);
-            lab_details_item_weight = itemView.findViewById(R.id.lab_details_item_weight);
-            btn_delete = itemView.findViewById(R.id.btn_delete);
-            btn_change = itemView.findViewById(R.id.btn_change);
-
             btn_change.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showChangeDialog();
                 }
             });
-
             btn_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -235,7 +234,5 @@ public class DetailsRecyclerAdapter extends RecyclerView.Adapter<DetailsRecycler
                 }
             });
         }
-
-
     }
 }

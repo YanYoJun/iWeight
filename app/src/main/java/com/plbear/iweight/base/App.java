@@ -24,6 +24,7 @@ public class App extends Application {
         mContext = getApplicationContext();
         CrashReport.initCrashReport(getApplicationContext(),Constant.BUGLY_ID, Utils.DEBUG);
         NetworkDataManager.getsInstance().sync();
+
         super.onCreate();
     }
 }

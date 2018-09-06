@@ -32,13 +32,8 @@ import butterknife.BindView;
 
 public class MainFragment extends BaseFragment {
 
-    @BindView(R.id.btn_record)
-    Button mBtnRecord;
-
-    @BindView(R.id.lab_notification)
-    TextView mLabNotification;
-
-
+    @BindView(R.id.btn_record) Button mBtnRecord;
+    @BindView(R.id.lab_notification) TextView mLabNotification;
     @Override
     public int getLayout() {
         return R.layout.fragment_main;
@@ -85,7 +80,6 @@ public class MainFragment extends BaseFragment {
 
     @Override
     public void onResume() {
-        //initLabText();
         super.onResume();
     }
 

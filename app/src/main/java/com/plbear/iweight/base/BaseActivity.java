@@ -19,7 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void afterLayout();
 
-    protected static String TAG = BaseActivity.class.getSimpleName();
+    protected String TAG = this.getClass().getSimpleName();
 
     protected Handler mHandler = new Handler();
 

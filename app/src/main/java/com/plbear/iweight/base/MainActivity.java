@@ -2,12 +2,18 @@ package com.plbear.iweight.base;
 
 import android.os.Handler;
 import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.iflytek.voiceads.AdError;
+import com.iflytek.voiceads.AdKeys;
+import com.iflytek.voiceads.IFLYAdListener;
+import com.iflytek.voiceads.IFLYAdSize;
+import com.iflytek.voiceads.IFLYInterstitialAd;
 import com.plbear.iweight.R;
 import com.plbear.iweight.model.details.ui.DetailsFragment;
 import com.plbear.iweight.model.form.ui.DataFragment;
@@ -17,15 +23,61 @@ import com.plbear.iweight.utils.Utils;
 
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     private String[] titles = {"主页", "数据", "详细", "我的"};
     private Class[] fragments = {MainFragment.class, DataFragment.class, DetailsFragment.class, MeFragment.class};
     private boolean mIsExiting = false;
     private android.os.Handler mHandler = new Handler();
+    private boolean isShowedAd = false;
 
     @BindView(R.id.tab_host)
     FragmentTabHost mTabHost;
+
+    IFLYInterstitialAd ad = null;
+    IFLYAdListener mAdListener = new IFLYAdListener() {
+        @Override
+        public void onAdReceive() {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ad.showAd();
+                    isShowedAd = true;
+                }
+            }, 400);
+        }
+
+        @Override
+        public void onAdFailed(AdError adError) {
+
+        }
+
+        @Override
+        public void onAdClick() {
+
+        }
+
+        @Override
+        public void onAdClose() {
+
+        }
+
+        @Override
+        public void onAdExposure() {
+
+        }
+
+        @Override
+        public void onConfirm() {
+
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+    };
 
     @Override
     public int getLayout() {
@@ -59,6 +111,21 @@ public class MainActivity extends BaseActivity {
                 TextView lab = v.findViewById(R.id.tv_tab);
                 lab.setTextColor(getResources().getColor(R.color.keyboard_key_submit_pressed));
 
+                if (!isShowedAd && mTabHost.getCurrentTab() != 0) {
+                    /**
+                     * 加载广告
+                     */
+                    int ramdom = ((int) (Math.random() * 10)) % 10;
+                    logerror("ramdom:" + ramdom);
+
+                    if ( ramdom < 5) {
+                        ad = IFLYInterstitialAd.createInterstitialAd(MainActivity.this, Constant.AD_ID_Main);
+                        ad.setAdSize(IFLYAdSize.INTERSTITIAL);
+                        ad.setParameter(AdKeys.BACK_KEY_ENABLE, "true");
+                        ad.loadAd(mAdListener);
+                    }
+                }
+
             }
         });
         mTabHost.setCurrentTabByTag("0");
@@ -66,6 +133,7 @@ public class MainActivity extends BaseActivity {
         TextView lab = v.findViewById(R.id.tv_tab);
         lab.setTextColor(getResources().getColor(R.color.keyboard_key_submit_pressed));
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
