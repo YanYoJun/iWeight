@@ -40,6 +40,7 @@
         </activity>
         <activity android:name=".model.me.ui.LoginActivity"></activity>
         <activity android:name=".model.me.ui.RegisterActivity"></activity>
+        <activity android:name=".model.me.ui.AboutActivity"></activity>
 
 
         <provider

@@ -6,8 +6,8 @@ android {
         applicationId "com.plbear.iweight"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 15
-        versionName "7.1.7"
+        versionCode 16
+        versionName "7.9.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         // 指定支持的so架构
         ndk {
