@@ -10,12 +10,12 @@
         android:id="@+id/details_title"
         layout="@layout/include_title"></include>
 
-    <com.plbear.iweight.model.details.view.SlideCutListView
+    <com.plbear.iweight.model.details.view.SlideCutRecyclerView
         android:id="@+id/listview_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/details_title"
         android:divider="@color/details_item_bg"
-        android:dividerHeight="0.5dp"></com.plbear.iweight.model.details.view.SlideCutListView>
+        android:dividerHeight="0.5dp"></com.plbear.iweight.model.details.view.SlideCutRecyclerView>
 </RelativeLayout>

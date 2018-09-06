@@ -29,7 +29,7 @@ import xvv.sde.yfd.nm.sp.SpotRequestListener;
  */
 
 public class SplashActivity extends BaseActivity {
-    private final static String TAG = "SplashActivity";
+    private final static String TAG = SplashActivity.class.getSimpleName();
     private PermissionHelper mPermissionHelper;
     private Context mContext = null;
     private boolean mIsFirstLoad = false;

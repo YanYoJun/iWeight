@@ -1,28 +1,24 @@
 package com.plbear.iweight.model.details.view;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.OverScroller;
-import android.widget.Scroller;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.data.Data;
-import com.plbear.iweight.model.details.adapter.DetailsAdapter;
-import com.plbear.iweight.utils.LogInfo;
+import com.plbear.iweight.model.details.adapter.DetailsRecyclerAdapter;
 
 /**
  * @author xiaanming
  * @blog http://blog.csdn.net/xiaanming
  */
-public class SlideCutListView extends ListView {
+public class SlideCutRecyclerView extends RecyclerView {
     private static final String TAG = "SlideCutListView";
     /**
      * 当前滑动的ListView　position
@@ -45,7 +41,7 @@ public class SlideCutListView extends ListView {
      */
     private View itemView;
 
-    private int mPostion;
+    //private int mPostion;
     /**
      * 滑动类
      */
@@ -72,7 +68,7 @@ public class SlideCutListView extends ListView {
      */
     private RemoveDirection removeDirection;
 
-    private DetailsAdapter mAdapter = null;
+    private DetailsRecyclerAdapter mAdapter = null;
 
     // 滑动删除方向的枚举值
     public enum RemoveDirection {
@@ -80,20 +76,20 @@ public class SlideCutListView extends ListView {
     }
 
 
-    public SlideCutListView(Context context) {
+    public SlideCutRecyclerView(Context context) {
         this(context, null);
     }
 
-    public SlideCutListView(Context context, AttributeSet attrs) {
+    public SlideCutRecyclerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SlideCutListView(Context context, AttributeSet attrs, int defStyle) {
+    public SlideCutRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         screenWidth = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
         scroller = new OverScroller(context);
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-        mAdapter = (DetailsAdapter)getAdapter();
+        mAdapter = (DetailsRecyclerAdapter) getAdapter();
     }
 
     /**
@@ -121,18 +117,23 @@ public class SlideCutListView extends ListView {
                 downX = (int) event.getX();
                 downY = (int) event.getY();
 
-                slidePosition = pointToPosition(downX, downY);
-
-                // 无效的position, 不做任何处理
-                if (slidePosition == AdapterView.INVALID_POSITION) {
+//                slidePosition = pointToPosition(downX, downY);
+//
+//
+//                // 无效的position, 不做任何处理
+//                if (slidePosition == AdapterView.INVALID_POSITION) {
+//                    return super.dispatchTouchEvent(event);
+//                }
+//
+//                // 获取我们点击的item view
+//                mPostion = slidePosition - getFirstVisiblePosition();
+//                View v = getChildAt(mPostion);
+                View v = findChildViewUnder(downX,downY);
+                if(v == null){
                     return super.dispatchTouchEvent(event);
                 }
-
-                // 获取我们点击的item view
-                mPostion = slidePosition - getFirstVisiblePosition();
-                View v = getChildAt(mPostion);
                 itemView = v.findViewById(R.id.scroll_rel);
-
+                this.slidePosition = getChildAdapterPosition(v);
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -200,7 +201,7 @@ public class SlideCutListView extends ListView {
      */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if (isSlide && slidePosition != AdapterView.INVALID_POSITION) {
+        if (isSlide) {
             requestDisallowInterceptTouchEvent(true);
             addVelocityTracker(ev);
             final int action = ev.getAction();
@@ -220,9 +221,9 @@ public class SlideCutListView extends ListView {
 
                     // 手指拖动itemView滚动, deltaX大于0向左滚动，小于0向右滚
                     if(mAdapter == null){
-                        mAdapter = (DetailsAdapter) getAdapter();
+                        mAdapter = (DetailsRecyclerAdapter) getAdapter();
                     }
-                    Data data = mAdapter.getListData().get(mPostion);
+                    Data data = mAdapter.getListData().get(slidePosition);
                     if((data.isEditMode() || mAdapter.isEditMode)){
                         if(deltaX<0){
                             itemView.scrollBy(deltaX, 0);
@@ -258,7 +259,7 @@ public class SlideCutListView extends ListView {
 
     @Override
     public void computeScroll() {
-        LogInfo.e("ListView","computeScroll");
+        //LogInfo.e("ListView","computeScroll");
         // 调用startScroll的时候scroller.computeScrollOffset()返回true，
         if (scroller.computeScrollOffset()) {
             // 让ListView item根据当前的滚动偏移量进行滚动
@@ -274,6 +275,7 @@ public class SlideCutListView extends ListView {
 
                 //itemView.scrollTo(0, 0);
                 mRemoveListener.removeItem(removeDirection, slidePosition);
+                itemView.scrollTo(0,0);
             }
         }
     }

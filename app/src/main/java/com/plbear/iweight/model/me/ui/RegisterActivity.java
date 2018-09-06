@@ -12,11 +12,22 @@ import com.plbear.iweight.base.Constant;
 import com.plbear.iweight.http.Bean.User;
 import com.plbear.iweight.http.HttpPost;
 import com.plbear.iweight.utils.SPUtils;
+import com.plbear.iweight.utils.ThreadUtils;
 import com.plbear.iweight.utils.Utils;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity {
+    @BindView(R.id.edit_name) EditText mEditName;
+    @BindView(R.id.btn_back) View mViewBack;
+    @BindView(R.id.lab_title) TextView mLabTitle;
+    @BindView(R.id.lab_notify) TextView mLabNotify;
+    @BindView(R.id.edit_passwd) EditText mEditPasswd;
+    @BindView(R.id.edit_passwd_double) EditText mEditPasswdDouble;
+    @BindView(R.id.btn_register) View mBtnRegister;
+
+
     @Override
     public int getLayout() {
         return R.layout.activity_register;
@@ -24,42 +35,30 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void afterLayout() {
-        View v = findViewById(R.id.btn_back);
-        v.setOnClickListener(new View.OnClickListener() {
+        mViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-
-        TextView labTitle = findViewById(R.id.lab_title);
-        labTitle.setText("注册");
-
-        final TextView labNotify = findViewById(R.id.lab_notify);
-        labNotify.setVisibility(View.INVISIBLE);
-
-
-        final EditText editName = findViewById(R.id.edit_name);
-        final EditText editPasswd = findViewById(R.id.edit_passwd);
-        final EditText editPasswdDouble = findViewById(R.id.edit_passwd_double);
-
-        final View btnRegister = findViewById(R.id.btn_register);
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        mLabTitle.setText("注册");
+        mLabNotify.setVisibility(View.INVISIBLE);
+        mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editName.getText().toString();
-                String passwd = editPasswd.getText().toString();
-                String passwdDouble = editPasswdDouble.getText().toString();
+                String name = mEditName.getText().toString();
+                String passwd = mEditPasswd.getText().toString();
+                String passwdDouble = mEditPasswdDouble.getText().toString();
 
-                if(TextUtils.isEmpty(name) || TextUtils.isEmpty(passwd) || TextUtils.isEmpty(passwdDouble)){
-                    labNotify.setVisibility(View.VISIBLE);
-                    labNotify.setText("请输入用户名和密码");
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(passwd) || TextUtils.isEmpty(passwdDouble)) {
+                    mLabNotify.setVisibility(View.VISIBLE);
+                    mLabNotify.setText("请输入用户名和密码");
                     return;
                 }
 
-                if(!passwd.equals(passwdDouble)){
-                    labNotify.setVisibility(View.VISIBLE);
-                    labNotify.setText("两次密码不一致");
+                if (!passwd.equals(passwdDouble)) {
+                    mLabNotify.setVisibility(View.VISIBLE);
+                    mLabNotify.setText("两次密码不一致");
                     return;
                 }
 
@@ -67,31 +66,34 @@ public class RegisterActivity extends BaseActivity {
                 user.setName(name);
                 user.setPasswd(passwd);
 
-                new AsyncTask<Void, Void, Boolean>() {
+                ThreadUtils.getCachedPool().execute(new Runnable() {
                     @Override
-                    protected void onPostExecute(Boolean aVoid) {
-                        if (aVoid) {
-                            Utils.showToast("注册成功");
-                            SPUtils.save(Constant.PRE_KEY_LOGIN_NAME, user.getName());
-                            SPUtils.save(Constant.PRE_KEY_LOGIN_PASSWD, user.getPasswd());
-                            SPUtils.save(Constant.PRE_KEY_USER_ID, user.getUserid());
-                            finish();
-                        } else {
-                            SPUtils.save(Constant.PRE_KEY_LOGIN_STATUS, false);
-                            Utils.showToast("注册失败，请检查网络");
-                        }
-                        super.onPostExecute(aVoid);
-                    }
-
-                    @Override
-                    protected Boolean doInBackground(Void... voids) {
+                    public void run() {
                         HttpPost httpPost = HttpPost.getInstance();
-                        return httpPost.create(user);
+                        if (httpPost.create(user)) {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Utils.showToast("注册成功");
+                                    SPUtils.save(Constant.PRE_KEY_LOGIN_NAME, user.getName());
+                                    SPUtils.save(Constant.PRE_KEY_LOGIN_PASSWD, user.getPasswd());
+                                    SPUtils.save(Constant.PRE_KEY_USER_ID, user.getUserid());
+                                    finish();
+                                }
+                            });
+                        } else {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    SPUtils.save(Constant.PRE_KEY_LOGIN_STATUS, false);
+                                    Utils.showToast("注册失败，请检查网络");
+                                }
+                            });
+                        }
                     }
-                }.execute();
+                });
             }
         });
-
 
 
     }

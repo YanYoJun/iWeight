@@ -1,7 +1,5 @@
 package com.plbear.iweight.data;
 
-import com.plbear.iweight.model.details.adapter.DetailsAdapter;
-
 /**
  * Created by yanyongjun on 2018/6/11.
  */

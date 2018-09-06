@@ -183,7 +183,6 @@ public class LineChartView extends View {
         drawPolyLine(canvas);
         drawWeightText(canvas);
         drawTimeText(canvas);
-        int temp = dataAdpater.getShowPointCount();
         if (dataAdpater.getShowPointCount() < 50) {
             drawPoint(canvas);
         }
@@ -223,8 +222,6 @@ public class LineChartView extends View {
             return;
         }
         if (dataAdpater.getShowDataList().size() == 1) {
-            /*            canvas.drawCircle(ALIGN_PADDING_LEFT,
-                    ALIGN_PADDING_TOP + mHeight / normal_2 10,mPointPaint);*/
             canvas.drawCircle(ALIGN_PADDING_LEFT,
                     toYPoint(dataAdpater.getShowDataList().get(0).getWeight()), 5f, mPointPaint);
             return;
@@ -267,8 +264,6 @@ public class LineChartView extends View {
         long maxTime = dataAdpater.getTimeBiggest();
         canvas.drawText(Utils.formatTime(minTime), ALIGN_PADDING_LEFT, (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT),
                 mTextPaint);
-//        canvas.drawText(Utils.formatTime((minTime + maxTime) / 2), (ALIGN_PADDING_LEFT + mWidth / 2 - 60), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT),
-//                mTextPaint);
         canvas.drawText(Utils.formatTime(maxTime), (ALIGN_PADDING_LEFT + mWidth - 110), (40 + ALIGN_PADDING_TOP + mLineSpacing * SPACES_COUNT),
                 mTextPaint);
     }

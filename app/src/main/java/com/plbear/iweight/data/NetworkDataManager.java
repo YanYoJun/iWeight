@@ -10,6 +10,7 @@ import com.plbear.iweight.http.Bean.Weight;
 import com.plbear.iweight.http.HttpPost;
 import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.SPUtils;
+import com.plbear.iweight.utils.ThreadUtils;
 
 import java.nio.file.WatchEvent;
 import java.util.List;
@@ -32,18 +33,13 @@ public class NetworkDataManager {
     }
 
     public void add(final Data data) {
-        new AsyncTask<Void, Void, Boolean>() {
+        ThreadUtils.getCachedPool().execute(new Runnable() {
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-            }
-
-            @Override
-            protected Boolean doInBackground(Void... voids) {
-                LogInfo.i(TAG,"add data to network begin");
+            public void run() {
+                LogInfo.i(TAG, "add data to network begin");
                 boolean status = SPUtils.getSP().getBoolean(Constant.PRE_KEY_LOGIN_STATUS, false);
                 if (!status) {
-                    return false;
+                    return;
                 }
                 try {
                     Weight weight = new Weight();
@@ -51,99 +47,85 @@ public class NetworkDataManager {
                     weight.setTime(data.getTime() + "");
                     weight.setValue(data.getWeight() + "");
                     HttpPost httpPost = HttpPost.getInstance();
-                    return httpPost.addWeight(weight);
+                    httpPost.addWeight(weight);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return false;
                 } finally {
-                    LogInfo.i(TAG,"add data to network end");
+                    LogInfo.i(TAG, "add data to network end");
                 }
             }
-        }.execute();
+        });
     }
 
     public void delete(final Data data) {
-        new AsyncTask<Void, Void, Boolean>() {
+        ThreadUtils.getCachedPool().execute(new Runnable() {
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-            }
-
-            @Override
-            protected Boolean doInBackground(Void... voids) {
-                LogInfo.i(TAG,"delete network data");
+            public void run() {
+                LogInfo.i(TAG, "delete network data");
                 try {
                     boolean status = SPUtils.getSP().getBoolean(Constant.PRE_KEY_LOGIN_STATUS, false);
                     if (!status) {
-                        return false;
+                        return;
                     }
                     Weight weight = new Weight();
                     weight.setUserid(SPUtils.getSP().getString(Constant.PRE_KEY_USER_ID, ""));
                     weight.setTime(data.getTime() + "");
                     weight.setValue(data.getWeight() + "");
                     HttpPost httpPost = HttpPost.getInstance();
-                    return httpPost.deleteWeight(weight);
+                    httpPost.deleteWeight(weight);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return false;
+                    return;
                 } finally {
-                    LogInfo.i(TAG,"delete network data end");
+                    LogInfo.i(TAG, "delete network data end");
                 }
             }
-        }.execute();
+        });
     }
 
     public void update(final Data data) {
-        new AsyncTask<Void, Void, Boolean>() {
+        ThreadUtils.getCachedPool().execute(new Runnable() {
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-            }
-
-            @Override
-            protected Boolean doInBackground(Void... voids) {
+            public void run() {
                 boolean status = SPUtils.getSP().getBoolean(Constant.PRE_KEY_LOGIN_STATUS, false);
                 if (!status) {
-                    return false;
+                    return;
                 }
-                LogInfo.i(TAG,"update network data begin");
+                LogInfo.i(TAG, "update network data begin");
                 try {
                     Weight weight = new Weight();
                     weight.setUserid(SPUtils.getSP().getString(Constant.PRE_KEY_USER_ID, ""));
                     weight.setTime(data.getTime() + "");
                     weight.setValue(data.getWeight() + "");
                     HttpPost httpPost = HttpPost.getInstance();
-                    return httpPost.deleteWeight(weight) && httpPost.addWeight(weight);
+                    if (httpPost.deleteWeight(weight)) {
+                        httpPost.addWeight(weight);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return false;
+                    return;
                 } finally {
-                    LogInfo.i(TAG,"update network data end");
+                    LogInfo.i(TAG, "update network data end");
                 }
             }
-        }.execute();
+        });
     }
 
     public void sync() {
-        new AsyncTask<Void, Void, Boolean>() {
+        ThreadUtils.getCachedPool().execute(new Runnable() {
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-            }
-
-            @Override
-            protected Boolean doInBackground(Void... voids) {
+            public void run() {
                 boolean status = SPUtils.getSP().getBoolean(Constant.PRE_KEY_LOGIN_STATUS, false);
                 if (!status) {
-                    return false;
+                    return;
                 }
                 try {
-                    LogInfo.i(TAG,"sync network data begin");
+                    LogInfo.i(TAG, "sync network data begin");
                     HttpPost httpPost = HttpPost.getInstance();
                     List<Weight> allNetworkData = httpPost.queryAll(SPUtils.getSP().getString(Constant.PRE_KEY_USER_ID, ""));
 
                     if (allNetworkData == null || allNetworkData.size() == 0) {
-                        return false;
+                        return;
                     }
 
                     DataManager dataManager = DataManager.getInstance();
@@ -162,7 +144,7 @@ public class NetworkDataManager {
                         }
                         if (!find) {
                             try {
-                                LogInfo.i(TAG,"add data to local");
+                                LogInfo.i(TAG, "add data to local");
                                 Data insertData = new Data();
                                 insertData.setTime(Long.parseLong(weight.getTime()));
                                 insertData.setWeight(Float.parseFloat(weight.getValue()));
@@ -180,7 +162,7 @@ public class NetworkDataManager {
                             Weight networkData = allNetworkData.get(j);
                             if (networkData.getTime().equals(localData.getTime() + "")) {
                                 if (!networkData.getValue().equals(localData.getWeight() + "")) {
-                                    LogInfo.i(TAG,"update network data in sync");
+                                    LogInfo.i(TAG, "update network data in sync");
                                     httpPost.deleteWeight(networkData);
                                     networkData.setValue(localData.getWeight() + "");
                                     httpPost.addWeight(networkData);
@@ -190,7 +172,7 @@ public class NetworkDataManager {
                             }
                         }
                         if (!find) {
-                            LogInfo.i(TAG,"upload network data in sync");
+                            LogInfo.i(TAG, "upload network data in sync");
                             Weight weight = new Weight();
                             weight.setValue(localData.getWeight() + "");
                             weight.setTime(localData.getTime() + "");
@@ -198,14 +180,14 @@ public class NetworkDataManager {
                             httpPost.addWeight(weight);
                         }
                     }
-                    return true;
+                    return;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return false;
+                    return;
                 } finally {
-                    LogInfo.i(TAG,"sync data end");
+                    LogInfo.i(TAG, "sync data end");
                 }
             }
-        }.execute();
+        });
     }
 }

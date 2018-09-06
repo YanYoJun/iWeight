@@ -1,6 +1,7 @@
 package com.plbear.iweight.base;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,7 +19,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void afterLayout();
 
-    protected String TAG = this.getClass().getSimpleName();
+    protected static String TAG = BaseActivity.class.getSimpleName();
+
+    protected Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         AppManager.getAppManager().removeFromStack(this);
+        mHandler.removeCallbacksAndMessages(null);
         loginfo("onDestory");
     }
 

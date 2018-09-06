@@ -16,18 +16,26 @@ import android.widget.TextView;
 import com.plbear.iweight.base.BaseFragment;
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.Constant;
-import com.plbear.iweight.model.me.ui.AboutActivity;
-import com.plbear.iweight.model.settings.SettingsActivity;
 import com.plbear.iweight.utils.SPUtils;
 import com.plbear.iweight.utils.Utils;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MeFragment extends BaseFragment {
-    private TextView mLabLoginTitle = null;
-    private TextView mLabLoginNotify = null;
+import butterknife.BindView;
 
+public class MeFragment extends BaseFragment {
+
+    @BindView(R.id.lab_login_title) TextView mLabLoginTitle;
+    @BindView(R.id.lab_login_notify) TextView mLabLoginNotify;
+
+    @BindView(R.id.switch_once) Switch mSwitchOnce;
+    @BindView(R.id.view_about) View mViewAbout;
+    @BindView(R.id.view_wechat) View mViewWeChat;
+    @BindView(R.id.view_once) View mViewOnce;
+    @BindView(R.id.view_target) View mViewTarget;
+    @BindView(R.id.view_unit) View mViewUnit;
+    @BindView(R.id.view_quit) View mViewQuit;
 
     @Override
     public int getLayout() {
@@ -36,14 +44,12 @@ public class MeFragment extends BaseFragment {
 
     @Override
     public void afterLayout() {
-        final Switch swich = mActivity.findViewById(R.id.switch_once);
-        swich.setClickable(false);
-        swich.setChecked(SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false));
+        mSwitchOnce.setClickable(false);
+        mSwitchOnce.setChecked(SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false));
 
         notifyChange();
 
-        View v = mActivity.findViewById(R.id.view_about);
-        v.setOnClickListener(new View.OnClickListener() {
+        mViewAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mActivity, AboutActivity.class);
@@ -51,8 +57,7 @@ public class MeFragment extends BaseFragment {
             }
         });
 
-        v = mActivity.findViewById(R.id.view_wechat);
-        v.setOnClickListener(new View.OnClickListener() {
+        mViewWeChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean status = SPUtils.getSP().getBoolean(Constant.PRE_KEY_LOGIN_STATUS, false);
@@ -65,37 +70,30 @@ public class MeFragment extends BaseFragment {
             }
         });
 
-        v = mActivity.findViewById(R.id.view_once);
-        v.setOnClickListener(new View.OnClickListener() {
+        mViewOnce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean curValue = SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false);
-                swich.setChecked(!curValue);
+                mSwitchOnce.setChecked(!curValue);
                 SPUtils.save(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, !curValue);
             }
         });
 
-        v = mActivity.findViewById(R.id.view_target);
-        v.setOnClickListener(new View.OnClickListener() {
+        mViewTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showSetTargetDialog();
             }
         });
 
-        v = mActivity.findViewById(R.id.view_unit);
-        v.setOnClickListener(new View.OnClickListener() {
+        mViewUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showUnitDialog();
             }
         });
 
-        mLabLoginTitle = mActivity.findViewById(R.id.lab_login_title);
-        mLabLoginNotify = mActivity.findViewById(R.id.lab_login_notify);
-
-        v = mActivity.findViewById(R.id.view_quit);
-        v.setOnClickListener(new View.OnClickListener() {
+        mViewQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SPUtils.save(Constant.PRE_KEY_LOGIN_STATUS, false);
@@ -154,7 +152,7 @@ public class MeFragment extends BaseFragment {
         editText.setHint("请输入公斤制体重，切记切记");
 
         //set default values
-        float curValues = SPUtils.getSP().getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, 0f);
+        float curValues = SPUtils.getSP().getFloat(Constant.PREFERENCE_KEY_SET_TARGET_WEIGHT, 0f);
         if (curValues != 0f) {
             editText.setText(curValues + "");
         }
@@ -168,7 +166,7 @@ public class MeFragment extends BaseFragment {
                         Utils.showToast("您输入的值太不合理了，在逗我玩吧~");
                         return;
                     }
-                    SPUtils.save(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, weight);
+                    SPUtils.save(Constant.PREFERENCE_KEY_SET_TARGET_WEIGHT, weight);
                     Utils.showToast(R.string.settings_toast_save_target_success);
 
                     notifyChange();
@@ -233,90 +231,3 @@ public class MeFragment extends BaseFragment {
         dialog.show();
     }
 }
-
-
-//    private void initNav() {
-//        View btnAbout = mNavView.getHeaderView(0).findViewById(R.id.btn_main_nav_about);
-//        btnAbout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(mActivity, AboutActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        View exitButton = mNavView.getHeaderView(0).findViewById(R.id.btn_main_nav_exit);
-//        exitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mActivity.exitAll();
-//            }
-//        });
-//
-//        View detailsButton = mNavView.getHeaderView(0).findViewById(R.id.btn_main_nav_detail);
-//        detailsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(mActivity, DetailsActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//
-//        View settingsButton = mNavView.getHeaderView(0).findViewById(R.id.btn_main_nav_settings);
-//        settingsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(mActivity, SettingsActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//    }
-
-//    boolean isExOn = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_EXPORT_IMPORT, false);
-//    Button importButton = mNavView.getHeaderView(0).findViewById(R.id.btn_main_nav_import);
-//        if (isExOn) {
-//                importButton.setVisibility(View.VISIBLE);
-//                importButton.setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View v) {
-//        XMLHelper xmlHelper = new XMLHelper(mActivity);
-//        if (Build.VERSION.SDK_INT >= 23) {
-//        int checkPermission = ContextCompat.checkSelfPermission(mActivity, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-//        if (checkPermission != PackageManager.PERMISSION_GRANTED) {
-//        ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS},
-//        REQUSET_IMPORT_CODE_PERMISSION);
-//        return;
-//        }
-//        }
-//        xmlHelper.readXML(mXmlListener);
-//        }
-//        });
-//        } else {
-//        importButton.setVisibility(View.GONE);
-//        }
-//
-//
-//        /**
-//         * 导出
-//         */
-//        Button exportButton = mNavView.getHeaderView(0).findViewById(R.id.btn_main_nav_export);
-//        if (isExOn) {
-//        exportButton.setVisibility(View.VISIBLE);
-//        exportButton.setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View v) {
-//        XMLHelper helper = new XMLHelper(mActivity);
-//        if (Build.VERSION.SDK_INT >= 23) {
-//        int checkPermission = ContextCompat.checkSelfPermission(mActivity, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-//        if (checkPermission != PackageManager.PERMISSION_GRANTED) {
-//        ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//        Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS}, REQUSET_EXPORT_CODE_PERMISSION);
-//        return;
-//        }
-//        }
-//        helper.saveXML(mXmlListener);
-//        }
-//        });
-//        } else {
-//        exportButton.setVisibility(View.GONE);
-//        }

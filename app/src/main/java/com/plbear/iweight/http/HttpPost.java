@@ -35,10 +35,13 @@ public class HttpPost {
 
 
     public static HttpPost getInstance() {
-        if (sInstance != null) {
-            return sInstance;
+        if(sInstance == null){
+            synchronized (HttpPost.class){
+                if(sInstance == null){
+                    sInstance = new HttpPost();
+                }
+            }
         }
-        sInstance = new HttpPost();
         return sInstance;
     }
 

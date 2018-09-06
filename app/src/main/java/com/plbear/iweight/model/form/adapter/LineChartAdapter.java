@@ -7,7 +7,6 @@ import android.util.SparseArray;
 import com.plbear.iweight.base.Constant;
 import com.plbear.iweight.data.DataManager;
 import com.plbear.iweight.data.Data;
-import com.plbear.iweight.model.settings.SettingsActivity;
 import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.SPUtils;
 
@@ -66,7 +65,7 @@ public class LineChartAdapter {
      */
     private void init(Context context) {
         mContext = context;
-        mTagetWeight = SPUtils.getSP().getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1) *
+        mTagetWeight = SPUtils.getSP().getFloat(Constant.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1) *
                 SPUtils.getSP().getFloat(Constant.PREFERENCE_KEY_UNIT, 1);
 
         DataManager db = DataManager.getInstance(context);
@@ -98,7 +97,7 @@ public class LineChartAdapter {
      * 通知注册Adapter Lisntenr的类进行刷新
      */
     private void notifyDataChange() {
-        mTagetWeight = SPUtils.getSP().getFloat(SettingsActivity.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1) *
+        mTagetWeight = SPUtils.getSP().getFloat(Constant.PREFERENCE_KEY_SET_TARGET_WEIGHT, -1) *
                 SPUtils.getSP().getFloat(Constant.PREFERENCE_KEY_UNIT, 1);
         for (DataChangeListener listener : mListener) {
             listener.onChange();

@@ -14,12 +14,9 @@ import android.widget.TextView;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseFragment;
+import com.plbear.iweight.base.Constant;
 import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
-import com.plbear.iweight.data.NetworkDataManager;
-import com.plbear.iweight.model.form.ui.FormViewFrag;
-import com.plbear.iweight.model.settings.SettingsActivity;
-import com.plbear.iweight.storage.XMLHelper;
 import com.plbear.iweight.utils.SPUtils;
 import com.plbear.iweight.utils.Utils;
 
@@ -27,26 +24,19 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.BindView;
+
 /**
  * Created by yanyongjun on 2018/6/30.
  */
 
 public class MainFragment extends BaseFragment {
-    public final static int REQUSET_IMPORT_CODE_PERMISSION = 1;
-    public final static int REQUSET_EXPORT_CODE_PERMISSION = 2;
-    private XMLHelper.OnXMLListener mXmlListener;
-    private ArrayList<FormViewFrag> mFragList = new ArrayList<>();
-    private boolean mIsExiting = false;
-    private FragmentPagerAdapter mPagerAdapter;
-    private Button mBtnRecord;
-    private TextView mLabNotification;
-    private TabLayout mTabMain;
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-        }
-    };
+
+    @BindView(R.id.btn_record)
+    Button mBtnRecord;
+
+    @BindView(R.id.lab_notification)
+    TextView mLabNotification;
 
 
     @Override
@@ -60,7 +50,7 @@ public class MainFragment extends BaseFragment {
         mBtnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean onceEveryDay = SPUtils.getSP().getBoolean(SettingsActivity.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false);
+                boolean onceEveryDay = SPUtils.getSP().getBoolean(Constant.PREFERENCE_KEY_ONLY_ONCE_EVERYDAY, false);
                 if (onceEveryDay&&!Utils.DEBUG) {
                     String lastTime = Utils.formatTime(DataManager.getInstance().queryLastDataTime());
                     loginfo("lastTime:"+lastTime);
@@ -75,8 +65,6 @@ public class MainFragment extends BaseFragment {
     }
 
     private void init() {
-        mBtnRecord = getView().findViewById(R.id.btn_record);
-        mLabNotification = getView().findViewById(R.id.lab_notification);
         initLabText();
     }
 
@@ -99,15 +87,6 @@ public class MainFragment extends BaseFragment {
     public void onResume() {
         //initLabText();
         super.onResume();
-    }
-
-    EditText mEditText;
-
-
-    /**
-     * 弹出记录体重的弹框
-     */
-    private void recordWeight() {
     }
 
     private void showChangeDialog() {
@@ -167,34 +146,4 @@ public class MainFragment extends BaseFragment {
             }
         }, 200);
     }
-//
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        XMLHelper helper = null;
-//        switch (requestCode) {
-//            case REQUSET_EXPORT_CODE_PERMISSION: {
-//                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-//                    Toast.makeText(mActivity, "请在“设置->应用->权限”中赋予权限后重新执行", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                helper = new XMLHelper(mActivity);
-//                helper.saveXML(mXmlListener);
-//                break;
-//            }
-//            case REQUSET_IMPORT_CODE_PERMISSION: {
-//                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-//                    Toast.makeText(mActivity, "请在“设置->应用->权限”赋予权限后重新执行", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                helper = new XMLHelper(mActivity);
-//                helper = new XMLHelper(mActivity);
-//                helper.readXML(mXmlListener);
-//                break;
-//            }
-//        }
-//    }
 }

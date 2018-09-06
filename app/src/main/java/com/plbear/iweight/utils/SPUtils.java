@@ -14,10 +14,13 @@ public class SPUtils {
     private static SharedPreferences SP = null;
 
     public static SharedPreferences getSP() {
-        if (SP != null) {
-            return SP;
+        if (SP == null) {
+            synchronized (SPUtils.class) {
+                if (SP == null) {
+                    SP = PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
+                }
+            }
         }
-        SP = PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
         return SP;
     }
 

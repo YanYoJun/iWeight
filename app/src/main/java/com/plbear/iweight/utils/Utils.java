@@ -6,8 +6,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.plbear.iweight.base.App;
+import com.plbear.iweight.base.Constant;
 import com.plbear.iweight.data.Data;
-import com.plbear.iweight.model.settings.SettingsActivity;
+import com.plbear.iweight.data.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class Utils {
         }
         try {
             SharedPreferences sp = SPUtils.getSP();
-            VALUE_UNIT = sp.getFloat(SettingsActivity.PREFERENCE_KEY_UNIT, 1.0f);
+            VALUE_UNIT = sp.getFloat(Constant.PREFERENCE_KEY_UNIT, 1.0f);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,8 +115,6 @@ public class Utils {
 
     /**
      * 以begin end 为起始点构造一条直线，求param点关于这条直线的对称点
-     *
-     * @return
      */
     public static Point getOppPoint(Point begin, Point end, Point param) {
         if (begin == null || end == null || param == null || begin == end || begin == param || end == param) {

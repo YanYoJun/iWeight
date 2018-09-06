@@ -2,21 +2,19 @@ package com.plbear.iweight.model.details.ui;
 
 import android.database.ContentObserver;
 import android.os.Handler;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.plbear.iweight.R;
 import com.plbear.iweight.base.BaseFragment;
 import com.plbear.iweight.base.Constant;
 import com.plbear.iweight.data.Data;
 import com.plbear.iweight.data.DataManager;
-import com.plbear.iweight.model.details.adapter.DetailsAdapter;
-import com.plbear.iweight.model.details.view.SlideCutListView;
+import com.plbear.iweight.model.details.adapter.DetailsRecyclerAdapter;
+import com.plbear.iweight.model.details.view.SlideCutRecyclerView;
+import com.plbear.iweight.utils.LogInfo;
 import com.plbear.iweight.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.BindView;
 
@@ -26,24 +24,15 @@ import butterknife.BindView;
 
 public class DetailsFragment extends BaseFragment {
     @BindView(R.id.listview_details)
-    SlideCutListView mListView;
+    SlideCutRecyclerView mListView;
 
-    private DetailsAdapter mAdapter;
+    private DetailsRecyclerAdapter mAdapter;
     private ArrayList<Data> mDataList;
-    private DetailsAdapter.OnItemClick mCallback = new DetailsAdapter.OnItemClick() {
-        @Override
-        public void itemClick(HashMap<Integer, Boolean> mSelectMap, int selectCount) {
-        }
-
-        @Override
-        public void longItemClick(boolean editMode) {
-        }
-    };
 
     private ContentObserver mObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {
-            mAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataChanged();
             super.onChange(selfChange);
         }
     };
@@ -82,19 +71,16 @@ public class DetailsFragment extends BaseFragment {
 
         mDataList = DataManager.getInstance().queryAll();
         Utils.sortDataBigToSmall(mDataList);
-        mAdapter = new DetailsAdapter(mActivity, mDataList, mCallback);
+        mAdapter = new DetailsRecyclerAdapter(mActivity, mDataList);
         mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL,false);
+        mListView.setLayoutManager(linearLayoutManager);
 
-            }
-        });
-
-        mListView.setRemoveListener(new SlideCutListView.RemoveListener() {
+        mListView.setRemoveListener(new SlideCutRecyclerView.RemoveListener() {
             @Override
-            public void removeItem(SlideCutListView.RemoveDirection direction, int position) {
-                if (direction == SlideCutListView.RemoveDirection.LEFT) {
+            public void removeItem(SlideCutRecyclerView.RemoveDirection direction, int position) {
+                LogInfo.e(TAG,"mListView removeItem:"+position);
+                if (direction == SlideCutRecyclerView.RemoveDirection.LEFT) {
 
                     Data data = mDataList.get(position);
                     data.setEditMode(true);
@@ -104,7 +90,7 @@ public class DetailsFragment extends BaseFragment {
                     data.setEditMode(false);
                 }
                 mAdapter.setChangePos(position);
-                mAdapter.notifyDataSetChanged();
+                mAdapter.notifyDataChanged();
             }
         });
     }
